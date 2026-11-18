@@ -1,5 +1,9 @@
 {
-  "version": "1.2.15.12",
-  "game": "game.html",
-  "updated": "2026-11-18"
+  "version": "1.2.15.13",
+  "game": "game-1.2.15.13.html",
+  "previous": {
+    "version": "1.2.15.12",
+    "game": "game.html"
+  },
+  "updated": "2026-11-19"
 }
