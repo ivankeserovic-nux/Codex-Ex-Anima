@@ -1,0 +1,29 @@
+{
+  "id": "./",
+  "name": "Codex ex Anima · Test",
+  "short_name": "Codex Test",
+  "description": "Launcher di sviluppo Codex ex Anima",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "standalone"
+  ],
+  "background_color": "#090c16",
+  "theme_color": "#090c16",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
