@@ -1,0 +1,1818 @@
+<!doctype html><html lang="it"><head>
+<!-- Codex ex Anima QA31: navigazione comune e fermate riposizionate --><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src blob: data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#090c16"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="mobile-web-app-capable" content="yes"><title>Codex ex Anima | Alpha 1.2.15.31.5</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#090c16;color:#f6e7d7;font-family:system-ui,sans-serif;touch-action:none}canvas{display:block;width:100vw;height:100dvh;image-rendering:pixelated}#ui{position:fixed;inset:0;pointer-events:none}#top{position:absolute;top:env(safe-area-inset-top);left:12px;right:12px;display:flex;justify-content:space-between;align-items:start;text-shadow:1px 2px #000;font-size:12px}#brand{font-size:18px;font-weight:900;letter-spacing:2px;color:#f2d3c5}#badge{color:#ff5577}#hint{position:absolute;bottom:calc(155px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:#0b1020d9;border:1px solid #8c3457;padding:8px 12px;font-size:12px;white-space:nowrap;max-width:90%;overflow:hidden;text-overflow:ellipsis}#joy{position:absolute;bottom:calc(28px + env(safe-area-inset-bottom));left:24px;width:156px;height:156px;border:2px solid #c84570;border-radius:50%;background:#1b2232a8;pointer-events:auto;touch-action:none}#stick{position:absolute;left:50%;top:50%;margin-left:-25px;margin-top:-25px;width:50px;height:50px;border-radius:50%;background:#ef6a83;box-shadow:0 0 18px #d34d8a}#act{position:absolute;bottom:calc(60px + env(safe-area-inset-bottom));right:25px;width:85px;height:85px;border-radius:50%;background:#912849df;border:2px solid #f6b6bd;color:white;font-weight:900;pointer-events:auto;touch-action:none}#dialog{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(170px + env(safe-area-inset-bottom));width:min(550px,90vw);padding:17px;background:#0a0b18f2;border:2px solid #df5272;box-shadow:0 8px 30px #000b;display:none;pointer-events:auto}#dialog strong{color:#ff9ca9}#dialog p{margin:8px 0 14px;line-height:1.4}#close{background:#a63759;color:white;border:0;padding:9px 18px}#intro{position:absolute;inset:0;background:linear-gradient(#080914eb,#120e20f0);display:flex;align-items:center;justify-content:center;pointer-events:auto;text-align:center;padding:25px}#intro>div{max-width:520px}h1{font-size:clamp(28px,7vw,52px);color:#ffe0c4;margin:0 0 15px}#intro p{line-height:1.55}#start{background:#d73562;border:1px solid #ff9eaf;color:white;padding:14px 32px;font-size:17px;font-weight:800;margin-top:12px}small{opacity:.7}#mini{position:absolute;top:55px;right:10px;background:#101426d9;padding:7px;border:1px solid #7d4261;font-size:11px} @media(pointer:fine){#joy,#act{opacity:.45}}#zoomPanel{position:absolute;right:calc(12px + env(safe-area-inset-right));top:calc(47px + env(safe-area-inset-top));display:flex;gap:5px;align-items:center;background:#101426ed;border:1px solid #9e4669;padding:3px 5px;pointer-events:auto;font-size:11px}#zoomPanel button{width:32px;height:30px;border:1px solid #a45b75;background:#282333;color:#fff;font-size:20px;touch-action:manipulation}#zoomValue{min-width:39px;text-align:center}#rotate{display:none;position:fixed;inset:0;background:#090c16;z-index:100;align-items:center;justify-content:center;text-align:center;padding:24px;color:#f2d3c5}#rotate strong{letter-spacing:2px;font-size:19px}#rotate p{color:#ddd;font-size:14px}.rotateIcon{font-size:64px;color:#ee668a}@media(orientation:portrait) and (pointer:coarse){#top{top:calc(10px + env(safe-area-inset-top))}#zoomPanel{top:calc(85px + env(safe-area-inset-top));right:10px}#mini{top:calc(52px + env(safe-area-inset-top));right:10px}#hint{bottom:calc(175px + env(safe-area-inset-bottom));font-size:10px;max-width:94vw}#joy{bottom:calc(20px + env(safe-area-inset-bottom));left:15px;width:144px;height:144px}#stick{left:50%;top:50%}#act{bottom:calc(37px + env(safe-area-inset-bottom));right:18px;width:80px;height:80px}#dialog{bottom:calc(145px + env(safe-area-inset-bottom));max-height:45dvh;overflow:auto}}@media(orientation:landscape){#brand{font-size:clamp(12px,2.8vw,19px)}#hint{bottom:calc(5px + env(safe-area-inset-bottom));font-size:10px;padding:4px 7px}#joy{width:136px;height:136px;bottom:calc(10px + env(safe-area-inset-bottom));left:calc(18px + env(safe-area-inset-left))}#stick{left:50%;top:50%}#act{width:74px;height:74px;bottom:calc(24px + env(safe-area-inset-bottom));right:calc(22px + env(safe-area-inset-right))}#dialog{bottom:calc(30px + env(safe-area-inset-bottom));padding:11px}#mini{top:calc(7px + env(safe-area-inset-top));right:calc(120px + env(safe-area-inset-right))}#zoomPanel{top:calc(7px + env(safe-area-inset-top))}}@media(orientation:landscape) and (max-height:400px){#hint{display:none}#joy{width:120px;height:120px}#stick{left:50%;top:50%}#act{width:65px;height:65px}}  #fullscreen{position:absolute;right:calc(12px + env(safe-area-inset-right));top:calc(91px + env(safe-area-inset-top));background:#101426ed;border:1px solid #9e4669;color:#fff;padding:7px 10px;pointer-events:auto;font-size:11px}#installTip{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#0b1020f5;border:1px solid #d85c85;padding:18px;width:min(330px,88vw);font-size:14px;line-height:1.5;pointer-events:auto;z-index:20}#installTip button{float:right;background:#a63759;color:white;border:0;padding:5px 10px} @media(orientation:landscape){#fullscreen{top:calc(45px + env(safe-area-inset-top))}}@media(orientation:portrait){#fullscreen{top:calc(133px + env(safe-area-inset-top))}} #actions{position:absolute;right:calc(12px + env(safe-area-inset-right));bottom:calc(22px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(2,68px);gap:7px;pointer-events:auto}#actions .skill{position:static;width:68px;height:68px;border-radius:50%;background:#912849e8;border:2px solid #f6b6bd;color:white;font-size:10px;font-weight:900;touch-action:manipulation;user-select:none;-webkit-user-select:none}#actions #act{background:#a33761}#actions .skill:active{filter:brightness(1.4);transform:scale(.94)}@media(orientation:portrait){#actions{right:12px;bottom:calc(22px + env(safe-area-inset-bottom));grid-template-columns:repeat(3,60px);gap:6px}#actions .skill{width:52px;height:52px}}@media(orientation:landscape){#actions{right:calc(14px + env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom));grid-template-columns:repeat(3,58px);gap:6px}#actions .skill{width:58px;height:58px;font-size:9px}#hint{bottom:calc(2px + env(safe-area-inset-bottom));left:49%;max-width:30%}}@media(orientation:landscape) and (max-height:400px){#actions .skill{width:52px;height:52px}#actions{grid-template-columns:repeat(3,52px)}}@media(max-width:350px) and (orientation:portrait){#joy{width:128px;height:128px;left:8px}#actions{right:7px;grid-template-columns:repeat(3,52px)}#actions .skill{width:60px;height:60px}} #saveControls{position:absolute;top:calc(115px + env(safe-area-inset-top));left:12px;display:flex;gap:6px;pointer-events:auto;z-index:5}#saveControls button{background:#151a2de8;color:#ffe5dc;border:1px solid #b64a70;border-radius:6px;padding:8px 9px;font-size:11px;font-weight:700}#saveStatus{position:absolute;top:calc(157px + env(safe-area-inset-top));left:12px;max-width:270px;font-size:11px;background:#0b1020e8;padding:6px;display:none;z-index:5}#saveFile{display:none}#needs{position:absolute;top:calc(195px + env(safe-area-inset-top));left:12px;background:#0b1020df;border:1px solid #94546d;padding:6px 9px;font-size:11px;line-height:1.6;pointer-events:none}#needs b{color:#ffb9a7}@media(max-height:480px){#needs{top:calc(110px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);font-size:10px;padding:3px 5px}}@media(max-height:480px){#saveControls{top:calc(67px + env(safe-area-inset-top))}#saveStatus{top:calc(104px + env(safe-area-inset-top))}} 
+/* Alpha 1.2.6: HUD fisso, menu secondario, slider verticale */
+#top{left:calc(10px + env(safe-area-inset-left));right:calc(64px + env(safe-area-inset-right));top:calc(8px + env(safe-area-inset-top));z-index:3}
+#mini{position:static;max-width:52%;text-align:right;font-size:10px;line-height:1.35;padding:5px 7px}
+#needs{position:absolute!important;top:calc(62px + env(safe-area-inset-top))!important;left:calc(10px + env(safe-area-inset-left))!important;transform:none!important;background:#0b1020e8;border:1px solid #94546d;border-radius:7px;padding:7px 9px;font-size:11px;line-height:1.55;z-index:3;pointer-events:none;max-width:210px}
+#settingsToggle{position:absolute;top:calc(8px + env(safe-area-inset-top));right:calc(10px + env(safe-area-inset-right));width:43px;height:43px;border:1px solid #ad5578;border-radius:10px;background:#101426ed;color:#fff;font-size:23px;pointer-events:auto;z-index:12;touch-action:manipulation}
+#settingsMenu{position:absolute;top:calc(57px + env(safe-area-inset-top));right:calc(10px + env(safe-area-inset-right));width:min(220px,75vw);background:#101426f5;border:1px solid #ad5578;border-radius:10px;padding:10px;pointer-events:auto;z-index:13;box-shadow:0 8px 25px #0009}
+#settingsMenu[hidden]{display:none!important}
+#settingsMenu button:not(#settingsClose){display:block;width:100%;background:#242238;color:#ffe5dc;border:1px solid #94546d;border-radius:6px;padding:11px 8px;text-align:left;margin-top:7px;font-size:12px;font-weight:700;touch-action:manipulation}
+.settingsTitle{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:1px;font-weight:800;color:#ffb9a7}
+#settingsClose{background:transparent;color:white;border:0;font-size:19px;padding:3px 8px;touch-action:manipulation}
+#saveFile{display:none}#saveStatus{position:static;display:none;margin-top:8px;font-size:11px;line-height:1.4;background:#0b1020e8;padding:6px;max-width:none}
+#zoomPanel{position:absolute!important;right:calc(8px + env(safe-area-inset-right))!important;top:50%!important;transform:translateY(-50%);display:flex!important;flex-direction:column;gap:6px;align-items:center;width:43px;padding:9px 5px!important;border:1px solid #94546d;border-radius:12px;background:#101426d9;pointer-events:auto;z-index:4}
+#zoomPanel label{font-size:9px;letter-spacing:.5px;font-weight:800;color:#ffb9a7}
+#zoomSlider{appearance:none;-webkit-appearance:none;writing-mode:vertical-lr;direction:rtl;width:30px;height:clamp(105px,27dvh,210px);margin:0;cursor:pointer;background:transparent;touch-action:none}
+#zoomSlider::-webkit-slider-runnable-track{width:5px;border-radius:6px;background:#715068}
+#zoomSlider::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#ef6a83;border:2px solid #ffe3e4;margin-left:-10px}
+#zoomSlider::-moz-range-track{width:5px;background:#715068;border-radius:6px}
+#zoomSlider::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#ef6a83;border:2px solid #ffe3e4}
+#zoomValue{min-width:0;font-size:10px;text-align:center;color:white}
+@media(orientation:landscape){#needs{top:calc(47px + env(safe-area-inset-top))!important;font-size:10px;line-height:1.35;padding:5px 7px}#zoomSlider{height:clamp(75px,24dvh,150px)}#zoomPanel{right:calc(8px + env(safe-area-inset-right))!important}#settingsToggle{width:39px;height:39px}#settingsMenu{top:calc(50px + env(safe-area-inset-top))}}
+@media(max-width:380px) and (orientation:portrait){#brand{font-size:15px}#badge{font-size:10px}#needs{font-size:10px}}
+#dialog{z-index:30;max-height:70dvh;overflow-y:auto;border-radius:12px}#choices{display:flex;flex-direction:column;gap:8px;margin:12px 0}#choices button{background:#28243b;color:#ffe8dc;border:1px solid #a65a79;border-radius:8px;padding:12px;text-align:left;font-weight:700;font-size:13px;touch-action:manipulation}#choices button:disabled{opacity:.4}#choices button:active{background:#8d3657}#close{width:100%;border-radius:7px;background:#503449}#dialog p{white-space:pre-line}@media(orientation:landscape){#dialog{max-height:88dvh;bottom:5dvh}}
+
+/* Alpha 1.2.6: compact and non-overlapping touch HUD */
+#top{top:calc(12px + env(safe-area-inset-top));left:calc(16px + env(safe-area-inset-left));right:calc(76px + env(safe-area-inset-right));align-items:flex-start;gap:12px;text-shadow:0 2px 3px #000b}
+#brand{font-size:clamp(13px,1.9vw,20px);letter-spacing:2.3px;line-height:1.15;white-space:nowrap}
+#badge{font-size:10px;letter-spacing:1.1px;margin-top:4px;color:#d27b98}
+#mini{border-radius:9px;max-width:46%;font-size:clamp(10px,1.2vw,13px);padding:7px 10px;background:#0d1321e8;border:1px solid #584052;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#needs{top:calc(67px + env(safe-area-inset-top))!important;left:calc(16px + env(safe-area-inset-left))!important;min-width:166px;max-width:200px;padding:9px 11px!important;background:#0c1220e8!important;border:1px solid #5c4356!important;border-radius:10px!important;font-size:11px!important;line-height:1.5!important;box-shadow:0 5px 18px #0005;backdrop-filter:blur(5px)}
+.status-time{display:flex;justify-content:space-between;gap:10px;padding-bottom:6px;margin-bottom:5px;border-bottom:1px solid #544052;color:#f6d5bd;font-size:11px}
+.status-row{display:flex;justify-content:space-between;gap:16px;color:#d6c5c6;font-size:10px;letter-spacing:.4px}
+.status-row b{font-size:11px;color:#ffe5df}
+.status-house{margin-top:5px;padding-top:5px;border-top:1px solid #544052;color:#e6c7bb;font-size:10px}
+#settingsToggle{top:calc(12px + env(safe-area-inset-top));right:calc(16px + env(safe-area-inset-right));width:42px;height:42px;border-radius:12px;font-size:21px;background:#101523e9;border-color:#725066;box-shadow:0 4px 12px #0005}
+#settingsMenu{right:calc(16px + env(safe-area-inset-right));top:calc(60px + env(safe-area-inset-top))}
+#zoomPanel{right:calc(13px + env(safe-area-inset-right))!important;top:47%!important;width:37px!important;padding:9px 3px!important;border-radius:20px!important;border-color:#765169!important;background:#0d1423d9!important;box-shadow:0 4px 15px #0005}
+#zoomPanel label{font-size:8px;letter-spacing:.6px}
+#zoomSlider{height:clamp(90px,23dvh,170px);width:27px}
+#zoomValue{font-size:9px}
+#joy{width:clamp(112px,16vw,144px)!important;height:clamp(112px,16vw,144px)!important;left:calc(23px + env(safe-area-inset-left))!important;bottom:calc(18px + env(safe-area-inset-bottom))!important;border:2px solid #b44c71;background:#1017278a;box-shadow:inset 0 0 25px #0a0d17a0}
+#stick{width:44px;height:44px;margin-left:-22px;margin-top:-22px;background:#e65e84;box-shadow:0 0 12px #c3437166}
+#actions{right:calc(65px + env(safe-area-inset-right))!important;bottom:calc(22px + env(safe-area-inset-bottom))!important;grid-template-columns:repeat(3,56px)!important;gap:9px!important;align-items:center;justify-items:center}
+#actions .skill{width:56px!important;height:56px!important;border:1.5px solid #df8ca6!important;background:#702842e6!important;font-size:9px!important;letter-spacing:.1px;border-radius:50%;box-shadow:0 3px 10px #0006}
+#actions #act{background:#a13e60!important;border-color:#f3bdc6!important}
+#actions #beg{font-size:8px!important}
+#hint{display:none!important}
+@media(orientation:landscape){#needs{top:calc(63px + env(safe-area-inset-top))!important}#zoomPanel{top:46%!important}#actions{right:calc(70px + env(safe-area-inset-right))!important;bottom:calc(15px + env(safe-area-inset-bottom))!important}#joy{bottom:calc(14px + env(safe-area-inset-bottom))!important}}
+@media(orientation:landscape) and (max-height:390px){#brand{font-size:14px}#needs{top:calc(49px + env(safe-area-inset-top))!important;padding:5px 9px!important;font-size:10px!important}.status-time{padding-bottom:3px;margin-bottom:2px}.status-house{margin-top:2px;padding-top:2px}#joy{width:110px!important;height:110px!important}#actions{grid-template-columns:repeat(3,49px)!important;gap:7px!important}#actions .skill{width:49px!important;height:49px!important;font-size:8px!important}#zoomSlider{height:75px}}
+@media(orientation:portrait){#top{left:calc(11px + env(safe-area-inset-left));right:calc(59px + env(safe-area-inset-right));top:calc(9px + env(safe-area-inset-top))}#brand{font-size:clamp(12px,3.8vw,17px);letter-spacing:1px}#badge{font-size:9px}#mini{font-size:10px;padding:5px 6px;max-width:45%}#needs{top:calc(58px + env(safe-area-inset-top))!important;left:calc(11px + env(safe-area-inset-left))!important;min-width:146px;max-width:165px;padding:7px 8px!important}#settingsToggle{right:calc(10px + env(safe-area-inset-right));top:calc(9px + env(safe-area-inset-top));width:39px;height:39px}#zoomPanel{top:50%!important;right:calc(10px + env(safe-area-inset-right))!important}#joy{width:clamp(115px,35vw,145px)!important;height:clamp(115px,35vw,145px)!important;left:calc(12px + env(safe-area-inset-left))!important;bottom:calc(18px + env(safe-area-inset-bottom))!important}#actions{right:calc(12px + env(safe-area-inset-right))!important;bottom:calc(23px + env(safe-area-inset-bottom))!important;grid-template-columns:repeat(3,49px)!important;gap:7px!important}#actions .skill{width:49px!important;height:49px!important;font-size:8px!important}}
+@media(max-width:360px) and (orientation:portrait){#actions{grid-template-columns:repeat(2,49px)!important}#joy{width:115px!important;height:115px!important}#mini{max-width:42%}}
+
+/* 1.2.4: HUD orizzontale, bersaglio selezionabile */
+#needs{position:absolute!important;left:calc(10px + env(safe-area-inset-left))!important;right:calc(64px + env(safe-area-inset-right))!important;top:calc(54px + env(safe-area-inset-top))!important;max-width:none!important;width:auto!important;transform:none!important;display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:4px 14px;padding:5px 10px!important;font-size:11px!important;line-height:1.3!important;min-height:30px;pointer-events:none}
+#needs .status-row,#needs .status-time,#needs .status-house{display:flex;gap:4px;align-items:center;white-space:nowrap;margin:0!important;padding:0!important}
+#targetBar{position:absolute;top:calc(94px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;background:#0b1020d9;border:1px solid #96506b;border-radius:8px;padding:3px 6px;pointer-events:auto;font-size:11px;z-index:5}
+#targetBar button{color:#fff;background:#803353;border:0;border-radius:5px;min-width:30px;min-height:27px;touch-action:manipulation}
+#targetName{min-width:88px;text-align:center;white-space:nowrap}
+#settingsMenu .speedLabel{display:flex;justify-content:space-between;font-size:12px;margin-top:13px}
+#settingsMenu #timeSpeed{width:100%;accent-color:#e76892;touch-action:auto}
+@media(orientation:landscape) and (max-height:420px){#needs{top:calc(39px + env(safe-area-inset-top))!important;right:calc(68px + env(safe-area-inset-right))!important;font-size:10px!important;gap:3px 10px}#targetBar{top:calc(79px + env(safe-area-inset-top))}}
+@media(orientation:portrait){#needs{top:calc(60px + env(safe-area-inset-top))!important;gap:3px 9px}#targetBar{top:calc(125px + env(safe-area-inset-top))}}
+
+/* 1.2.9 UI: compact brand aligned with HUD, accessible inventory and map */
+#top{top:calc(7px + env(safe-area-inset-top))!important;left:calc(12px + env(safe-area-inset-left))!important}#brand{font-size:clamp(11px,1.35vw,15px)!important;letter-spacing:1px!important}#badge{font-size:8px!important;margin-top:1px!important}#needs{top:calc(36px + env(safe-area-inset-top))!important;gap:3px 11px!important;padding:5px 8px!important;right:calc(65px + env(safe-area-inset-right))!important}#targetBar{top:calc(82px + env(safe-area-inset-top))!important}#mapQuick{border:1px solid #75556b;border-radius:6px;background:#292337;color:#ffddd4;font-size:10px;padding:4px 7px;pointer-events:auto;white-space:nowrap}#mapQuick:disabled{opacity:.55}#inventoryQuick{position:absolute;top:calc(7px + env(safe-area-inset-top));right:calc(66px + env(safe-area-inset-right));z-index:12;width:40px;height:40px;border:1px solid #80516d;border-radius:10px;background:#121727ed;color:#fff;font-size:20px;pointer-events:auto;touch-action:manipulation}#settingsMenu #fullscreen{text-align:center!important}#settingsMenu #exitGame{text-align:center!important;border-color:#a65b64!important;color:#ffb7ae!important}@media(orientation:landscape) and (max-height:420px){#needs{top:calc(34px + env(safe-area-inset-top))!important}#targetBar{top:calc(72px + env(safe-area-inset-top))!important}}@media(orientation:portrait){#top{top:calc(7px + env(safe-area-inset-top))!important}#needs{top:calc(43px + env(safe-area-inset-top))!important}#targetBar{top:calc(125px + env(safe-area-inset-top))!important}#inventoryQuick{right:calc(57px + env(safe-area-inset-right))}}
+
+/* Alpha 1.2.9: HUD responsive e comandi senza sovrapposizioni */
+#top{right:calc(115px + env(safe-area-inset-right))!important;pointer-events:none}
+#top #mini{display:none!important}
+#needs{left:calc(12px + env(safe-area-inset-left))!important;right:calc(112px + env(safe-area-inset-right))!important;box-sizing:border-box;max-height:64px;overflow:hidden;align-content:center;z-index:7}
+#targetBar{z-index:7;max-width:45vw;box-sizing:border-box}
+#targetName{max-width:28vw;overflow:hidden;text-overflow:ellipsis}
+#inventoryQuick{right:calc(69px + env(safe-area-inset-right))!important}
+#settingsToggle{z-index:14}
+#actions .skill{white-space:normal;overflow-wrap:anywhere;line-height:1.1;font-size:clamp(8px,1vw,11px)!important}
+#zoomPanel{z-index:8}
+@media(orientation:landscape){#needs{top:calc(29px + env(safe-area-inset-top))!important;min-height:31px!important;font-size:clamp(9px,1vw,12px)!important;gap:2px 9px!important}#targetBar{top:calc(71px + env(safe-area-inset-top))!important}#actions{right:calc(88px + env(safe-area-inset-right))!important;gap:8px!important}#zoomPanel{right:calc(10px + env(safe-area-inset-right))!important}#brand{font-size:12px!important}#badge{font-size:7px!important}}
+@media(orientation:portrait){#needs{top:calc(44px + env(safe-area-inset-top))!important;right:calc(8px + env(safe-area-inset-right))!important;max-height:92px;overflow:visible;font-size:10px!important}#targetBar{top:calc(144px + env(safe-area-inset-top))!important;max-width:80vw}#targetName{max-width:45vw}#actions{right:calc(10px + env(safe-area-inset-right))!important}#inventoryQuick{right:calc(61px + env(safe-area-inset-right))!important}}
+
+/* Alpha 1.2.12.3: correzioni mirate, senza cambiare gameplay */
+#settingsMenu #fullscreen{position:static!important;inset:auto!important;top:auto!important;right:auto!important;left:auto!important;bottom:auto!important;transform:none!important;width:100%!important;float:none!important;margin-top:7px!important}
+body:not(.game-started) #top,body:not(.game-started) #needs,body:not(.game-started) #targetBar,body:not(.game-started) #inventoryQuick,body:not(.game-started) #settingsToggle,body:not(.game-started) #settingsMenu,body:not(.game-started) #zoomPanel,body:not(.game-started) #joy,body:not(.game-started) #actions,body:not(.game-started) #hint,body:not(.game-started) #saveControls{display:none!important}
+#intro{z-index:40}
+@media(orientation:portrait){
+ #needs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px 7px!important;max-height:none!important;overflow:hidden!important;padding:5px 7px!important;align-items:center}
+ #needs .status-time{grid-column:1/-1;justify-content:space-between;min-width:0}
+ #needs .status-row{min-width:0;justify-content:flex-start;gap:4px!important;font-size:9px!important}
+ #needs .status-row b{font-size:10px!important}
+ #needs .status-house{grid-column:1/3;min-width:0;overflow:hidden;text-overflow:ellipsis}
+ #needs #mapQuick{grid-column:3;grid-row:3;font-size:9px;padding:3px 1px}
+ #targetBar{top:calc(147px + env(safe-area-inset-top))!important}
+}
+
+/* Alpha 1.2.12.3 — responsive UI consolidation. Gameplay and save format unchanged. */
+:root{--ui-left:env(safe-area-inset-left,0px);--ui-right:env(safe-area-inset-right,0px);--ui-bottom:env(safe-area-inset-bottom,0px);--ui-top:env(safe-area-inset-top,0px)}
+#top{top:calc(8px + var(--ui-top))!important;left:calc(14px + var(--ui-left))!important;right:calc(115px + var(--ui-right))!important}
+#needs{box-sizing:border-box;overflow:hidden!important;max-height:none!important;border-radius:12px;box-shadow:0 3px 14px #0005}
+#targetBar{box-sizing:border-box;min-height:34px;max-width:min(340px,86vw);white-space:nowrap}
+#targetName{max-width:190px;min-width:85px;overflow:hidden;text-overflow:ellipsis}
+#joy{width:144px!important;height:144px!important;left:calc(14px + var(--ui-left))!important;bottom:calc(18px + var(--ui-bottom))!important;background:rgba(20,25,43,.20)!important;border-color:rgba(218,91,135,.52)!important;box-shadow:inset 0 0 15px #090b1630!important}
+#stick{background:#e7658b!important;box-shadow:0 0 12px #d34d8a66!important}
+#actions{align-items:center;justify-items:center}
+#actions .skill{overflow-wrap:normal!important;word-break:normal!important;hyphens:none;line-height:1.05!important;letter-spacing:0!important;text-align:center;padding:2px!important;box-shadow:0 2px 8px #0006}
+#actions #fight{font-size:0!important}
+#actions #fight::after{content:'LOTTA';font-size:11px}
+#actions #tattoo{font-size:10px!important}
+#zoomPanel{z-index:8}
+#settingsMenu{max-height:min(72dvh,540px);overflow-y:auto;overscroll-behavior:contain}
+@media(orientation:portrait){
+ #top{right:calc(114px + var(--ui-right))!important}
+ #needs{top:calc(47px + var(--ui-top))!important;left:calc(12px + var(--ui-left))!important;right:calc(12px + var(--ui-right))!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 6px!important;padding:8px 9px!important;font-size:10px!important}
+ #needs .status-time{grid-column:1/-1;grid-row:1;display:flex;justify-content:space-between;border-bottom:1px solid #73516b;padding-bottom:4px!important;font-size:11px}
+ #needs .status-row{min-width:0;white-space:nowrap;font-size:9px!important}
+ #needs .status-row b{font-size:10px!important}
+ #needs .status-house{grid-column:1/3;grid-row:3;overflow:hidden}
+ #needs #mapQuick{grid-column:3;grid-row:3;min-width:0}
+ #needs .status-row:last-child{grid-column:1/-1;grid-row:4}
+ #targetBar{top:calc(166px + var(--ui-top))!important;left:50%;max-width:80vw}
+ #zoomPanel{top:51%!important;right:calc(9px + var(--ui-right))!important}
+ #actions{right:calc(13px + var(--ui-right))!important;bottom:calc(24px + var(--ui-bottom))!important;grid-template-columns:repeat(3,56px)!important;gap:7px!important}
+ #actions .skill{width:56px!important;height:56px!important;font-size:10px!important}
+ #actions #fight::after{font-size:10px}
+ #joy{width:144px!important;height:144px!important}
+}
+@media(orientation:landscape){
+ #top{right:calc(116px + var(--ui-right))!important}
+ #needs{top:calc(32px + var(--ui-top))!important;left:calc(12px + var(--ui-left))!important;right:calc(116px + var(--ui-right))!important;display:flex!important;flex-wrap:nowrap!important;gap:clamp(4px,1vw,12px)!important;min-height:33px!important;padding:5px 8px!important;font-size:clamp(9px,1vw,12px)!important}
+ #needs .status-row,#needs .status-time,#needs .status-house{flex-shrink:0;min-width:0}
+ #needs .status-time{margin-right:3px!important}
+ #needs #mapQuick{margin-left:auto;min-width:0}
+ #targetBar{top:calc(73px + var(--ui-top))!important;left:50%;max-width:260px}
+ #joy{width:136px!important;height:136px!important;left:calc(16px + var(--ui-left))!important;bottom:calc(12px + var(--ui-bottom))!important}
+ #actions{right:calc(94px + var(--ui-right))!important;bottom:calc(12px + var(--ui-bottom))!important;grid-template-columns:repeat(3,58px)!important;gap:8px!important}
+ #actions .skill{width:58px!important;height:58px!important;font-size:10px!important}
+ #zoomPanel{right:calc(10px + var(--ui-right))!important;top:48%!important}
+}
+@media(orientation:landscape) and (max-height:420px){
+ #top{top:calc(4px + var(--ui-top))!important}
+ #needs{top:calc(27px + var(--ui-top))!important;min-height:30px!important;font-size:9px!important}
+ #targetBar{top:calc(64px + var(--ui-top))!important}
+ #joy{width:132px!important;height:132px!important}
+ #actions{grid-template-columns:repeat(3,52px)!important;gap:7px!important}
+ #actions .skill{width:52px!important;height:52px!important;font-size:9px!important}
+ #actions #fight::after{font-size:9px}
+}
+@media(orientation:portrait) and (max-width:380px){
+ #joy{width:130px!important;height:130px!important}
+ #actions{grid-template-columns:repeat(3,49px)!important;gap:5px!important;right:calc(8px + var(--ui-right))!important}
+ #actions .skill{width:49px!important;height:49px!important;font-size:9px!important}
+ #actions #fight::after{font-size:9px}
+}
+@media(orientation:landscape) and (max-width:760px){
+ #needs .status-house{display:none!important}
+ #needs{gap:5px!important}
+}
+
+/* Alpha 1.2.12.3: contextual controls; preserve joystick hit area. */
+#actions .skill[hidden],#targetBar[hidden]{display:none!important}
+#actions{display:grid!important;grid-template-columns:repeat(3,56px)!important;grid-auto-flow:row;align-content:end;min-height:56px}
+#actions .skill{background:rgba(112,40,66,.73)!important}
+#actions #useItem{background:rgba(112,54,85,.84)!important}
+#targetBar{background:rgba(11,16,32,.87);z-index:9}
+@media(orientation:portrait){#actions{grid-template-columns:repeat(3,56px)!important}#targetBar{top:calc(157px + env(safe-area-inset-top))!important}}
+@media(orientation:landscape){#actions{grid-template-columns:repeat(3,58px)!important}#targetBar{top:calc(70px + env(safe-area-inset-top))!important}}
+@media(orientation:landscape) and (max-height:420px){#actions{grid-template-columns:repeat(3,52px)!important}#targetBar{top:calc(65px + env(safe-area-inset-top))!important}}
+@media(orientation:portrait) and (max-width:380px){#actions{grid-template-columns:repeat(3,49px)!important}}
+
+/* Alpha 1.2.12.3: permanent action slots, contextual controls on a separate row.
+   Hidden contextual buttons never move the three primary actions. */
+#actions{
+ display:grid!important;
+ grid-template-columns:repeat(3,var(--action-size))!important;
+ grid-template-rows:var(--action-size) var(--action-size)!important;
+ grid-auto-flow:row!important;
+ gap:7px!important;
+ align-content:end!important;
+ justify-items:center!important;
+ min-height:calc(2 * var(--action-size) + 7px)!important;
+ --action-size:56px;
+}
+#actions .skill{width:var(--action-size)!important;height:var(--action-size)!important}
+#actions #jump{grid-column:1;grid-row:2}
+#actions #fight{grid-column:2;grid-row:2}
+#actions #useItem{grid-column:3;grid-row:2}
+#actions #act{grid-column:1;grid-row:1;font-size:23px!important;line-height:1!important}
+#actions #tattoo{grid-column:2;grid-row:1}
+#actions #beg{grid-column:3;grid-row:1}
+#actions .skill[hidden]{display:none!important}
+@media(orientation:landscape){#actions{--action-size:58px}}
+@media(orientation:landscape) and (max-height:420px){#actions{--action-size:52px}}
+@media(orientation:portrait) and (max-width:380px){#actions{--action-size:49px}}
+
+/* 1.2.14: responsive HUD: no text overlap, compact landscape */
+#needs{max-width:min(360px,calc(100vw - 110px));box-sizing:border-box}
+#needs .status-row{min-width:0;white-space:nowrap}
+#needs .status-row b{flex-shrink:0}
+@media (orientation:landscape){#needs{max-width:270px;font-size:11px}#brand{font-size:13px}#badge{font-size:9px}}
+
+/* 1.2.15.1 · Layout: barra icone sempre accessibile, bersaglio sotto le icone. */
+#businessCard[hidden],#targetBar[hidden]{display:none!important}
+#businessCard{position:absolute;z-index:9;pointer-events:none;left:calc(12px + env(safe-area-inset-left));top:calc(153px + env(safe-area-inset-top));width:min(270px,calc(100vw - 98px));max-height:112px;overflow:hidden;background:rgba(12,19,30,.91);border:1px solid rgba(200,158,121,.72);border-radius:9px;padding:9px 11px;color:#e6ddce;font:11px/1.35 system-ui,sans-serif;box-shadow:0 5px 18px #0008;overflow-wrap:anywhere}
+#businessCard strong{display:block;color:#f4d8ae;font-size:12px;line-height:1.3;margin-bottom:3px}
+#businessCard .open{color:#e8ca7d}#businessCard .closed{color:#e5a79f}
+#businessCard .owner{opacity:.86}#businessCard .note{opacity:.75;font-size:10px;margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#targetBar{position:absolute!important;left:auto!important;right:calc(9px + env(safe-area-inset-right))!important;top:calc(64px + env(safe-area-inset-top))!important;transform:none!important;max-width:min(230px,52vw)!important;min-height:31px!important;padding:3px 5px!important;gap:4px!important;font-size:11px!important;z-index:12!important;box-shadow:0 3px 14px #0009}
+#targetBar button{min-width:27px!important;min-height:26px!important}
+#targetName{min-width:0!important;max-width:calc(min(230px,52vw) - 73px)!important;overflow:hidden;text-overflow:ellipsis}
+#inventoryQuick,#settingsToggle{z-index:18!important}
+@media(orientation:portrait){
+ #top{right:calc(115px + env(safe-area-inset-right))!important}
+ #needs{right:calc(12px + env(safe-area-inset-right))!important;top:calc(48px + env(safe-area-inset-top))!important;max-width:calc(100vw - 24px)!important;padding:6px 8px!important;z-index:7!important}
+ #needs .status-row{letter-spacing:-.2px;font-size:9px!important;gap:2px!important}
+ #needs .status-row b{font-size:10px!important}
+ #businessCard{top:calc(148px + env(safe-area-inset-top));width:min(265px,calc(100vw - 105px))}
+ #targetBar{top:calc(151px + env(safe-area-inset-top))!important;max-width:min(205px,48vw)!important}
+ #targetName{max-width:calc(min(205px,48vw) - 72px)!important}
+}
+@media(orientation:landscape){
+ #needs{right:calc(128px + env(safe-area-inset-right))!important;max-height:43px!important;overflow:hidden!important;white-space:nowrap}
+ #businessCard{top:calc(82px + env(safe-area-inset-top));left:calc(12px + env(safe-area-inset-left));width:min(250px,29vw);max-height:87px;padding:6px 9px;font-size:10px}
+ #businessCard strong{font-size:11px}
+ #businessCard .note{display:none}
+ #targetBar{top:calc(64px + env(safe-area-inset-top))!important;right:calc(9px + env(safe-area-inset-right))!important;max-width:195px!important}
+ #targetName{max-width:120px!important}
+}
+@media(orientation:landscape) and (max-height:390px){#businessCard{top:calc(75px + env(safe-area-inset-top))}#targetBar{top:calc(58px + env(safe-area-inset-top))!important}}
+#joy,#stick,#targetBar,#targetPrev,#targetNext{user-select:none!important;-webkit-user-select:none!important;-webkit-touch-callout:none!important;touch-action:none!important}
+</style><style id="urban-ui-1213">
+/* Coherent HUD: world zoom never changes screen-space controls. */
+#top{top:calc(7px + env(safe-area-inset-top))!important;left:calc(10px + env(safe-area-inset-left))!important;right:calc(112px + env(safe-area-inset-right))!important}
+#brand{font-size:clamp(11px,2.4vw,16px)!important;letter-spacing:1.2px!important}
+#badge{font-size:9px!important}
+#needs{top:calc(51px + env(safe-area-inset-top))!important;left:calc(10px + env(safe-area-inset-left))!important;min-width:0!important;max-width:min(245px,56vw)!important;padding:6px 8px!important;font-size:10px!important;line-height:1.25!important;background:#0b1220d6!important}
+#needs .status-time{font-size:10px!important;padding-bottom:3px!important;margin-bottom:3px!important}
+#needs .status-row{font-size:9px!important;gap:6px!important}
+#needs .status-house{font-size:9px!important;margin-top:3px!important;padding-top:3px!important}
+#settingsToggle{top:calc(7px + env(safe-area-inset-top))!important;right:calc(9px + env(safe-area-inset-right))!important;width:38px!important;height:38px!important}
+#zoomPanel{right:calc(7px + env(safe-area-inset-right))!important;top:51%!important;width:39px!important;padding:5px 3px!important}
+#zoomSlider{height:clamp(80px,22dvh,160px)!important}
+#joy{width:156px!important;height:156px!important;left:calc(12px + env(safe-area-inset-left))!important;bottom:calc(13px + env(safe-area-inset-bottom))!important;background:#1b223252!important}
+#actions{bottom:calc(22px + env(safe-area-inset-bottom))!important;right:calc(12px + env(safe-area-inset-right))!important}
+#actions .skill{width:56px!important;height:56px!important;font-size:10px!important}
+#dialog{max-height:65dvh!important;max-width:min(470px,92vw)!important}
+@media(orientation:landscape){
+ #top{right:calc(115px + env(safe-area-inset-right))!important}
+ #needs{top:calc(40px + env(safe-area-inset-top))!important;max-width:190px!important;font-size:9px!important}
+ #joy{width:144px!important;height:144px!important;bottom:calc(5px + env(safe-area-inset-bottom))!important}
+ #actions{bottom:calc(7px + env(safe-area-inset-bottom))!important}
+ #actions .skill{width:49px!important;height:49px!important;font-size:9px!important}
+ #zoomPanel{top:52%!important}
+ #zoomSlider{height:clamp(65px,20dvh,105px)!important}
+ #dialog{bottom:4dvh!important;max-height:83dvh!important}
+}
+</style><style id="hudbar-12154">
+#top{position:absolute!important;top:calc(5px + env(safe-area-inset-top))!important;left:calc(8px + env(safe-area-inset-left))!important;right:calc(8px + env(safe-area-inset-right))!important;width:auto!important;max-width:none!important;min-height:48px!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;padding:5px 8px!important;border:1px solid #98536f!important;border-radius:10px!important;background:rgba(11,15,29,.92)!important;pointer-events:auto!important;z-index:25!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none!important;white-space:nowrap!important}
+#top::-webkit-scrollbar{display:none}
+#top .brandblock{flex:0 0 auto!important;min-width:0!important;padding-right:8px!important}
+#top #brand{font-size:clamp(11px,2.2vw,16px)!important;line-height:1.15!important}
+#top #badge{font-size:9px!important;white-space:nowrap!important}
+#top #mini{position:static!important;display:none!important}
+#top #inventoryQuick,#top #settingsToggle{position:static!important;inset:auto!important;flex:0 0 43px!important;width:43px!important;height:43px!important;margin:0!important;transform:none!important;pointer-events:auto!important;z-index:27!important}
+#top #barBack{display:none;background:#71364e;border:1px solid #d58ca2;color:white;border-radius:8px;font-size:20px;height:40px;min-width:35px;pointer-events:auto}
+#needs{top:calc(60px + env(safe-area-inset-top))!important;z-index:8!important}
+#targetBar{top:calc(60px + env(safe-area-inset-top))!important;right:calc(8px + env(safe-area-inset-right))!important;z-index:9!important}
+#businessCard{top:calc(170px + env(safe-area-inset-top))!important}
+#settingsMenu{top:calc(60px + env(safe-area-inset-top))!important;z-index:30!important}
+@media(orientation:portrait){#top{padding-right:45px!important}#top #barBack{display:block!important;position:fixed!important;right:calc(12px + env(safe-area-inset-right));top:calc(9px + env(safe-area-inset-top));z-index:35!important}#needs{top:calc(61px + env(safe-area-inset-top))!important}#targetBar{top:calc(172px + env(safe-area-inset-top))!important}}
+@media(orientation:landscape){#top{overflow-x:visible!important;overflow-y:visible!important;flex-wrap:wrap!important;white-space:normal!important;min-height:45px!important;max-height:105px!important}#top .brandblock{min-width:160px}#needs{top:calc(63px + env(safe-area-inset-top))!important;max-width:300px!important}#targetBar{top:calc(63px + env(safe-area-inset-top))!important}#businessCard{top:calc(111px + env(safe-area-inset-top))!important}}
+</style><style id="hud-unificato-12157">
+/* Una sola superficie: marchio, indicatori e comandi. */
+#top{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;left:calc(8px + env(safe-area-inset-left))!important;right:calc(8px + env(safe-area-inset-right))!important;top:calc(5px + env(safe-area-inset-top))!important;min-height:54px!important;max-height:96px!important;padding:6px 9px!important;overflow-x:auto!important;overflow-y:hidden!important;flex-wrap:nowrap!important;white-space:nowrap!important;border:1px solid #965b75!important;border-radius:12px!important;background:rgba(12,16,29,.94)!important;box-shadow:0 4px 14px #0008!important;pointer-events:auto!important;z-index:25!important}
+#top .brandblock{flex:0 0 auto!important;min-width:150px!important}
+#top #brand{font-size:clamp(12px,2.6vw,16px)!important}
+#top #badge{font-size:9px!important}
+#top #needs{position:static!important;inset:auto!important;transform:none!important;display:flex!important;flex:0 0 auto!important;align-items:center!important;gap:9px!important;min-width:0!important;max-width:none!important;width:auto!important;height:auto!important;padding:0 7px!important;margin:0!important;border:0!important;border-left:1px solid #6d485f!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;font-size:10px!important;line-height:1.25!important;white-space:nowrap!important;pointer-events:auto!important}
+#top #needs .status-time{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:1px!important;min-width:110px!important;margin:0!important;padding:0!important;border:0!important}
+#top #needs .status-row{display:flex!important;align-items:center!important;gap:3px!important;flex:0 0 auto!important;min-width:0!important;margin:0!important;padding:0!important;border:0!important;white-space:nowrap!important}
+#top #needs .status-house{display:block!important;flex:0 0 auto!important;white-space:nowrap!important;margin:0!important;padding:0!important}
+#top #needs #mapQuick{position:static!important;inset:auto!important;transform:none!important;display:block!important;width:auto!important;min-width:57px!important;height:34px!important;margin:0!important;padding:4px 7px!important;font-size:10px!important;white-space:nowrap!important}
+#top #inventoryQuick,#top #settingsToggle{position:static!important;inset:auto!important;transform:none!important;flex:0 0 39px!important;width:39px!important;height:39px!important;margin:0!important;padding:0!important;z-index:27!important}
+#top #barBack{display:none!important}
+#top #mini{display:none!important}
+#targetBar{top:calc(67px + env(safe-area-inset-top))!important}
+#businessCard{top:calc(110px + env(safe-area-inset-top))!important}
+#settingsMenu{top:calc(65px + env(safe-area-inset-top))!important}
+@media(orientation:portrait){
+ #top{padding-right:42px!important;max-height:67px!important}
+ #top #barBack{display:block!important;position:fixed!important;right:calc(12px + env(safe-area-inset-right))!important;top:calc(12px + env(safe-area-inset-top))!important;min-width:32px!important;height:39px!important;z-index:40!important}
+ #top #needs{gap:7px!important;font-size:10px!important}
+ #targetBar{top:calc(78px + env(safe-area-inset-top))!important}
+}
+@media(orientation:landscape){
+ #top{flex-wrap:wrap!important;white-space:normal!important;max-height:114px!important;overflow-x:visible!important;overflow-y:visible!important;gap:5px 10px!important}
+ #top #needs{flex-wrap:wrap!important;gap:5px 10px!important}
+ #targetBar{top:calc(115px + env(safe-area-inset-top))!important}
+}
+</style><style id="urban-standard-12158">
+#top #brand{font-size:12px!important;font-weight:600!important;letter-spacing:.35px!important;text-transform:lowercase!important}
+#top .brandblock{min-width:112px!important}
+#top #badge{font-size:8px!important;letter-spacing:.2px!important}
+@media(orientation:landscape){
+ #top{min-height:0!important;height:43px!important;max-height:43px!important;padding:3px 7px!important;gap:4px!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;white-space:nowrap!important;border-radius:8px!important;align-items:center!important}
+ #top .brandblock{min-width:110px!important}
+ #top #needs{flex-wrap:nowrap!important;gap:5px!important;font-size:9px!important;padding:0 5px!important;line-height:1.1!important}
+ #top #needs .status-time{min-width:88px!important}
+ #top #needs #mapQuick{height:28px!important;font-size:9px!important}
+ #top #inventoryQuick,#top #settingsToggle{height:30px!important;width:30px!important;flex-basis:30px!important;font-size:17px!important}
+ #targetBar{top:calc(50px + env(safe-area-inset-top))!important}
+ #businessCard{top:calc(53px + env(safe-area-inset-top))!important}
+ #settingsMenu{top:calc(50px + env(safe-area-inset-top))!important}
+}
+</style><style id="hud-clean-12159">
+#top .brandblock{display:none!important}
+#top{height:47px!important;min-height:47px!important;max-height:47px!important;padding:3px 6px!important;gap:3px!important;align-items:center!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none!important}
+#top::-webkit-scrollbar{display:none}
+#top #needs{border:0!important;padding:0 3px!important;gap:9px!important;font-size:11px!important;flex-wrap:nowrap!important;align-items:center!important}
+#top #needs .status-time{min-width:108px!important}
+#top #needs .status-time b#clock{font-size:11px!important}
+#top #needs #mapQuick{height:31px!important}
+#top #inventoryQuick,#top #settingsToggle{height:33px!important;width:33px!important;flex-basis:33px!important}
+#top #barBack{display:block!important;position:fixed!important;right:calc(12px + env(safe-area-inset-right))!important;top:calc(9px + env(safe-area-inset-top))!important;height:37px!important;min-width:32px!important;z-index:41!important}
+#top{padding-right:43px!important}
+#targetBar{top:calc(56px + env(safe-area-inset-top))!important}
+#businessCard{top:calc(60px + env(safe-area-inset-top))!important}
+#settingsMenu{top:calc(57px + env(safe-area-inset-top))!important}
+@media(orientation:landscape){#top{height:36px!important;min-height:36px!important;max-height:36px!important;padding:2px 5px!important}#top #needs{font-size:10px!important;gap:7px!important}#top #needs .status-time{min-width:95px!important}#top #barBack{top:calc(5px + env(safe-area-inset-top))!important;height:28px!important}#top #inventoryQuick,#top #settingsToggle{height:27px!important;width:27px!important;flex-basis:27px!important}#targetBar,#businessCard,#settingsMenu{top:calc(42px + env(safe-area-inset-top))!important}}
+
+/* Simbolo provvisorio: sostituire con logo ufficiale quando disponibile */
+#start.logo-launch{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:172px;height:172px;margin:18px auto 0;border-radius:50%;border:3px solid #d8a6a6;background:radial-gradient(circle at 50% 42%,#4b213c,#130f22 72%);box-shadow:0 0 0 6px #201426,0 0 26px #ad436950;cursor:pointer;transition:transform .13s,box-shadow .22s,filter .22s;-webkit-tap-highlight-color:transparent}
+#start.logo-launch:active{transform:scale(.91);filter:brightness(1.6);box-shadow:0 0 0 6px #45203b,0 0 44px #ff6c9f}
+.launch-symbol{font-family:Georgia,serif;font-size:43px;letter-spacing:-3px;color:#f9d5c4}.launch-symbol span{font-size:20px;vertical-align:middle;padding:0 3px;color:#ff7196}.launch-caption{font-size:10px;letter-spacing:2px}
+#recenterCamera{position:absolute;right:calc(16px + env(safe-area-inset-right));top:calc(155px + env(safe-area-inset-top));z-index:17;pointer-events:auto;touch-action:manipulation;border:1px solid #efb3c8;background:#4c2741ed;color:#fff;border-radius:12px;padding:9px 12px;font-size:15px;font-weight:800;box-shadow:0 2px 12px #0008}#recenterCamera[hidden]{display:none!important}#recenterCamera span{font-size:10px;letter-spacing:.7px}@media(orientation:landscape){#recenterCamera{top:calc(55px + env(safe-area-inset-top));right:calc(80px + env(safe-area-inset-right))}}canvas#game{touch-action:none;user-select:none;-webkit-user-select:none}</style><style id="joy-center-121515">#joyCenterTarget{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:28px;line-height:1;color:#fff0d8;text-shadow:0 0 9px #e7658b,0 1px 3px #000;pointer-events:none;z-index:3}#joyCenterTarget[hidden]{display:none!important}#joy:has(#joyCenterTarget:not([hidden])) #stick{opacity:.38}#recenterCamera{display:none!important}</style><style id="hud-arrow-121518">
+#top #barBack{background:rgba(95,53,76,.30)!important;border:1px solid rgba(214,158,180,.35)!important;color:rgba(255,230,237,.75)!important;font-size:16px!important;min-width:26px!important;width:26px!important;height:29px!important;padding:0!important;border-radius:7px!important;box-shadow:none!important;backdrop-filter:blur(2px)}
+@media(orientation:landscape){#top #barBack{height:25px!important;width:25px!important;min-width:25px!important;font-size:14px!important}}
+</style><style id="layout-121519">
+#top{display:flex!important;align-items:center!important;gap:7px!important;padding-left:7px!important}
+#top>.status-row{display:flex!important;align-items:center!important;flex:0 0 auto!important;white-space:nowrap!important;color:#f9dfb5!important;font-size:13px!important;font-weight:800!important;padding:0 6px!important}
+#top #inventoryQuick,#top #settingsToggle{flex:0 0 32px!important;width:32px!important;height:32px!important;position:static!important;display:block!important;order:0!important}
+#top #needs{order:1!important;flex:0 0 auto!important}
+#top #barBack{opacity:.6!important}
+@media(orientation:portrait){#top{padding-right:37px!important}#top #needs .status-time{min-width:98px!important}}
+</style><style>
+#audioSettings{margin:10px 0 7px;border-top:1px solid #6d5265;padding-top:8px;color:#ffe5dc;font:11px system-ui,sans-serif}
+#audioSettings .audioTitle{display:flex;justify-content:space-between;align-items:center;font-weight:bold;margin-bottom:6px}
+#settingsMenu #audioMute{width:auto!important;margin:0!important;padding:5px 7px!important;font-size:10px!important}
+#audioSettings label{display:flex;align-items:center;justify-content:space-between;gap:7px;margin:6px 0}
+#audioSettings input{width:58%;accent-color:#e76892;touch-action:auto}
+</style><style id="qa25-touch-guard">
+html,body,#game,#ui{touch-action:none!important;-webkit-text-size-adjust:100%;}
+#dialog,#settingsMenu,#codexJournal>div,#journalContent{overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y!important;}
+button,input,select,textarea{touch-action:manipulation;}
+#joy,#stick,#actions,#zoomSlider{touch-action:none!important;}
+</style><style id="qa28-season-icons">#seasonIcon{display:inline-block;min-width:1.15em;text-align:center;vertical-align:baseline}#season{white-space:nowrap}</style><style id="qa26-style">#journalQuick{position:absolute;z-index:26;top:calc(7px + env(safe-area-inset-top));right:calc(116px + env(safe-area-inset-right));bottom:auto;width:40px;height:40px;display:flex;align-items:center;justify-content:center;pointer-events:auto;border:1px solid #c6859d;background:#302239ee;color:white;border-radius:10px;padding:0;font-size:19px;touch-action:manipulation}body:not(.game-started) #journalQuick{display:none!important}@media(orientation:portrait){#journalQuick{right:calc(108px + env(safe-area-inset-right))}}#journalBadge{font-size:11px;color:#ffcbdb;font-weight:bold}#journalContent button{margin:5px 5px 5px 0;padding:8px 11px;border-radius:8px;background:#4b2943;border:1px solid #ad7893;color:white;touch-action:manipulation}#journalContent button:disabled{opacity:.45}#codexJournal{touch-action:pan-y}#codexJournal section{line-height:1.5}</style><style id="qa30-hud">#top #journalQuick{position:static!important;inset:auto!important;transform:none!important;flex:0 0 33px!important;width:33px!important;height:33px!important;margin:0!important;padding:0!important;display:flex!important;align-items:center;justify-content:center;order:0!important;z-index:27!important;font-size:17px!important}body:not(.game-started) #top #journalQuick{display:none!important}@media(orientation:landscape){#top #journalQuick{flex-basis:27px!important;width:27px!important;height:27px!important;font-size:15px!important}}#top #needs{min-width:0!important}#top{overflow-x:auto!important;scrollbar-width:none}#top::-webkit-scrollbar{display:none}</style><style id="qa31-2-compact-hud">
+/* Solo HUD: non cambia le meccaniche di gioco. */
+#top{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:clamp(2px,.55vw,8px)!important;overflow-x:auto!important;overflow-y:hidden!important;white-space:nowrap!important;padding:2px 6px!important;padding-right:6px!important;max-height:47px!important;box-sizing:border-box!important}
+#top #barBack{display:none!important}
+#top .hud-money{display:flex!important;align-items:center!important;gap:4px!important;flex:0 0 auto!important;padding:0 4px!important;font-size:13px!important}
+#top .hud-money .rent-mini{font-size:14px;opacity:.9;margin-left:2px}
+#top #inventoryQuick,#top #journalQuick,#top #mapQuick,#top #settingsToggle{position:static!important;inset:auto!important;display:flex!important;align-items:center!important;justify-content:center!important;flex:0 0 32px!important;width:32px!important;min-width:32px!important;height:32px!important;padding:0!important;margin:0!important;font-size:18px!important;line-height:1!important;border-radius:8px!important;box-sizing:border-box!important;order:initial!important}
+#top #needs{display:contents!important}
+#top .hud-vitals{display:flex!important;align-items:center!important;gap:clamp(3px,.6vw,9px)!important;flex:0 0 auto!important;margin:0!important;padding:0!important;border:0!important}
+#top .hud-vitals .status-row{display:flex!important;align-items:center!important;gap:3px!important;flex:0 0 auto!important;font-size:12px!important;margin:0!important;padding:0!important;border:0!important;white-space:nowrap!important}
+#top .hud-vitals .vital-icon{font-size:16px!important;line-height:1!important}
+#top .hud-vitals .status-row b{font-size:11px!important;font-weight:650!important}
+#top .hud-vitals .status-row .vital-label{display:none!important}
+#top .status-time,#top .status-house{display:none!important}
+#top .hud-clock{display:none!important}
+#top #mapQuick:disabled{opacity:.48!important}
+#top #settingsToggle{margin-left:auto!important}
+#hudClockOutside{position:absolute;top:calc(51px + env(safe-area-inset-top));left:calc(12px + env(safe-area-inset-left));z-index:18;pointer-events:none;color:#fff0db;background:#111522c9;border-radius:6px;padding:2px 6px;font-size:10px;white-space:nowrap}
+@media(orientation:landscape){#top{height:38px!important;min-height:38px!important;max-height:38px!important}#top #inventoryQuick,#top #journalQuick,#top #mapQuick,#top #settingsToggle{flex-basis:29px!important;min-width:29px!important;width:29px!important;height:29px!important;font-size:16px!important}#top .hud-money{font-size:12px!important}#top .hud-vitals .status-row{font-size:11px!important}#top .hud-vitals .vital-icon{font-size:14px!important}#hudClockOutside{top:calc(43px + env(safe-area-inset-top))}}
+@media(max-width:660px){#top .hud-vitals .status-row b{font-size:10px!important}#top .hud-vitals{gap:3px!important}#top .hud-money{gap:2px!important;padding:0 2px!important}}
+</style><style id="qa31-4-hud-fix">
+/* Override finale delle regole legacy: la barra ha solo sei gruppi, in ordine fisso. */
+#top{position:absolute!important;top:calc(7px + env(safe-area-inset-top))!important;left:calc(9px + env(safe-area-inset-left))!important;right:calc(9px + env(safe-area-inset-right))!important;width:auto!important;height:43px!important;min-height:43px!important;max-height:43px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;flex-wrap:nowrap!important;gap:2px!important;overflow:hidden!important;padding:3px 5px!important;pointer-events:auto!important}
+#top #needs{display:none!important}
+#top #mini,#top #barBack{display:none!important}
+#top .hud-money{position:static!important;display:flex!important;align-items:center!important;gap:3px!important;flex:0 0 auto!important;white-space:nowrap!important;margin:0!important;padding:0 1px!important;font-size:12px!important}
+#top .rent-mini{font-size:13px!important;margin:0 0 0 1px!important}
+#top #inventoryQuick,#top #journalQuick,#top #mapQuick,#top #settingsToggle{position:static!important;inset:auto!important;transform:none!important;display:flex!important;align-items:center!important;justify-content:center!important;flex:0 0 33px!important;width:33px!important;min-width:33px!important;height:33px!important;max-height:33px!important;margin:0!important;padding:0!important;font-size:17px!important;order:initial!important;box-sizing:border-box!important;pointer-events:auto!important}
+#top .hud-vitals{position:static!important;display:flex!important;align-items:center!important;gap:5px!important;flex:0 0 auto!important;min-width:0!important;white-space:nowrap!important;margin:0!important;padding:0!important}
+#top .hud-vitals .status-row{display:flex!important;align-items:center!important;gap:2px!important;white-space:nowrap!important;font-size:11px!important;padding:0!important;margin:0!important}
+#top .hud-vitals .vital-icon{font-size:15px!important;line-height:1!important}
+#top .hud-vitals .status-row b{font-size:11px!important;font-weight:650!important}
+#top .hud-vitals .vital-label{display:none!important}
+#top #settingsToggle{margin-left:0!important}
+#hudClockOutside{position:absolute!important;left:calc(12px + env(safe-area-inset-left))!important;top:calc(53px + env(safe-area-inset-top))!important;z-index:18!important;pointer-events:none!important;font-size:10px!important}
+@media(orientation:landscape){#top{height:40px!important;min-height:40px!important;max-height:40px!important}#hudClockOutside{top:calc(45px + env(safe-area-inset-top))!important}}
+@media(max-width:420px){#top{gap:1px!important;padding:2px 4px!important}#top #inventoryQuick,#top #journalQuick,#top #mapQuick,#top #settingsToggle{flex-basis:30px!important;width:30px!important;min-width:30px!important;height:30px!important;font-size:16px!important}#top .hud-money{font-size:11px!important;gap:2px!important}#top .hud-vitals{gap:3px!important}#top .hud-vitals .vital-icon{font-size:13px!important}#top .hud-vitals .status-row b{font-size:10px!important}}
+@media(max-width:350px){#top .hud-vitals{gap:1px!important}#top .hud-vitals .status-row{gap:1px!important}#top .hud-vitals .status-row b{font-size:9px!important}#top #inventoryQuick,#top #journalQuick,#top #mapQuick,#top #settingsToggle{flex-basis:27px!important;width:27px!important;min-width:27px!important;height:27px!important;font-size:14px!important}}
+</style><style id="qa31-5-layout">
+/* HUD: allineamento compatto e uniforme nei due orientamenti. */
+#top{justify-content:flex-start!important;gap:clamp(3px,1vw,12px)!important;padding-inline:clamp(4px,1vw,12px)!important}
+#top .hud-money{min-width:max-content!important;gap:4px!important}
+#top .rent-mini{font-size:16px!important;line-height:1!important;display:inline-flex!important;align-items:center!important}
+#top .hud-vitals{margin-left:clamp(2px,1vw,12px)!important;gap:clamp(4px,.8vw,12px)!important}
+#top #settingsToggle{margin-left:auto!important}
+#top #inventoryQuick,#top #journalQuick,#top #mapQuick,#top #settingsToggle{flex-shrink:0!important}
+#hudClockOutside{font-size:11px!important;letter-spacing:.1px!important}
+@media (orientation:portrait){
+ #top{gap:clamp(2px,.75vw,5px)!important;padding-inline:4px!important}
+ #top .hud-money{font-size:12px!important;gap:2px!important}
+ #top .rent-mini{font-size:14px!important}
+ #top .hud-vitals{margin-left:1px!important;gap:3px!important}
+ #top .hud-vitals .status-row{gap:1px!important}
+ #top .hud-vitals .status-row b{font-size:10px!important}
+ #top .hud-vitals .vital-icon{font-size:13px!important}
+ #top #inventoryQuick,#top #journalQuick,#top #mapQuick,#top #settingsToggle{flex-basis:clamp(28px,8vw,34px)!important;width:clamp(28px,8vw,34px)!important;min-width:clamp(28px,8vw,34px)!important;height:33px!important;font-size:16px!important}
+}
+@media (orientation:landscape){
+ #top{gap:clamp(8px,1.5vw,22px)!important}
+ #top .hud-vitals{gap:clamp(7px,1.2vw,18px)!important}
+ #top .hud-vitals .status-row b{font-size:12px!important}
+ #top #inventoryQuick,#top #journalQuick,#top #mapQuick,#top #settingsToggle{width:34px!important;min-width:34px!important;flex-basis:34px!important;height:33px!important}
+}
+</style></head><body><canvas id="game"></canvas><div id="ui"><div id="top"><div id="needs"><div class="status-time">☀ <span>GIORNO <b id="day">1</b> · <span id="seasonIcon" aria-hidden="true">🍃</span> <span id="season">PRIMAVERA</span></span><b id="clock">08:00</b></div><div class="status-row"><span>♥ SALUTE</span><b><span id="health">100</span>%</b></div><div class="status-row"><span>◈ FAME</span><b><span id="hunger">10</span>%</b></div><div class="status-row"><span>☾ ENERGIA</span><b><span id="energy">90</span>%</b></div><button id="mapQuick" type="button" disabled title="Esplora la città per sbloccare la mappa">🗺 MAPPA 🔒</button><div class="status-house">⌂ <span id="housing">Senza casa</span></div><div class="status-row">€ <span id="hudMoney">12</span></div></div><div id="mini">€ <span id="money">12</span> · <span id="task">Trova lavoro</span></div><button id="barBack" type="button" aria-label="Scorri barra">❯</button></div><button id="settingsToggle" type="button" aria-label="Apri impostazioni" aria-expanded="false" aria-controls="settingsMenu">⚙️</button><div id="settingsMenu" hidden><div class="settingsTitle">IMPOSTAZIONI <button id="settingsClose" type="button" aria-label="Chiudi impostazioni">✕</button></div><button id="exportSave" type="button">💾 SALVA FILE</button><button id="importSave" type="button">📂 CARICA FILE</button><button id="fullscreen" type="button">⛶ SCHERMO</button><button id="exitGame" type="button">⏻ ESCI DAL GIOCO</button><div id="audioSettings" class="audioSettings"><div class="audioTitle">🔊 AUDIO <button id="audioMute" type="button">DISATTIVA</button><button id="audioTest" type="button" style="padding:5px 7px;font-size:10px">▶ PROVA SUONO</button><span id="audioStatus" role="status" style="font-size:10px;color:#f7d6bb">Non avviato</span></div><label>Generale <input data-audio="master" type="range" min="0" max="100" value="65"></label><label>Musica <input data-audio="music" type="range" min="0" max="100" value="28"></label><label>Effetti <input data-audio="sfx" type="range" min="0" max="100" value="65"></label><label>Ambiente <input data-audio="ambient" type="range" min="0" max="100" value="30"></label></div><label class="speedLabel" for="timeSpeed">TEMPO <b id="timeSpeedValue">1×</b></label><input id="timeSpeed" type="range" min="0" max="4" step="1" value="1" aria-label="Velocità tempo"><input id="saveFile" type="file" accept=".json,application/json"><div id="saveStatus" role="status"></div></div><button id="inventoryQuick" type="button" aria-label="Apri zaino">🎒</button><button id="journalQuick" type="button" aria-label="Apri diario">📓 <span id="journalBadge" hidden></span></button><button id="recenterCamera" type="button" hidden aria-label="Ritorna a Chicco" title="Ritorna al personaggio">⌖ <span>CHICCO</span></button><div id="zoomPanel"><label for="zoomSlider">ZOOM</label><input id="zoomSlider" type="range" min="30" max="175" step="5" value="150" aria-label="Zoom della visuale"><span id="zoomValue">150%</span></div><div id="installTip"><button id="tipClose">✕</button><strong>Schermo intero su iPhone</strong><p>Safari non permette a un sito di nascondere forzatamente la barra delle schede. Tocca Condividi → Aggiungi alla schermata Home, poi avvia il gioco dalla nuova icona. Funziona sia in verticale sia in orizzontale.</p></div><aside id="businessCard" hidden aria-live="off"></aside><div id="targetBar"><button id="targetPrev" type="button">◀</button><span id="targetName">Nessun bersaglio</span><button id="targetNext" type="button">▶</button></div><div id="hint" aria-hidden="true">WASD · E interagisci · SPAZIO salta</div><div id="joy"><div id="stick"></div><div id="joyCenterTarget" hidden aria-hidden="true">⌖</div></div><div id="actions"><button id="jump" class="skill">SALTO</button><button id="fight" class="skill">COMBATTI</button><button id="useItem" class="skill" type="button">USA</button><button id="tattoo" class="skill" type="button" hidden>TATUA</button><button id="act" class="skill" type="button" hidden aria-label="Interagisci" title="Interagisci">💬</button><button id="beg" class="skill" type="button" hidden>ELEMOSINA</button></div><div id="dialog"><strong id="who"></strong><p id="say"></p><div id="choices"></div><button id="close">CHIUDI</button></div><div id="intro"><div><h1>CODEX EX ANIMA</h1><button id="start" class="logo-launch" aria-label="Entra in città"><span class="launch-symbol">C<span>✦</span>A</span><span class="launch-caption">ENTRA IN CITTÀ</span></button><p><small>Alpha 1.2.15.31.5 · Diario, agenda e reputazione · inventario, scambi, NPC e tempo · salvataggio su file</small></p></div></div></div><script>
+/* Codex Audio Engine v3: gesture-safe unlock, validated settings, bounded synthesis. */
+(()=>{'use strict';
+const STORE='codex.audio.v1';
+const defaults=Object.freeze({master:.8,music:.42,sfx:.8,ambient:.35,mute:false});
+const prefs={...defaults};
+const clamp=v=>Number.isFinite(Number(v))?Math.max(0,Math.min(1,Number(v))):0;
+try{const saved=JSON.parse(localStorage.getItem(STORE)||'null');if(saved&&typeof saved==='object')for(const k of Object.keys(defaults)){if(k==='mute'){if(typeof saved[k]==='boolean')prefs[k]=saved[k]}else if(typeof saved[k]==='number'&&Number.isFinite(saved[k]))prefs[k]=clamp(saved[k])}}catch(_){/* Storage can be blocked in private mode. */}
+const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+let ctx=null,master=null,channels=null,musicTimer=null,ambientTimer=null,scene='city',note=0,lastFoot=0;
+let needsGesture=false, pendingUnlock=null, generation=0, backgroundEpoch=0;
+const report=()=>window.dispatchEvent(new Event('codex-audio-state'));
+function createContext(){ctx=new AudioContextClass();master=ctx.createGain();master.connect(ctx.destination);channels={};for(const k of ['music','sfx','ambient']){channels[k]=ctx.createGain();channels[k].connect(master)}const owned=ctx;owned.addEventListener('statechange',()=>{if(ctx===owned)report()});gains();report()}
+
+const scales=Object.freeze({city:[196,246.94,293.66,392,329.63,246.94,220,293.66],studio:[174.61,220,261.63,329.63,261.63,220,196,174.61],night:[146.83,196,220,261.63,220,196,164.81,146.83]});
+function gains(){if(!ctx)return;master.gain.value=prefs.mute?0:prefs.master;for(const k of ['music','sfx','ambient'])channels[k].gain.value=prefs[k]}
+function tone(freq,duration,channel='sfx',type='sine',volume=.15,delay=0){if(!ctx||ctx.state!=='running'||prefs.mute||!channels[channel])return;const t=ctx.currentTime+delay,o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.setValueAtTime(freq,t);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.0002,volume),t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+duration);o.connect(g);g.connect(channels[channel]);o.onended=()=>{o.disconnect();g.disconnect()};o.start(t);o.stop(t+duration+.025)}
+function effect(name){switch(name){case'interact':tone(520,.12,'sfx','sine',.25);tone(690,.16,'sfx','sine',.2,.08);break;case'jump':tone(260,.16,'sfx','triangle',.22);tone(410,.12,'sfx','triangle',.15,.07);break;case'fight':tone(115,.16,'sfx','sawtooth',.2);break;case'tattoo':for(let i=0;i<5;i++)tone(125+i*9,.12,'sfx','sawtooth',.1,i*.09);break;case'notification':tone(580,.17,'sfx','sine',.3);tone(870,.25,'sfx','sine',.25,.16);break;case'step':tone(105,.055,'sfx','triangle',.055);break;case'open':tone(360,.15,'sfx','sine',.2);break;}}
+function startLoops(){if(musicTimer!==null)return;musicTimer=setInterval(()=>{if(!ctx||ctx.state!=='running'||document.hidden||prefs.mute||prefs.music===0)return;const s=scales[scene];tone(s[note%s.length],.55,'music','sine',.2);if(note%4===0)tone(s[0]/2,1.2,'music','triangle',.13);note++},640);ambientTimer=setInterval(()=>{if(!ctx||ctx.state!=='running'||document.hidden||prefs.mute||prefs.ambient===0)return;tone(scene==='night'?70:scene==='studio'?115:92,1.2,'ambient','sine',.05)},2300)}
+// Safari may strand the previous AudioContext after a tab change.
+// Invalidate it once per background cycle; recreate it ONLY on a foreground gesture.
+function disposeContext(){
+ const old=ctx;generation++;pendingUnlock=null;
+ ctx=null;master=null;channels=null;
+ if(old){try{const p=old.close();if(p&&p.catch)p.catch(()=>{})}catch(_){}}
+ report();
+}
+function onBackground(){
+ if(!needsGesture){backgroundEpoch++;needsGesture=true;generation++;pendingUnlock=null;}
+ report();
+}
+function unlock(){
+ if(!AudioContextClass||document.hidden)return Promise.resolve(false);
+ try{
+  // A backgrounded context is not reused: this was the successful QA12 approach.
+  // Do not create a silent probe oscillator (caused extra audio sessions on iOS).
+  if(pendingUnlock)return pendingUnlock;
+  if(needsGesture||!ctx||ctx.state==='closed'||ctx.state==='interrupted'){
+   disposeContext();createContext();
+  }
+  const owned=ctx, token=++generation;
+  if(owned.state==='running'){
+   needsGesture=false;startLoops();report();return Promise.resolve(true);
+  }
+  // Safari requires resume() directly in the trusted pointer/touch event.
+  const resumed=owned.resume();
+  let task;
+  task=Promise.race([
+   Promise.resolve(resumed).then(()=>true,()=>false),
+   new Promise(resolve=>setTimeout(()=>resolve(false),1200))
+  ]).then(()=>{
+   if(ctx!==owned||generation!==token||document.hidden)return false;
+   if(owned.state==='running'){
+    needsGesture=false;startLoops();report();return true;
+   }
+   // Next gesture gets a fresh context instead of retrying the stuck one.
+   needsGesture=true;report();return false;
+  }).catch(()=>{if(ctx===owned){needsGesture=true;report()}return false})
+   .finally(()=>{if(pendingUnlock===task)pendingUnlock=null});
+  pendingUnlock=task;report();return task;
+ }catch(_){needsGesture=true;report();return Promise.resolve(false)}
+}
+function shouldUnlock(){return !document.hidden&&!prefs.mute&&(needsGesture||!ctx||ctx.state!=='running')}
+
+function set(k,v){if(!Object.hasOwn(defaults,k))return false;if(k==='mute')prefs[k]=Boolean(v);else{if(!Number.isFinite(Number(v)))return false;prefs[k]=clamp(v)}gains();try{localStorage.setItem(STORE,JSON.stringify(prefs))}catch(_){}return true}
+function setScene(v){scene=Object.hasOwn(scales,v)?v:'city'}
+function footsteps(moving){if(!moving)return;const now=performance.now();if(now-lastFoot>420){lastFoot=now;effect('step')}}
+function stop(){if(musicTimer!==null)clearInterval(musicTimer);if(ambientTimer!==null)clearInterval(ambientTimer);musicTimer=ambientTimer=null;disposeContext()}
+window.CodexAudio=Object.freeze({unlock,onBackground,shouldUnlock,effect,set,setScene,footsteps,stop,get preferences(){return {...prefs}},get supported(){return Boolean(AudioContextClass)},get state(){return needsGesture?'interrupted':ctx?.state||'not-started'}});
+})();
+</script><script>
+window.addEventListener('error',function(e){const intro=document.getElementById('intro');if(intro&&getComputedStyle(intro).display!=='none'){let box=document.getElementById('bootError');if(!box){box=document.createElement('p');box.id='bootError';box.style.cssText='color:#ffb1ba;font:12px monospace;max-width:300px;margin:12px auto;overflow-wrap:anywhere';intro.querySelector('div').appendChild(box)}box.textContent='Errore avvio: '+(e.message||'sconosciuto')}});
+(()=>{'use strict';document.querySelector('#top').prepend(document.querySelector('#settingsToggle'));document.querySelector('#top').prepend(document.querySelector('#inventoryQuick'));document.querySelector('#inventoryQuick').after(document.querySelector('#journalQuick'));const moneyRow=document.querySelector('#hudMoney').closest('.status-row');document.querySelector('#top').prepend(moneyRow);const barBack=document.querySelector('#barBack');barBack.addEventListener('click',()=>{const b=document.querySelector('#top');b.scrollLeft+=Math.max(130,b.clientWidth*.65);if(b.scrollLeft+b.clientWidth>=b.scrollWidth-5)b.scrollLeft=0;});const audio=window.CodexAudio;document.querySelectorAll('[data-audio]').forEach(el=>{const k=el.dataset.audio;el.value=Math.round(audio.preferences[k]*100);el.addEventListener('input',()=>audio.set(k,Number(el.value)/100))});const muteButton=document.querySelector('#audioMute');function updateMute(){muteButton.textContent=audio.preferences.mute?'ATTIVA':'DISATTIVA'}muteButton.addEventListener('click',async()=>{audio.set('mute',!audio.preferences.mute);updateMute();if(!audio.preferences.mute)await startAudio(true)});updateMute();
+const audioStatus=document.querySelector('#audioStatus');
+let audioRequestId=0;
+let lastAudioState='';
+function updateAudioStatus(){
+ const state=audio.state;
+ const label=!audio.supported?'Non supportato':audio.preferences.mute?'Disattivato':
+  state==='running'?'Attivo':state==='not-started'?'Non avviato':
+  state==='closed'?'Da riattivare':'In pausa · tocca PROVA SUONO';
+ if(label!==lastAudioState){audioStatus.textContent=label;lastAudioState=label}
+ audioStatus.dataset.state=state;
+}
+function startAudio(test=false){
+ const request=++audioRequestId;
+ if(test&&audio.preferences.mute){audio.set('mute',false);updateMute()}
+ // Do not await before calling unlock: Safari's gesture must still be active.
+ return audio.unlock().then(ok=>{
+  if(request===audioRequestId)updateAudioStatus();
+  if(ok&&test&&!document.hidden)audio.effect('notification');
+  return ok;
+ });
+}
+const testButton=document.querySelector('#audioTest');
+function unlockOnGesture(test){startAudio(test)}
+testButton.addEventListener('pointerdown',()=>unlockOnGesture(true));
+testButton.addEventListener('click',e=>{if(e.detail===0)unlockOnGesture(true)});
+document.addEventListener('pointerdown',e=>{
+ if(document.hidden||e.target.closest('#audioTest'))return;
+ if(audio.shouldUnlock())unlockOnGesture(false);
+},{capture:true});
+// iOS Safari sometimes delivers touchstart without pointerdown after tab restore.
+document.addEventListener('touchstart',e=>{
+ if(window.PointerEvent||document.hidden||e.target.closest('#audioTest'))return;
+ if(audio.shouldUnlock())unlockOnGesture(false);
+},{capture:true,passive:true});
+window.addEventListener('codex-audio-state',updateAudioStatus);
+document.addEventListener('visibilitychange',()=>{
+ audioRequestId++;
+ if(document.hidden)audio.onBackground();
+ updateAudioStatus();
+});
+window.addEventListener('pagehide',()=>{
+ audioRequestId++;audio.onBackground();updateAudioStatus();
+});
+window.addEventListener('pageshow',()=>{audioRequestId++;updateAudioStatus()});
+updateAudioStatus();
+const c=document.querySelector('#game'),ctx=c.getContext('2d');let W=0,H=0,scale=2,baseScale=2,camX=0,camY=0,zoom=1.5;const zoomLevels=[0.3,0.6,1,1.25,1.3,1.5,1.75];const world={w:2600,h:4100};let cameraFree=false,panPointer=null,panLastX=0,panLastY=0;function clampCamera(){const vw=W/scale,vh=H/scale;camX=Math.max(0,Math.min(Math.max(0,world.w-vw),camX));camY=Math.max(0,Math.min(Math.max(0,world.h-vh),camY))}function recenterCamera(){cameraFree=false;panPointer=null;camX=p.x-W/scale/2;camY=p.y-H/scale/2;clampCamera();updateRecenterButton()}function updateRecenterButton(){const b=document.querySelector("#recenterCamera");if(!b)return;const vw=W/scale,vh=H/scale;const outside=cameraFree;b.hidden=true;const mark=document.querySelector("#joyCenterTarget");if(mark)mark.hidden=!outside;}const p={x:945,y:680,dir:0,walk:0,moving:false,money:12,quest:0,jump:0,attack:0,tattoo:0,health:100,invulnerable:0};const bag={items:[{id:"matita",name:"Matita",qty:1},{id:"bozzetto",name:"Bozzetto",qty:1}],capacity:16};const economy={trades:0};// Registro comune: ogni futuro studio usa lo stesso schema e le stesse operazioni.
+const STUDIO_TEMPLATE=Object.freeze({id:'dario-torino',name:'Studio di Dario',owner:'Dario',chairs:2,staff:['Dario','Lolly Piercer','JackPanthera'],stock:12,stockMax:60,cash:0,revenue:0,expenses:0,price:2500});
+const studios=[{...STUDIO_TEMPLATE,staff:[...STUDIO_TEMPLATE.staff]}];
+function studioById(id){return studios.find(s=>s.id===id)}
+function studioTransaction(s,type,amount){if(!Number.isSafeInteger(amount)||amount<0)throw Error('Importo non valido');if(type==='income'){s.cash+=amount;s.revenue+=amount}else if(type==='expense'){if(s.cash<amount)return false;s.cash-=amount;s.expenses+=amount}else return false;return true}
+function studioPermissions(s){return {owner:s.owner==='Chicco',manager:false};}
+function studioPanel(){
+ const s=studioById('dario-torino');if(!s)return;
+ const rights=studioPermissions(s);
+ const publicInfo='Proprietario: '+s.owner+'\nPostazioni: '+s.chairs+'\nAttività: tatuaggi su appuntamento.';
+ if(!rights.owner&&!rights.manager){
+  const options=[{label:'Informazioni sullo studio',action:()=>showInteraction(s.name,publicInfo)}];
+  if(s.owner==='Dario')options.push({label:'Proponi acquisto · '+s.price+' €',disabled:p.money<s.price,action:()=>confirmAction(s.name,'Acquistare lo studio di Dario per '+s.price+' €?',()=>{
+   if(s.owner!=='Dario'||p.money<s.price)return toast('Acquisto non disponibile');
+   p.money-=s.price;s.owner='Chicco';toast('Sei il nuovo proprietario dello studio');
+  })});
+  options.push({label:'Chiudi'});
+  showChoices('STUDIO · '+s.name,publicInfo,options);return;
+ }
+ const details=publicInfo+'\nPersonale: '+s.staff.join(', ')+'\nForniture: '+s.stock+'/'+s.stockMax+'\nCassa: '+s.cash+' € · Incassi: '+s.revenue+' € · Spese: '+s.expenses+' €';
+ const options=[{label:'Consulta bilancio',action:()=>showInteraction(s.name+' · Bilancio','Cassa: '+s.cash+' €\nIncassi: '+s.revenue+' €\nSpese: '+s.expenses+' €')}];
+ if(rights.owner){
+  options.push({label:'Acquista 5 forniture · 20 €',disabled:p.money<20||s.stock+5>s.stockMax,action:()=>confirmAction(s.name,'Acquistare cinque forniture per 20 €?',()=>{
+   if(s.owner!=='Chicco'||p.money<20||s.stock+5>s.stockMax)return toast('Operazione non consentita');
+   p.money-=20;s.stock+=5;s.expenses+=20;toast('Forniture acquistate');
+  })});
+  options.push({label:'Vendi studio · '+s.price+' €',action:()=>confirmAction(s.name,'Vendere lo studio a Dario? Il saldo della cassa rimane allo studio.',()=>{
+   if(s.owner!=='Chicco')return toast('Non sei il proprietario');
+   s.owner='Dario';p.money+=s.price;toast('Studio venduto');
+  })});
+ }
+ options.push({label:'Chiudi'});showChoices('GESTIONE · '+s.name,details,options);
+}
+function restoreStudios(rows){studios.splice(0,studios.length,{...STUDIO_TEMPLATE,staff:[...STUDIO_TEMPLATE.staff]});if(!Array.isArray(rows))return;for(const row of rows){const s=studioById(row?.id);if(!s)continue;if(!['Dario','Chicco'].includes(row.owner))continue;const keys=['chairs','stock','stockMax','cash','revenue','expenses','price'];if(!keys.every(k=>Number.isSafeInteger(row[k])&&row[k]>=0&&row[k]<=10000000))continue;if(row.chairs<1||row.chairs>20||row.stockMax<1||row.stockMax>1000||row.stock>row.stockMax||row.price<1)continue;s.owner=row.owner;for(const k of keys)s[k]=row[k];s.staff=['Dario','Lolly Piercer','JackPanthera'];}}
+const NPC_BAG_CAPACITY=8;function normalizeItems(items,capacity){return Array.isArray(items)?items.filter(a=>a&&typeof a.id==='string'&&typeof a.name==='string'&&Number.isInteger(a.qty)&&a.qty>0&&a.qty<=999).slice(0,capacity).map(a=>({id:a.id.slice(0,40),name:a.name.slice(0,60),qty:a.qty})):[];}let timeMultiplier=2;let targetIndex=0;let homeStorage=[];const life={minute:8*60,day:1,hunger:10,energy:90,rented:false,rentDue:0,rent:25,noticeDay:0};
+// Griglia urbanistica: tre taglie commerciali, fronti arretrati di 18 px dal marciapiede.
+/* Dati statici della città, indipendenti da Canvas e DOM.
+   ROAD_RENDER contiene anche le vie a sud; ROAD_LOGIC mantiene esattamente
+   le zone riconosciute dalla vecchia logica di gioco (compatibilità). */
+const CITY_ROADS=Object.freeze({
+ vertical:Object.freeze([{x:450,w:95},{x:900,w:116},{x:1620,w:95}].map(Object.freeze)),
+ horizontal:Object.freeze([{y:335,h:105},{y:790,h:65},{y:1200,h:65},{y:1720,h:80},{y:2170,h:80},{y:2620,h:80},{y:3070,h:80},{y:3520,h:80},{y:3970,h:80}].map(Object.freeze)),
+ logicalVertical:Object.freeze([{min:400,max:590},{min:850,max:1040},{min:1550,max:1745}].map(Object.freeze)),
+ logicalHorizontal:Object.freeze([{min:285,max:480},{min:735,max:900},{min:1140,max:1290}].map(Object.freeze)),
+ sidewalkHorizontal:Object.freeze([{y:335,h:105},{y:790,h:65},{y:1200,h:65}].map(Object.freeze))
+});
+// Registro toponomastico indipendente dal disegno e dalla navigazione.
+// Ogni asse principale ha un ID stabile; le attività possono usarlo come indirizzo.
+const CITY_STREETS=Object.freeze([
+ {id:'corso_ferro',name:'Corso Ferro',axis:'vertical',roadX:450,signX:417,signY:495},
+ {id:'via_ombre',name:'Via delle Ombre',axis:'vertical',roadX:900,signX:867,signY:495},
+ {id:'corso_aurora',name:'Corso Aurora',axis:'vertical',roadX:1620,signX:1587,signY:925},
+ {id:'via_officine',name:'Via delle Officine',axis:'horizontal',roadY:335,signX:370,signY:323},
+ {id:'via_inchiostro',name:'Via dell’Inchiostro',axis:'horizontal',roadY:790,signX:1045,signY:778},
+ {id:'via_mercato',name:'Via del Mercato',axis:'horizontal',roadY:1200,signX:1045,signY:1188}
+].map(street=>Object.freeze(street)));
+const CITY_ADDRESSES=Object.freeze({
+ 'OFFICINA':{street:'corso_ferro',number:2},
+ 'CAFFÈ / PASTICCERIA':{street:'via_officine',number:8},
+ 'ARCHIVIO':{street:'via_officine',number:18},
+ 'ABBIGLIAMENTO':{street:'corso_ferro',number:12},
+ 'BARBIERE':{street:'via_ombre',number:6},
+ 'STUDIO TATTOO':{street:'via_inchiostro',number:12},
+ 'RESIDENZA':{street:'corso_ferro',number:24},
+ 'MERCATO':{street:'via_mercato',number:8},
+ 'RISTORANTE':{street:'via_mercato',number:18}
+});
+function cityAddress(label){const a=CITY_ADDRESSES[label];if(!a)return '';const street=CITY_STREETS.find(s=>s.id===a.street);return street?street.name+' '+a.number:'';}
+function drawStreetPlaques(){
+ // Regola: una scritta per ogni isolato percorribile lungo gli assi principali.
+ // Inizio/metà/fine di una via lunga restano riconoscibili, senza disegnare
+ // sulle strisce pedonali, agli incroci o sopra le linee di mezzeria.
+ const gap=82, minSegment=190;
+ const horizontalRoads=CITY_ROADS.horizontal;
+ const verticalRoads=CITY_ROADS.vertical;
+ function paintLabel(s,x,y,vertical){
+  ctx.save();ctx.translate(Math.round(x),Math.round(y));
+  if(vertical)ctx.rotate(-Math.PI/2);
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.font='bold 12px monospace';
+  const name=s.name.toUpperCase();
+  const width=ctx.measureText(name).width;
+  // Un leggero fondo in tinta asfalto interrompe visivamente il pavé,
+  // senza creare una targa rettangolare o coprire la mezzeria.
+  ctx.fillStyle='rgba(47,55,63,.87)';
+  ctx.fillRect(-width/2-7,-9,width+14,18);
+  ctx.globalAlpha=.84;ctx.fillStyle='#bfc8bd';
+  ctx.fillText(name,0,0);ctx.restore();
+ }
+ function segments(start,end,obstacles){
+  const out=[];let cursor=start;
+  for(const r of obstacles){if(r.start>cursor)out.push([cursor,r.start]);cursor=Math.max(cursor,r.end);}
+  if(cursor<end)out.push([cursor,end]);return out;
+ }
+ for(const s of CITY_STREETS){
+  const vertical=s.axis==='vertical';
+  const road=vertical?verticalRoads.find(r=>r.x===s.roadX):horizontalRoads.find(r=>r.y===s.roadY);
+  if(!road)continue;
+  const blocked=(vertical?horizontalRoads.map(r=>({start:r.y,end:r.y+r.h})):verticalRoads.map(r=>({start:r.x,end:r.x+r.w}))).sort((a,b)=>a.start-b.start);
+  const spans=segments(0,vertical?world.h:world.w,blocked);
+  for(const [begin,end] of spans){
+   const usable=end-begin-2*gap;
+   if(end-begin<minSegment)continue;
+   // Etichette distribuite lungo ciascun tratto: circa ogni 500 px.
+   const count=Math.max(1,Math.ceil(usable/520));
+   for(let i=0;i<count;i++){
+    const along=begin+gap+usable*(i+.5)/count;
+    // Fuori dall'asse della mezzeria: nel terzo laterale della carreggiata.
+    if(vertical)paintLabel(s,road.x+road.w*.76,along,true);
+    else paintLabel(s,along,road.y+road.h*.76,false);
+   }
+  }
+ }
+}
+function cityMapDescription(){
+ const roads=CITY_STREETS.map(s=>s.name).join(' · ');
+ const addresses=Object.keys(CITY_ADDRESSES).map(label=>label+': '+cityAddress(label)).join('\n');
+ return 'Quartiere Zero · principali vie\n'+roads+'\n\nINDIRIZZI\n'+addresses+'\n\nLe vie secondarie saranno aggiunte con l’espansione della città.';
+}
+const SHOP_SIZES=Object.freeze({small:175,medium:190,large:210});
+const LOTS=[
+ {left:72,right:414,front:299,shop:'OFFICINA',size:'small',res:true},
+ {left:565,right:864,front:299,shop:'CAFFÈ / PASTICCERIA',size:'medium',res:true},
+ {left:1055,right:1584,front:299,shop:'ARCHIVIO',size:'large',res:true},
+ {left:72,right:414,front:754,shop:'ABBIGLIAMENTO',size:'small',res:true},
+ {left:565,right:864,front:754,shop:'BARBIERE',size:'medium',res:true},
+ {left:1055,right:1584,front:754,shop:'STUDIO TATTOO',size:'large',res:true},
+ {left:72,right:414,front:1164,shop:'RESIDENZA',size:'small',res:true},
+ {left:565,right:864,front:1164,shop:'MERCATO',size:'medium',res:true},
+ {left:1055,right:1584,front:1164,shop:'RISTORANTE',size:'large',res:true}
+];
+const metroStations=[{name:'METRO · PORTA OVEST',x:428,y:742},{name:'METRO · CENTRO',x:878,y:742},{name:'METRO · PORTA EST',x:1598,y:1152}];
+const businessInfo={
+ 'OFFICINA':['officina','Officina del quartiere','Vera','Riparazioni meccaniche; servizi cyber futuri'],
+ 'CAFFÈ / PASTICCERIA':['caffe','Pasticceria di Elia','Elia','Colazioni e incontri'],
+ 'ARCHIVIO':['archivio','Archivio cittadino','Amministrazione','Documenti e incarichi futuri'],
+ 'ABBIGLIAMENTO':['abbigliamento','Abbigliamento di Lina','Lina','Acquisto e scambio vestiti'],
+ 'STUDIO TATTOO':['studio','Studio di Dario','Dario','Tatuaggi e collaborazioni'],
+ 'RESIDENZA':['residenza','Residenza in affitto','Bruno','Ingresso 24/7 con affitto valido'],
+ 'BARBIERE':['barbiere','Barbiere di Sergio','Sergio','Taglio e cura personale'],
+ 'MERCATO':['mercato','Mercato di quartiere','Commercianti','Cibo e merci'],
+ 'RISTORANTE':['ristorante','Ristorante','Gestione locale','Pasti e incontri']};
+
+/* Registro unico delle strutture fisiche e dei punti interattivi.
+   Le coordinate e le etichette originali restano immutate. */
+const buildings=[{x:78,y:70,w:250,h:220,label:'OFFICINA',color:'#414052'},{x:575,y:60,w:270,h:225,label:'CAFFÈ / PASTICCERIA',color:'#554151'},{x:1100,y:65,w:300,h:225,label:'ARCHIVIO',color:'#353b55'},{x:78,y:500,w:250,h:235,label:'ABBIGLIAMENTO',color:'#4e3947'},{x:1100,y:490,w:290,h:245,label:'STUDIO TATTOO',color:'#473747'},{x:78,y:910,w:250,h:220,label:'RESIDENZA',color:'#373a4c'},{x:590,y:500,w:255,h:235,label:'BARBIERE',color:'#34444b'},{x:585,y:910,w:265,h:220,label:'MERCATO',color:'#50404a'},{x:1110,y:910,w:285,h:220,label:'RISTORANTE',color:'#493442'} ];
+const places=[{name:'STUDIO TATTOO',x:1245,y:755,kind:'studio'},{name:'CAFFÈ / PASTICCERIA',x:710,y:307,kind:'breakfast'},{name:'MERCATO',x:718,y:1150,kind:'lunch'},{name:'RISTORANTE',x:1252,y:1150,kind:'dinner'},{name:'RESIDENZA',x:233,y:1150,kind:'home'},{name:'Turet · fontana pubblica',x:1030,y:455,kind:'water'},{name:'Turet · fontana pubblica',x:565,y:890,kind:'water'},{name:'Turet · fontana pubblica',x:1505,y:890,kind:'water'},...metroStations.map(m=>({...m,kind:'metro'}))];
+
+const CITY_ENTITIES=Object.freeze({buildings,places,metroStations,lots:LOTS});
+function validateCityEntities(){
+ const errors=[];
+ const labels=new Set();
+ for(const b of buildings){
+  if(!Number.isFinite(b.x)||!Number.isFinite(b.y)||!Number.isFinite(b.w)||!Number.isFinite(b.h)||b.w<=0||b.h<=0)errors.push('Dimensioni edificio: '+b.label);
+  if(labels.has(b.label))errors.push('Etichetta edificio duplicata: '+b.label);
+  labels.add(b.label);
+  if(!businessInfo[b.label])errors.push('Attività non registrata: '+b.label);
+ }
+ for(const a of places){if(!Number.isFinite(a.x)||!Number.isFinite(a.y)||!a.kind||!a.name)errors.push('Punto interattivo non valido');}
+ for(const lot of LOTS){if(!labels.has(lot.shop))errors.push('Lotto senza edificio: '+lot.shop);}
+ return errors;
+}
+
+/* API unica per leggere le entità della città. Nessuna coordinata duplicata. */
+const CityEntities=Object.freeze({
+ buildings(){return CITY_ENTITIES.buildings},
+ places(){return CITY_ENTITIES.places},
+ buildingByLabel(label){return CITY_ENTITIES.buildings.find(b=>b.label===label)},
+ buildingFootprint(b,padX=0,padTop=0,padBottom=0){return {left:b.x-padX,right:b.x+b.w+padX,top:b.y-padTop,bottom:b.y+b.h+padBottom}},
+ containsFootprint(b,x,y,padX=0,padTop=0,padBottom=0){const r=this.buildingFootprint(b,padX,padTop,padBottom);return x>r.left&&x<r.right&&y>r.top&&y<r.bottom},
+ entrance(b){return {x:b.x+b.w/2,y:b.y+b.h+19}},
+ nearbyPlaces(x,y,maxDistance){return this.places().filter(a=>Math.hypot(a.x-x,a.y-y)<maxDistance)}
+});
+/* Geometria pura: nessun DOM, canvas, timer o stato globale mutabile.
+   Le coordinate e le eccezioni sono copiate dalla baseline 1.2.15.20. */
+const CityGeometry=Object.freeze({
+ onRoad(x,y){return CITY_ROADS.logicalHorizontal.some(r=>y>r.min&&y<r.max)||CITY_ROADS.logicalVertical.some(r=>x>r.min&&x<r.max)},
+ nearSidewalk(x,y,pad=18){
+  const vx=CITY_ROADS.vertical,hy=CITY_ROADS.sidewalkHorizontal;
+  return vx.some(r=>x>=r.x-36-pad&&x<=r.x+r.w+36+pad)||hy.some(r=>y>=r.y-36-pad&&y<=r.y+r.h+36+pad);
+ },
+ collides(x,y,world,buildings,residences,van){
+  if(x<24||y<24||x>world.w-24||y>world.h-24)return true;
+  if(x>1876&&x<2440&&y>22&&y<322)return true;
+  // QA32: nessuna zona può disabilitare indiscriminatamente le collisioni degli edifici.
+  return SOUTH_BUILDINGS.some(r=>x>r.x-12&&x<r.x+r.w+12&&y>r.y-10&&y<r.y+r.h+12)||residences.some(r=>x>r.x-12&&x<r.x+r.w+12&&y>r.y-10&&y<r.y+r.h+12)||buildings.some(b=>CityEntities.containsFootprint(b,x,y,17,13,13))||(x>van.x-van.w/2-17&&x<van.x+van.w/2+17&&y>van.y-van.h/2-13&&y<van.y+van.h/2+13);
+ }
+});
+// Footprints of the southern district are generated from the same grid used by drawSouthDistrict.
+const SOUTH_COLUMNS=[[40,410],[580,870],[1050,1590],[1750,2220],[2260,2550]];
+const SOUTH_ROWS=[[1815,2160],[2265,2610],[2715,3060],[3165,3510],[3615,3960]];
+function southernBuildings(){const result=[];for(let ri=0;ri<SOUTH_ROWS.length;ri++)for(let ci=0;ci<SOUTH_COLUMNS.length;ci++){
+ if((ri+ci)%5===0)continue;
+ const [xl,xr]=SOUTH_COLUMNS[ci],[yt,yb]=SOUTH_ROWS[ri];
+ const x=xl+28,y=yt+24,w=xr-xl-56,h=yb-yt-50;
+ if(w<100)continue;
+ const bw=Math.min(200,w-25),bh=Math.min(225,h-30);
+ result.push({x:x+12,y:y+h-bh-8,w:bw,h:bh});
+ if(w>330)result.push({x:x+w-bw-12,y:y+h-bh-8,w:bw,h:bh});
+ }return result;}
+const SOUTH_BUILDINGS=southernBuildings();
+const residences=[];
+for(const lot of LOTS){
+ const b=buildings.find(item=>item.label===lot.shop&&Math.abs(item.y-lot.front)<350);
+ if(!b)continue;
+ b.w=SHOP_SIZES[lot.size];b.h=lot.size==='large'?174:lot.size==='medium'?166:158;
+ b.x=lot.left+14;b.y=lot.front-18-b.h;
+ // Abitazioni senza insegna, su una griglia di lotti identica per tutti gli isolati.
+ const rx=b.x+b.w+15,rw=lot.right-rx-12;
+ if(lot.res&&rw>=48)residences.push({x:rx,y:lot.front-18-204,w:rw,h:204,kind:'residential'});
+}
+const van={x:1940,y:1018,w:68,h:116};
+const npcs=[{x:600,y:450,name:'Mara',role:'Corriere',lines:['Qui tutti cercano qualcosa. Io consegno pacchi, tu che sai fare?','Se cerchi lavoro, prova allo studio a est.']},{x:1230,y:755,name:'Dario',role:'Tatuatore',lines:['Cerchi un impiego? Mi serve una mano per un disegno.','Hai una macchinetta strana. Quella pietra... dove l’hai trovata?']},{x:1198,y:755,name:'Lolly Piercer',role:'Piercer',lines:['Sono Lolly, vengo da Padova. Qui nello studio di Dario mi occupo dei piercing.','Tra un piercing e una parete da arrampicata, uno spritz ci sta sempre bene.']},{x:1264,y:755,name:'JackPanthera',role:'Tatuatore',lines:['JackPanthera. Qui da Dario lavoro come tatuatore.','Quando non tatuo, mi trovi sul wakeboard. Oppure in giro con la mia Harley-Davidson.']},{x:1255,y:760,name:'Nico',role:'Cliente',lines:['Ho visto il tuo lavoro. Non so perché, ma quel simbolo mi sembra familiare.']},{x:240,y:875,name:'Bruno',role:'Proprietario',lines:['Affitto una stanza. Pagamento ogni tre giorni.']},{x:420,y:760,name:'Vera',role:'Meccanica',lines:['Il tuo ginocchio fa un rumore tremendo. Dovresti farlo controllare.']},{x:850,y:440,name:'Ada',role:'Poliziotta',lines:['Pattuglio il quartiere. Occhio ai guai.']},{x:718,y:760,name:'Sergio',role:'Barbiere',lines:['Un taglio nuovo cambia la giornata.']},{x:235,y:760,name:'Lina',role:'Negoziante abiti',lines:['Vestiti usati e nuovi, qualcosa troviamo.']},{x:710,y:310,name:'Elia',role:'Pasticcere',lines:['La pasticceria apre presto. Ogni dolce ha il suo prezzo.']},{x:1060,y:824,name:'ilBrusco',role:'Risolvi problemi',lines:['Quando serve una mano, di solito mi trovano.']},{x:630,y:824,name:'Chicco d’Uva',role:'Amico',lines:['La fortuna aiuta chi sa divertirsi.']},{x:1770,y:1120,name:'ilBarbaBarabba',role:'Surfista',lines:['Cognack è casa mia. Due ruote in meno, molta libertà in più.']}];const charity={};let begAttempts=0;
+const danger={x:1200,y:805,dir:3,walk:0,moving:false,cooldown:0,warning:0,targetX:1200,targetY:805,wait:1.5,mood:'calmo',moodTime:0,attitude:0,clientUntil:0,clientCooldown:0,clientDone:0};
+const clientState={Nico:{visits:0,nextDay:2,offer:null},Mara:{visits:0,nextDay:3,offer:null},Vera:{visits:0,nextDay:4,offer:null}};
+// Il cliente viene estratto tra NPC esistenti, senza una sequenza fissa.
+const darioClientPool=['Nico','Mara','Vera','Chicco d’Uva','ilBarbaBarabba'];
+let lastDarioClient=null;
+function randomDarioClient(){
+ const eligible=darioClientPool.filter(name=>npcs.some(n=>n.name===name)&&name!==lastDarioClient);
+ const pool=eligible.length?eligible:darioClientPool;
+ const chosen=pool[Math.floor(Math.random()*pool.length)];
+ lastDarioClient=chosen;
+ return chosen;
+}
+// Incarico tattoo: appuntamento unico, notificato e simulato in tempo di gioco.
+let tattooBooking=null;
+let tattooRequests=[];let tattooAgenda=[];let tattooHistory=[];let completedTattooCount=0;let selfClientCount=0;let reputation=15;let studioEmployed=false;let nextStudioOffer=0;let bookingSerial=0;let tattooInProgressId=null;
+let bookingNoticeAt=0;
+let bookingNoticeShown=false;
+let bookingNoticeHide=0;
+const GAME_START_DATE=Date.UTC(2011,0,11);const GAME_WEEKDAYS=["DOM","LUN","MAR","MER","GIO","VEN","SAB"];function calendarDate(day){const d=new Date(GAME_START_DATE+(day-1)*86400000);return GAME_WEEKDAYS[d.getUTCDay()]+" "+String(d.getUTCDate()).padStart(2,"0")+"/"+String(d.getUTCMonth()+1).padStart(2,"0")+"/"+d.getUTCFullYear();}
+function appointmentClock(total){const day=Math.floor(total/1440)+1;const mins=Math.floor(total%1440);return {day,time:String(Math.floor(mins/60)).padStart(2,'0')+':'+String(mins%60).padStart(2,'0')};}
+function bookingLabel(b){const d=appointmentClock(b.at);return calendarDate(d.day)+' · '+d.time+' · '+b.client+' · '+b.price+' €';}
+function syncActiveBooking(){
+ const now=gameMinutes();
+ tattooAgenda.sort((a,b)=>a.at-b.at);
+ tattooBooking=tattooAgenda.find(b=>b.status==='booked'||b.status==='arrived')||null;
+ if(tattooBooking)p.quest=1;else if(studioEmployed)p.quest=tattooHistory.some(b=>b.status==='done')?2:0;
+ const badge=document.querySelector('#journalBadge');if(badge){badge.hidden=tattooRequests.length===0;badge.textContent=tattooRequests.length?String(tattooRequests.length):'';}
+}
+function offerStudioClient(){
+ if(!studioEmployed||tattooRequests.length>=4||tattooAgenda.filter(b=>b.status==='booked'||b.status==='arrived').length>=5)return;
+ const used=new Set([...tattooRequests,...tattooAgenda.filter(b=>b.status==='booked'||b.status==='arrived')].map(b=>b.client));
+ const pool=darioClientPool.filter(n=>!used.has(n));if(!pool.length)return;
+ const client=pool[Math.floor(Math.random()*pool.length)];
+ const now=gameMinutes(),today=Math.floor(now/1440)*1440;
+ const dayOffset=1+Math.floor(Math.random()*4);
+ const slots=[12*60+15,13*60+30,15*60,16*60+30,18*60+15,19*60];
+ let at=today+dayOffset*1440+slots[Math.floor(Math.random()*slots.length)];
+ while([...tattooRequests,...tattooAgenda].some(b=>Math.abs(b.at-at)<100))at+=1440;
+ const b={id:++bookingSerial,client,price:35+Math.min(55,Math.floor(reputation/12)*5),studio:'Studio di Dario',at,status:'pending',offeredAt:now,expiresAt:now+2880,approachStarted:false};
+ tattooRequests.push(b);toast('📓 Dario: nuova richiesta! Apri il diario.');
+ syncActiveBooking();
+}
+function bookDarioClient(){studioEmployed=true;nextStudioOffer=gameMinutes()+20+Math.random()*120;offerStudioClient();}
+function manageStudioOffers(){
+ if(!studioEmployed)return;
+ const now=gameMinutes();
+ for(const b of [...tattooRequests])if(now>=b.expiresAt){tattooRequests.splice(tattooRequests.indexOf(b),1);tattooHistory.push({...b,status:'expired'});}
+ for(const b of tattooAgenda){if((b.status==='booked'||b.status==='arrived')&&now>b.at+90){if(b.clientOutcome==='no_show'){b.status='no_show';toast('Il cliente '+b.client+' non si è presentato. Nessuna penalità.');}else if(b.status==='arrived'){b.status='missed';reputation=Math.max(0,reputation-8);toast('Appuntamento perso · reputazione -8');}else{b.status='travel_failed';toast('Cliente '+b.client+' bloccato nel tragitto: incarico annullato senza penalità.');}const n=npcs.find(n=>n.name===b.client);if(n){n.targetX=n.x;n.targetY=n.y;}}}
+ if(now>=nextStudioOffer){offerStudioClient();const rep=Math.min(100,reputation);nextStudioOffer=now+Math.max(100,720-rep*5)+Math.random()*Math.max(90,800-rep*5);}
+ syncActiveBooking();
+}
+function acceptStudioOffer(id){const i=tattooRequests.findIndex(b=>b.id===id);if(i<0)return;const b=tattooRequests.splice(i,1)[0];if(gameMinutes()>=b.expiresAt)return; b.status='booked';const roll=Math.random();b.clientOutcome=roll<.05&&!tattooAgenda.slice(-4).some(x=>x.clientOutcome==='no_show')?'no_show':roll<.15?'late':'normal';b.lateMinutes=b.clientOutcome==='late'?10+Math.floor(Math.random()*31):0;tattooAgenda.push(b);syncActiveBooking();toast('Appuntamento confermato in agenda.');refreshJournal();}
+function rejectStudioOffer(id){const i=tattooRequests.findIndex(b=>b.id===id);if(i<0)return;const b=tattooRequests.splice(i,1)[0];tattooHistory.push({...b,status:'declined'});syncActiveBooking();refreshJournal();}
+// QA31: motore di navigazione condiviso da NPC, clienti e Ruggine.
+// La griglia e le collisioni sono uniche; le destinazioni non percorribili
+// vengono cercate entro un raggio limitato, senza spostare il personaggio.
+const NAV_CELL=24;
+// Campionamento del segmento per evitare attraversamenti a frame lunghi.
+function navigationSegmentClear(x1,y1,x2,y2){
+ const distance=Math.hypot(x2-x1,y2-y1);
+ const samples=Math.max(1,Math.ceil(distance/6));
+ for(let i=1;i<=samples;i++){
+  const t=i/samples;
+  if(collides(x1+(x2-x1)*t,y1+(y2-y1)*t))return false;
+ }
+ return true;
+}
+const CityNavigation=Object.freeze({
+ route(sx,sy,tx,ty){
+  const cell=NAV_CELL,cols=Math.ceil(world.w/cell),rows=Math.ceil(world.h/cell),count=cols*rows;
+  const key=(x,y)=>y*cols+x,inside=(x,y)=>x>=0&&y>=0&&x<cols&&y<rows;
+  const pass=(x,y)=>inside(x,y)&&!collides((x+.5)*cell,(y+.5)*cell);
+  const cx=v=>Math.max(0,Math.min(cols-1,Math.floor(v/cell)));
+  const cy=v=>Math.max(0,Math.min(rows-1,Math.floor(v/cell)));
+  function nearest(x,y){if(pass(x,y))return [x,y];for(let r=1;r<=12;r++){
+   let best=null,score=Infinity;for(let dy=-r;dy<=r;dy++)for(let dx=-r;dx<=r;dx++){
+    if(Math.max(Math.abs(dx),Math.abs(dy))!==r||!pass(x+dx,y+dy))continue;
+    const d=dx*dx+dy*dy;if(d<score){score=d;best=[x+dx,y+dy]}
+   }if(best)return best;
+  }return null;}
+  const a=nearest(cx(sx),cy(sy)),b=nearest(cx(tx),cy(ty));if(!a||!b)return null;
+  const start=key(...a),goal=key(...b),prev=new Int32Array(count).fill(-1),queue=new Int32Array(count);
+  let head=0,tail=0;queue[tail++]=start;prev[start]=start;
+  while(head<tail){const id=queue[head++];if(id===goal)break;const x=id%cols,y=(id/cols)|0;
+   for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){
+    const nx=x+dx,ny=y+dy;if(!pass(nx,ny)||!navigationSegmentClear((x+.5)*cell,(y+.5)*cell,(nx+.5)*cell,(ny+.5)*cell))continue;const ni=key(nx,ny);
+    if(prev[ni]!==-1)continue;prev[ni]=id;queue[tail++]=ni;
+   }
+  }
+  if(prev[goal]===-1)return null;
+  const points=[];let id=goal;
+  while(id!==start){points.push({x:((id%cols)+.5)*cell,y:(((id/cols)|0)+.5)*cell});id=prev[id];}
+  points.reverse();
+  // Include la posizione esatta solo quando raggiungibile senza collisioni.
+  if(!collides(tx,ty)&&points.length&&navigationSegmentClear(points.at(-1).x,points.at(-1).y,tx,ty))points.push({x:tx,y:ty});
+  return points;
+ },
+ advance(actor,route,dt,speed,threshold=7){
+  if(!route||!route.length)return false;
+  while(route.length&&Math.hypot(actor.x-route[0].x,actor.y-route[0].y)<threshold)route.shift();
+  if(!route.length)return false;
+  const goal=route[0],dx=goal.x-actor.x,dy=goal.y-actor.y,dist=Math.hypot(dx,dy);
+  if(dist<.001)return false;
+  const step=Math.min(dist,speed*dt),nx=actor.x+dx/dist*step,ny=actor.y+dy/dist*step;
+  if(!navigationSegmentClear(actor.x,actor.y,nx,ny))return false;
+  actor.x=nx;actor.y=ny;actor.dir=Math.abs(dx)>Math.abs(dy)?(dx>0?1:3):(dy>0?0:2);
+  actor.walk=(actor.walk||0)+step*.24;actor.moving=true;return true;
+ }
+});
+function tattooRoute(fromX,fromY,toX,toY){return CityNavigation.route(fromX,fromY,toX,toY)}
+function bookingReady(){return tattooBooking&&tattooBooking.status==='arrived'&&gameMinutes()>=tattooBooking.at;}
+function updateTattooBooking(dt){
+ const b=tattooBooking;if(!b||!['booked','arrived'].includes(b.status))return;
+ const now=gameMinutes(),n=npcs.find(n=>n.name===b.client);if(!n)return;
+ if(b.clientOutcome==='no_show')return; // Il pacco viene registrato alla scadenza, senza penalità.
+ if(b.status==='arrived')return;
+ const destination=safePosition(1245,755);
+ const distance=Math.hypot(destination.x-n.x,destination.y-n.y);
+ const lead=Math.max(35,Math.ceil(distance/65*12)+25);
+ const departure=b.at+(b.lateMinutes||0)-lead;
+ if(now<departure)return;
+ if(!b.approachStarted){b.approachStarted=true;b.route=null;b.routeIndex=0;b.routeRetry=0;}
+ if(!b.route||!b.route.length){
+  if(b.routeRetryAt&&performance.now()<b.routeRetryAt)return;
+  b.route=tattooRoute(n.x,n.y,destination.x,destination.y);
+  if(!b.route||!b.route.length){b.routeRetryAt=performance.now()+2500;return;}
+  b.routeRetryAt=0;
+ }
+ if(!CityNavigation.advance(n,b.route,dt,68,6)){
+  b.route=null;b.routeRetryAt=performance.now()+600;
+ }
+ if(Math.hypot(n.x-destination.x,n.y-destination.y)<18){b.status='arrived';n.moving=false;toast(b.client+' è arrivato allo studio.');}
+}
+function bookingNotice(){
+ if(!tattooBooking||bookingNoticeShown||performance.now()<bookingNoticeAt)return;
+ bookingNoticeShown=true;
+ const a=appointmentClock(tattooBooking.at);
+ const card=document.createElement('section');card.id='tattooBookingNotice';card.setAttribute('role','status');card.style.cssText='position:fixed;z-index:110;top:25%;left:50%;transform:translateX(-50%);width:min(84vw,340px);box-sizing:border-box;background:#161524;border:2px solid #d58aaa;border-radius:15px;padding:17px;color:#ffe7ed;box-shadow:0 8px 35px #000b;font:14px/1.6 monospace;white-space:pre-line;text-align:left;';
+ card.textContent='🖋️ NUOVO APPUNTAMENTO\nCliente: '+tattooBooking.client+'\nCompenso: '+tattooBooking.price+' €\nStudio: '+tattooBooking.studio+'\nGiorno '+a.day+' · '+a.time;
+ const close=document.createElement('button');close.type='button';close.textContent='CHIUDI';close.style.cssText='display:block;margin:12px 0 0 auto;padding:8px 14px;border-radius:9px;background:#70314f;color:white;border:1px solid #d58aaa;';close.onclick=()=>card.remove();card.appendChild(close);document.body.appendChild(card);
+ setTimeout(()=>card.remove(),9500);
+}
+const artStock={sold:0};const storyFlags={uvaMet:false,bruscoFavor:0,barbaMet:false};
+function gameMinutes(){return (life.day-1)*1440+life.minute}
+function hashEvent(n,salt=0){const x=Math.sin((life.day*7919+n.length*113+salt*2371))*43758.5453;return x-Math.floor(x)}
+const trees=[];
+function onRoad(x,y){return CityGeometry.onRoad(x,y)}
+for(let i=0;i<85;i++){
+ const x=48+(i*271+79)%(world.w-96),y=48+(i*419+113)%(world.h-96);
+ if(onRoad(x,y)||Math.hypot(x-1650,y-1035)<105)continue;
+ if(buildings.some(b=>x>b.x-65&&x<b.x+b.w+65&&y>b.y-65&&y<b.y+b.h+65))continue;
+ trees.push({x,y});
+}
+const $=s=>document.querySelector(s);function resize(){const maxZoom=innerWidth>innerHeight?1.3:1.75;zoom=Math.min(zoom,maxZoom);const slider=document.querySelector('#zoomSlider');if(slider){slider.max=Math.round(maxZoom*100);slider.value=Math.round(zoom*100)}W=c.width=Math.round(innerWidth*devicePixelRatio);H=c.height=Math.round(innerHeight*devicePixelRatio);baseScale=Math.max(2,Math.min(W/390,H/245));scale=baseScale*zoom;ctx.imageSmoothingEnabled=false}addEventListener('resize',resize);resize();// No automatic persistence: reloading always starts a fresh run.
+function save(){} // Legacy calls intentionally do not persist gameplay.
+function saveStatus(message){const el=$('#saveStatus');el.textContent=message;el.style.display='block';clearTimeout(saveStatus.timer);saveStatus.timer=setTimeout(()=>el.style.display='none',3600)}
+function exportSave(){
+  const data={game:'codex-ex-anima',version:1,savedAt:new Date().toISOString(),player:{x:p.x,y:p.y,money:p.money,quest:p.quest,dir:p.dir,health:p.health},life:{...life},charity:{...charity},begAttempts,zoom,mapUnlocked,clientState,tattooBooking,tattooRequests,tattooAgenda,tattooHistory,completedTattooCount,selfClientCount,reputation,studioEmployed,nextStudioOffer,bookingSerial,artStock,bag:bag.items,homeStorage,timeMultiplier,economy,studios:studios.map(s=>({...s,staff:[...s.staff]})),storyFlags:{...storyFlags},npcState:npcs.map(n=>({name:n.name,x:n.x,y:n.y,bag:n.bag,loop:n.loop})),dangerState:{x:danger.x,y:danger.y,mood:danger.mood,moodTime:danger.moodTime,attitude:danger.attitude,clientUntil:danger.clientUntil,clientCooldown:danger.clientCooldown,clientDone:danger.clientDone}};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='codex-ex-anima-salvataggio-1.2.15.31.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+  saveStatus('Salvataggio esportato. Conservalo nei File del dispositivo.');
+}
+function importSave(data){
+  if(!data||data.game!=='codex-ex-anima'||data.version!==1||!data.player)throw Error('File non compatibile');
+  const v=data.player;
+  if(![v.x,v.y,v.money,v.quest].every(Number.isFinite)||!Number.isInteger(v.quest)||v.quest<0||v.quest>2||v.money<0||v.money>1e9||v.x<24||v.y<24||v.x>world.w-24||v.y>world.h-24)throw Error('Dati di gioco non validi');
+  const safe=safePosition(v.x,v.y);p.x=safe.x;p.y=safe.y;p.money=v.money;p.quest=v.quest;p.dir=[0,1,2,3].includes(v.dir)?v.dir:0;
+  p.health=Number.isFinite(v.health)?Math.max(1,Math.min(100,v.health)):100;p.invulnerable=0;for(const k of Object.keys(charity))delete charity[k];if(data.charity&&typeof data.charity==='object'){for(const n of npcs){const t=data.charity[n.name];if(Number.isFinite(t)&&t>=0&&t<1e8)charity[n.name]=t}}begAttempts=Number.isInteger(data.begAttempts)?Math.max(0,Math.min(100000,data.begAttempts)):0;p.walk=0;p.moving=false;p.jump=0;p.attack=0;p.tattoo=0;if(data.life&&typeof data.life==='object'){const l=data.life;if(Number.isFinite(l.minute)&&l.minute>=0&&l.minute<1440&&Number.isInteger(l.day)&&l.day>=1&&l.day<100000&&Number.isFinite(l.hunger)&&l.hunger>=0&&l.hunger<=100&&Number.isFinite(l.energy)&&l.energy>=0&&l.energy<=100&&Number.isInteger(l.rentDue)&&l.rentDue>=0&&l.rentDue<100000){Object.assign(life,{minute:l.minute,day:l.day,hunger:l.hunger,energy:l.energy,rented:l.rented===true,rentDue:l.rentDue,noticeDay:0});}}
+  if(data.clientState&&typeof data.clientState==='object')for(const name of Object.keys(clientState)){
+    const src=data.clientState[name];if(!src||typeof src!=='object')continue;
+    const dst=clientState[name];dst.visits=Number.isInteger(src.visits)?Math.max(0,Math.min(1000,src.visits)):0;
+    dst.nextDay=Number.isInteger(src.nextDay)?Math.max(1,Math.min(100000,src.nextDay)):dst.nextDay;
+    dst.offer=['tattoo','art'].includes(src.offer)?src.offer:null;
+  }
+  if(data.artStock&&Number.isInteger(data.artStock.sold))artStock.sold=Math.max(0,Math.min(100000,data.artStock.sold));
+  if(data.dangerState&&typeof data.dangerState==='object'){
+    const d=data.dangerState;if(Number.isFinite(d.x)&&Number.isFinite(d.y)&&!collides(d.x,d.y)){danger.x=d.x;danger.y=d.y;danger.targetX=d.x;danger.targetY=d.y;}
+    danger.mood=['calmo','irritato','aggressivo'].includes(d.mood)?d.mood:'calmo';
+    for(const k of ['moodTime','attitude','clientUntil','clientCooldown','clientDone'])if(Number.isFinite(d[k]))danger[k]=Math.max(0,Math.min(1e8,d[k]));
+  }
+  if(Array.isArray(data.bag)){bag.items=normalizeItems(data.bag,bag.capacity);}homeStorage=normalizeItems(data.homeStorage,120);
+  tattooBooking=null;bookingNoticeShown=true;
+  const b=data.tattooBooking;
+  if(p.quest===1){
+    if(b&&darioClientPool.includes(b.client)&&b.studio==='Studio di Dario'&&b.price===35&&Number.isFinite(b.at)&&b.at>=0&&b.at<144000000&&['booked','arrived'].includes(b.status)){
+      tattooBooking={client:b.client,price:35,studio:'Studio di Dario',at:b.at,status:b.status,approachStarted:b.approachStarted===true};
+    }else{const today=Math.floor(gameMinutes()/1440)*1440;tattooBooking={client:randomDarioClient(),price:35,studio:'Studio di Dario',at:today+12*60+30+(gameMinutes()>today+12*60+30?1440:0),status:'booked',approachStarted:false};}
+  }
+  tattooRequests=[];tattooAgenda=[];tattooHistory=[];studioEmployed=data.studioEmployed===true;reputation=Number.isFinite(data.reputation)?Math.max(0,Math.min(100,Math.round(data.reputation))):15;
+  completedTattooCount=Number.isSafeInteger(data.completedTattooCount)?Math.max(0,Math.min(100000,data.completedTattooCount)):0;selfClientCount=Number.isSafeInteger(data.selfClientCount)?Math.max(0,Math.min(100000,data.selfClientCount)):0;
+  bookingSerial=Number.isSafeInteger(data.bookingSerial)?Math.max(0,Math.min(1e7,data.bookingSerial)):0;
+  const validRow=b=>b&&Number.isSafeInteger(b.id)&&b.id>0&&darioClientPool.includes(b.client)&&Number.isFinite(b.at)&&b.at>=0&&b.at<144000000&&Number.isFinite(b.price)&&b.price>=0&&b.price<=1000&&b.studio==='Studio di Dario';
+  if(Array.isArray(data.tattooRequests))tattooRequests=data.tattooRequests.filter(b=>validRow(b)&&b.status==='pending'&&Number.isFinite(b.expiresAt)&&b.expiresAt>gameMinutes()).slice(0,4).map(b=>({...b}));
+  if(Array.isArray(data.tattooAgenda))tattooAgenda=data.tattooAgenda.filter(b=>validRow(b)&&['booked','arrived','done','missed'].includes(b.status)).slice(0,50).map(b=>({...b,approachStarted:false,status:b.status==='arrived'?'booked':b.status}));
+  if(Array.isArray(data.tattooHistory))tattooHistory=data.tattooHistory.filter(validRow).slice(-100).map(b=>({...b}));
+  if(!Number.isSafeInteger(data.completedTattooCount))completedTattooCount=tattooAgenda.filter(b=>b.status==='done').length;
+  if(!Array.isArray(data.tattooAgenda)&&tattooBooking){tattooAgenda=[{...tattooBooking,id:++bookingSerial,approachStarted:false}];studioEmployed=true;}
+  bookingSerial=Math.max(bookingSerial,...[...tattooRequests,...tattooAgenda].map(b=>b.id),0);
+  nextStudioOffer=Number.isFinite(data.nextStudioOffer)&&data.nextStudioOffer>=gameMinutes()?data.nextStudioOffer:gameMinutes()+240;
+  syncActiveBooking();
+  restoreStudios(data.studios);
+  if(data.economy&&Number.isInteger(data.economy.trades))economy.trades=Math.max(0,Math.min(100000000,data.economy.trades));
+  if([0,.5,1,2,4].includes(data.timeMultiplier)){timeMultiplier=data.timeMultiplier;$('#timeSpeed').value=[0,.5,1,2,4].indexOf(timeMultiplier);$('#timeSpeedValue').textContent=timeMultiplier+'×'}
+  if(data.storyFlags&&typeof data.storyFlags==='object'){storyFlags.uvaMet=data.storyFlags.uvaMet===true;storyFlags.barbaMet=data.storyFlags.barbaMet===true;storyFlags.bruscoFavor=Number.isFinite(data.storyFlags.bruscoFavor)?Math.max(0,Math.min(10,data.storyFlags.bruscoFavor)):0;}
+  if(Array.isArray(data.npcState))for(const row of data.npcState){const n=npcs.find(v=>v.name===row?.name);if(!n)continue;if(Number.isFinite(row.x)&&Number.isFinite(row.y)&&!collides(row.x,row.y)){n.x=row.x;n.y=row.y;n.targetX=row.x;n.targetY=row.y}if(Array.isArray(row.bag))n.bag=normalizeItems(row.bag,NPC_BAG_CAPACITY);if(Number.isInteger(row.loop))n.loop=Math.max(0,Math.min(100000,row.loop));}
+  mapUnlocked=data.mapUnlocked===true;updateMapButton();zoom=zoomLevels.includes(data.zoom)?data.zoom:1.3;resize();updateZoomLabel();
+  paused=false;$('#dialog').style.display='none';$('#intro').style.display='none';document.body.classList.add('game-started');
+  if(!last){last=performance.now();requestAnimationFrame(loop)}
+  saveStatus('Partita caricata dal file.');
+}
+$('#exportSave').addEventListener('click',exportSave);
+$('#importSave').addEventListener('click',()=>$('#saveFile').click());
+$('#saveFile').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{if(file.size>100000)throw Error('File troppo grande');importSave(JSON.parse(await file.text()))}catch(err){saveStatus('Impossibile caricare: '+err.message)}finally{e.target.value=''}});
+function rect(x,y,w,h,color){ctx.fillStyle=color;ctx.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h))}function text(s,x,y,color='#d5d4df',size=12){ctx.fillStyle=color;ctx.font=`bold ${size}px monospace`;ctx.textAlign='center';ctx.fillText(s,x,y)}function collides(x,y){return CityGeometry.collides(x,y,world,buildings,residences,van)}function safePosition(x,y){if(!collides(x,y))return {x,y};for(let r=20;r<=400;r+=20){for(let a=0;a<32;a++){const theta=a*Math.PI/16;const tx=x+Math.cos(theta)*r,ty=y+Math.sin(theta)*r;if(!collides(tx,ty))return {x:tx,y:ty}}}return {x:920,y:725}}// Frame-based pixel-art gait: opposing arms/legs, planted feet and a small body lift.
+function drawWalker(x,y,phase,moving,dir,player,role){
+ const stride=moving?Math.sin(phase):0;
+ const lift=moving?Math.round(Math.abs(Math.sin(phase))*2):0;
+ const legA=Math.round(stride*5),legB=-legA;
+ const armA=-Math.round(stride*4),armB=-armA;
+ const side=dir===1||dir===3;
+ const skin=player?'#bd8068':'#ba856b';
+ const coat=player?'#272330':role==='Tatuatore'?'#733e55':'#5b5a62';
+ const pants=player?'#35303a':'#2b2631';
+ // Ground shadow stays fixed while the body lifts.
+ rect(x-8,y+5,16,4,'#10121b');
+ if(side){
+   const facing=dir===1?1:-1;
+   rect(x-3+legB,y-8,5,12,pants);rect(x-3+legB+facing*2,y+3,6,3,'#171720');
+   rect(x-3+legA,y-8,5,12,player?'#46404a':pants);rect(x-3+legA+facing*2,y+3,6,3,'#171720');
+   rect(x-3+armB,y-19-lift,4,12,skin);
+   rect(x-5,y-23-lift,10,17,coat);
+   rect(x-3+armA,y-19-lift,4,12,skin);
+   rect(x-5,y-31-lift,10,9,skin);
+   rect(x-5,y-34-lift,10,4,player?'#30213b':'#25212d');
+   if(player){rect(x+facing*3,y-27-lift,2,2,'#18151d');rect(x-3+armA,y-16-lift,2,3,'#15121c');rect(x-3+legA,y-2,4,3,'#c1394d')}
+ }else{
+   rect(x-5+legB,y-8,4,13,pants);rect(x-5+legB,y+3,5,3,'#171720');
+   rect(x+1+legA,y-8,4,13,player?'#46404a':pants);rect(x+1+legA,y+3,5,3,'#171720');
+   rect(x-8+armB,y-20-lift,3,11,skin);
+   rect(x+5+armA,y-20-lift,3,11,skin);
+   rect(x-5,y-23-lift,10,16,coat);
+   if(player)rect(x-7,y-13-lift,14,4,'#962849');
+   rect(x-5,y-31-lift,10,9,skin);
+   rect(x-5,y-34-lift,10,4,player?'#2d1b38':'#25212d');
+   if(player){rect(x-8+armB,y-16-lift,2,3,'#15121c');rect(x-6+legB,y-2,5,3,'#c1394d')}
+   if(dir===0){rect(x-3,y-27-lift,2,2,'#18151d');rect(x+2,y-27-lift,2,2,'#18151d')}
+ }
+}
+function drawInkEnergy(x,y){
+ // Goccia stilizzata: punta superiore, corpo tondo; ancorata al salto.
+ const lift=p.jump>0?Math.round(Math.sin((1-p.jump/.62)*Math.PI)*34):0;
+ const yy=y-lift;
+ ctx.save();ctx.globalAlpha=Math.max(.06,Math.min(1,p.energy/100));
+ ctx.fillStyle='#090b11';ctx.strokeStyle='rgba(215,208,203,.45)';ctx.lineWidth=1;
+ ctx.beginPath();ctx.moveTo(x+1,yy-13);
+ ctx.bezierCurveTo(x-3,yy-7,x-9,yy-1,x-9,yy+5);
+ ctx.bezierCurveTo(x-9,yy+18,x+9,yy+18,x+9,yy+5);
+ ctx.bezierCurveTo(x+9,yy-1,x+5,yy-7,x+1,yy-13);
+ ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();
+}
+function drawTattooClientIcon(x,y){ctx.save();ctx.translate(x,y);rect(-7,-4,14,8,'#e7a0c6');rect(-4,-7,8,3,'#9fe0d7');rect(4,2,4,10,'#d2c3d1');rect(5,11,2,5,'#f3d8a9');rect(-9,-2,3,5,'#9fe0d7');ctx.restore();}
+function drawPlayer(x,y){
+ const height=p.jump>0?Math.round(Math.sin((1-p.jump/.62)*Math.PI)*34):0;
+ drawWalker(x,y-height,p.walk,p.moving,p.dir,true,'');
+ if(p.jump>0){rect(x-7,y+6,14,3,'#11131a');}
+ if(p.attack>0){const vx=[0,1,0,-1][p.dir],vy=[1,0,-1,0][p.dir];const ax=x+vx*21,ay=y-14+vy*18;rect(ax-10,ay-2,20,4,'#f6b9d1');rect(ax-3,ay-10,6,20,'#e76494');}
+ if(p.tattoo>0){rect(x+10,y-20,5,13,'#e5a5cf');rect(x+11,y-23,3,4,'#89e6e2');}
+}
+// 5 of 12 named NPCs (41.7%) are potential tattoo customers. No booking or tattoo
+// is created until the employment/appointment system is implemented.
+const potentialCustomerNames=new Set(['Nico','Mara','Vera','Chicco d’Uva','ilBarbaBarabba']);
+// Walkable street junctions: NPCs move between neighbourhoods rather than orbiting home.
+const npcStreetNodes=[
+ [495,385],[720,385],[945,385],[1190,385],[1500,385],[1665,385],
+ [495,820],[720,820],[945,820],[1190,820],[1500,820],[1665,820],
+ [495,1230],[720,1230],[945,1230],[1190,1230],[1500,1230],[1665,1230],
+ [495,160],[945,160],[1665,160],[495,1060],[945,1060],[1665,1060]
+].filter(([x,y])=>!collides(x,y));
+// Orari in minuti. Gli intervalli con fine <= inizio attraversano la mezzanotte.
+const businessHours={studio:[12*60,20*60],officina:[8*60,18*60],caffe:[8*60,18*60],abbigliamento:[10*60,19*60],barbiere:[12*60,22*60],mercato:[8*60,18*60],ristorante:[13*60,24*60],archivio:[10*60,19*60],notturno:[0,12*60],ospedale:null,polizia:null,cyber:null};
+function businessOpen(kind){const h=businessHours[kind];if(h===undefined||h===null)return true;const t=((life.minute%1440)+1440)%1440;return h[1]>h[0]?t>=h[0]&&t<h[1]:t>=h[0]||t<h[1];}
+function hoursLabel(kind){const h=businessHours[kind];if(!h)return '24/7';const fmt=m=>String(Math.floor(m/60)%24).padStart(2,'0')+':'+String(m%60).padStart(2,'0');return fmt(h[0])+'–'+(h[1]===1440?'24:00':fmt(h[1]));}
+// I lavoratori restano presso l'ingresso mentre il negozio e aperto.
+// Fuori servizio tornano liberi di attraversare il quartiere.
+const npcWorkplaces={Dario:{kind:'studio',x:1230,y:755},'Lolly Piercer':{kind:'studio',x:1145,y:755},JackPanthera:{kind:'studio',x:1320,y:755},Sergio:{kind:'barbiere',x:718,y:760},Lina:{kind:'abbigliamento',x:235,y:760},Elia:{kind:'caffe',x:710,y:310},Bruno:{kind:'residenza',x:240,y:875}};
+function onDuty(n){const w=npcWorkplaces[n.name];return !!w&&(w.kind==='residenza'?life.minute>=8*60&&life.minute<20*60:businessOpen(w.kind));}
+function workDestination(n,i){const w=npcWorkplaces[n.name];if(!w)return false;const a=(n.loop*1.618+i)*2.39996;const r=12+(n.loop%4)*12;const x=w.x+Math.cos(a)*r,y=w.y+Math.sin(a)*r;if(!collides(x,y)){n.targetX=x;n.targetY=y;return true}n.targetX=w.x;n.targetY=w.y;return true;}
+function npcChooseDestination(n,i){
+ if(onDuty(n)){workDestination(n,i);n.wait=.3;return}
+ const nearby=npcStreetNodes.filter(([x,y])=>Math.hypot(x-n.x,y-n.y)<480&&Math.hypot(x-n.x,y-n.y)>75);
+ const options=nearby.filter(([x,y])=>{for(let t=.1;t<=1;t+=.1)if(collides(n.x+(x-n.x)*t,n.y+(y-n.y)*t))return false;return true});
+ if(!options.length){n.targetX=n.homeX;n.targetY=n.homeY;n.wait=.3;return}
+ const pick=options[(n.loop*7+i*11)%options.length];n.targetX=pick[0];n.targetY=pick[1];n.wait=.25+(i%3)*.25;
+}
+for(let i=0;i<npcs.length;i++){const n=npcs[i];n.homeX=n.x;n.homeY=n.y;n.walk=0;n.moving=false;n.dir=0;n.targetX=n.x;n.targetY=n.y;n.wait=.2+i*.13;n.bag=[{id:i%2?'caffe':'spilla',name:i%2?'Caffè':'Spilla',qty:1}];n.tradeTick=0;n.loop=0;n.potentialCustomer=potentialCustomerNames.has(n.name);}
+
+
+function updateNpcs(dt){
+ for(let i=0;i<npcs.length;i++){
+  const n=npcs[i];n.moving=false;
+  if(tattooBooking&&n.name===tattooBooking.client&&tattooBooking.approachStarted&&['booked','arrived'].includes(tattooBooking.status))continue;
+  if(collides(n.x,n.y)){const safe=safePosition(n.x,n.y);n.x=safe.x;n.y=safe.y;n.homeX=safe.x;n.homeY=safe.y;n.targetX=safe.x;n.targetY=safe.y;n.wait=.4;}
+  // Turni di lavoro: i proprietari presidiano l'ingresso durante l'apertura.
+  // Il vecchio inseguimento in linea retta rimaneva bloccato contro gli isolati.
+  const duty=onDuty(n);
+  if(n.wasOnDuty!==duty){
+   n.wasOnDuty=duty;n.wait=0;n.loop++;
+   if(duty){
+    const w=npcWorkplaces[n.name];
+    const pos=collides(w.x,w.y)?safePosition(w.x,w.y):{x:w.x,y:w.y};
+    n.targetX=pos.x;n.targetY=pos.y;
+   }else npcChooseDestination(n,i);
+  }
+  if(duty){
+   const w=npcWorkplaces[n.name];
+   // Non allontanarsi dalla postazione: consente interazione e servizi negli orari indicati.
+   if(Math.hypot(n.x-w.x,n.y-w.y)>35){
+    const pos=collides(w.x,w.y)?safePosition(w.x,w.y):{x:w.x,y:w.y};
+    n.targetX=pos.x;n.targetY=pos.y;
+   }
+   // Nessun teletrasporto: spostamento progressivo verso la postazione.
+   if(Math.hypot(n.x-n.targetX,n.y-n.targetY)<6){n.loop++;if(n.wait<=0){workDestination(n,i);n.wait=1.2+(i%4)*.8;}}
+   // Il movimento effettivo viene gestito dal blocco comune qui sotto.
+
+  }
+  if(n.wait>0){n.wait-=dt;continue}
+  const dx=n.targetX-n.x,dy=n.targetY-n.y,dist=Math.hypot(dx,dy);
+  if(dist<8){n.loop++;n.route=null;n.routeGoal=null;npcChooseDestination(n,i);continue;}
+  const goalKey=Math.round(n.targetX)+':'+Math.round(n.targetY);
+  if(n.routeGoal!==goalKey||!n.route||!n.route.length){
+   // Rate-limit expensive searches when a destination cannot be reached.
+   if(n.routeRetryAt&&performance.now()<n.routeRetryAt)continue;
+   n.route=CityNavigation.route(n.x,n.y,n.targetX,n.targetY);
+   n.routeGoal=goalKey;
+   if(!n.route||!n.route.length){
+    n.routeRetryAt=performance.now()+2500;n.routeFailures=(n.routeFailures||0)+1;
+    if(n.routeFailures>=3){
+     n.routeFailures=0;n.routeGoal=null;
+     if(duty){n.wait=2.5;}else{npcChooseDestination(n,i);n.wait=.5;}
+    }else n.wait=.35;
+    continue;
+   }
+   n.routeFailures=0;
+   n.routeRetryAt=0;
+  }
+  if(!CityNavigation.advance(n,n.route,dt,40+i%5*7)){
+   n.route=null;n.routeRetryAt=performance.now()+600;
+  }
+ }
+ // Piccoli scambi tra NPC, senza creare oggetti dal nulla.
+ npcTradeClock+=dt;
+ if(npcTradeClock>22){npcTradeClock=0;const a=npcs[Math.floor(gameMinutes()/30)%npcs.length],b=npcs[(npcs.indexOf(a)+1)%npcs.length];if(a.bag.length&&b.bag.length<NPC_BAG_CAPACITY){b.bag.push(a.bag.shift());economy.trades++;}}
+}
+let npcTradeClock=0;
+function drawCognack(){
+ // T2 visto dall'alto, orientato lungo uno stallo. La sagoma e' nel secondo posto auto.
+ const x=van.x,y=van.y;
+ rect(x-34,y-57,68,116,'#20272e');
+ rect(x-29,y-55,58,110,'#d17a38');
+ rect(x-26,y-51,52,17,'#f4e5c9');
+ rect(x-24,y-30,48,31,'#82b1b9');
+ rect(x-21,y-27,42,24,'#a2cbd0');
+ rect(x-25,y+7,50,35,'#f0e2c7');
+ rect(x-24,y+42,48,9,'#e59d54');
+ rect(x-32,y-37,5,21,'#111820');rect(x+27,y-37,5,21,'#111820');
+ rect(x-32,y+24,5,22,'#111820');rect(x+27,y+24,5,22,'#111820');
+ rect(x-22,y+51,11,4,'#ffe4aa');rect(x+11,y+51,11,4,'#ffe4aa');
+ text('COGNACK',x,y+22,'#513b31',8);
+}
+// Architectural facade renderer: all shapes remain tied to original building bounds and collision map.
+function drawArchitecturalBuilding(b){
+ const x=b.x,y=b.y,w=b.w,h=b.h;
+ const seed=Math.abs([...b.label].reduce((a,c)=>a*31+c.charCodeAt(0),7));
+ const masonry=['#6c646b','#6a706d','#796a64','#626873'][seed%4];
+ const roof=['#363442','#343d44','#453d43'][seed%3];
+ const isStudio=b.label==='STUDIO TATTOO';
+ // Cast shadow, raised cornice, side-wall, and an angled facade illusion.
+ rect(x+10,y+12,w+4,h+7,'#141921');
+ rect(x+4,y+7,w,h,masonry);
+ rect(x+4,y+7,9,h,'#41444a');
+ rect(x,y,w,h,roof);
+ rect(x+5,y+5,w-10,h-10,'#41414b');
+ rect(x+10,y+10,w-20,h-22,'#343743');
+ // Slate roof texture, tiles and skylights.
+ for(let yy=y+16;yy<y+h-25;yy+=13){
+   rect(x+12,yy,w-24,1,'#4a4a53');
+   for(let xx=x+13+((Math.floor((yy-y)/13)%2)*12);xx<x+w-13;xx+=24)rect(xx,yy+1,1,10,'#454651');
+ }
+ // Rear facade: limestone moulding, columns, glowing upper windows.
+ rect(x-4,y-7,w+8,12,'#8d8582');rect(x-1,y-4,w+2,3,'#c2aca0');
+ rect(x+3,y+7,7,h-14,'#655e64');rect(x+w-10,y+7,7,h-14,'#655e64');
+ const count=Math.max(2,Math.min(5,Math.floor(w/64)));
+ for(let i=0;i<count;i++){
+   const xx=x+18+(w-36)*(i+.5)/count-13;
+   rect(xx-5,y+19,31,39,'#a49a91');rect(xx,y+22,21,31,'#171f2b');
+   rect(xx+2,y+24,16,21,((seed+i)%3===0)?'#c68b65':'#9c6e60');
+   rect(xx+9,y+24,2,23,'#3c3b43');rect(xx+2,y+34,16,2,'#3c3b43');
+   rect(xx-3,y+51,27,4,'#c0a89a');
+   rect(xx+3,y+26,3,13,'rgba(255,219,160,.23)');
+ }
+ // Street-facing frontage, sign, shopfront and doorway.
+ rect(x+1,y+h-82,w-2,80,'#60505a');rect(x+2,y+h-81,w-4,6,'#aa918b');
+ for(let i=0;i<Math.max(2,Math.floor(w/64));i++){
+   let xx=x+12+i*62;if(xx+52>x+w-10)break;
+   if(xx< x+w/2+23 && xx+49>x+w/2-23)continue;rect(xx,y+h-61,49,55,'#202633');rect(xx+4,y+h-57,41,47,'#52717b');
+   rect(xx+7,y+h-54,11,36,'#b1b9ac');rect(xx+27,y+h-52,15,12,'#d5a47c');
+   rect(xx+22,y+h-57,3,47,'#1c2934');rect(xx+4,y+h-34,41,3,'#26313b');
+ }
+ const doorX=x+w/2;
+ rect(doorX-20,y+h-62,40,64,'#b3a193');rect(doorX-17,y+h-59,34,59,'#1c2430');
+ rect(doorX-13,y+h-55,26,51,'#53636a');rect(doorX+9,y+h-20,3,3,'#edc986');
+ if(b.label!=='RESIDENZA')rect(x+8,y+h-86,w-16,22,isStudio?'#58354b':'#373c49');
+ rect(x+11,y+h-84,w-22,2,'#a38976');
+ if(b.label!=='RESIDENZA')text(b.label,doorX,y+h-70,'#f0d6b6',Math.max(9,Math.min(12,w/18)));
+ if(isStudio){rect(x+11,y+h-39,6,5,'#e65d94');rect(x+w-17,y+h-39,6,5,'#e65d94')}
+ const bi=businessInfo[b.label];
+ if(bi&&(bi[0]==='residenza'?life.rented:businessOpen(bi[0]))){
+   rect(doorX-8,y+h+4,16,13,'#dfae55');text('▼',doorX,y+h+15,'#3b2d2c',11);
+ }
+}
+function drawResidence(r){
+ const {x,y,w,h}=r;rect(x-3,y+h+2,w+6,5,'#20242b');rect(x+7,y+10,w,h,'#171b23');rect(x,y,w,h,'#45464f');
+ rect(x+5,y+5,w-10,h-10,'#55535b');rect(x-3,y-7,w+6,12,'#a69b8c');
+ for(let yy=y+25;yy<y+h-83;yy+=51){for(let xx=x+16;xx<x+w-19;xx+=43){rect(xx-3,yy-3,29,37,'#b1a397');rect(xx,yy,23,29,'#253442');rect(xx+3,yy+3,17,23,'#a87c65');rect(xx+10,yy+3,2,23,'#35343b');rect(xx+3,yy+14,17,2,'#35343b')}}
+ rect(x+3,y+h-78,w-6,77,'#655963');const dw=Math.min(40,w-18);rect(x+w/2-dw/2,y+h-60,dw,60,'#a89a86');rect(x+w/2-dw/2+4,y+h-55,dw-8,54,'#34404a');
+ // Nessuna insegna sulle abitazioni anonime.
+}
+function drawGardenBase(x,y,w,h){
+ // Identico bordo, pavimentazione, perimetro e ingressi per ogni giardino.
+ rect(x,y,w,h,'#66715f');
+ rect(x+7,y+7,w-14,h-14,'#385a48');
+ rect(x+14,y+14,w-28,h-28,'#487453');
+ rect(x+w/2-17,y,34,h,'#b6a88c');
+ rect(x,y+h/2-15,w,30,'#b6a88c');
+ ctx.strokeStyle='#c4b69b';ctx.lineWidth=9;
+ ctx.strokeRect(x+31,y+31,w-62,h-62);
+ ctx.strokeStyle='#7c8b70';ctx.lineWidth=2;
+ ctx.strokeRect(x+31,y+31,w-62,h-62);
+}
+function gardenBench(x,y){
+ rect(x,y,70,10,'#795a42');rect(x+4,y+2,62,3,'#bc956e');
+ rect(x+8,y+10,5,10,'#353b3b');rect(x+57,y+10,5,10,'#353b3b');
+}
+function gardenTree(x,y){
+ rect(x-4,y+3,8,17,'#5a4838');rect(x-17,y-18,34,29,'#315b3d');
+ rect(x-12,y-24,24,23,'#6a9662');rect(x-3,y-27,9,6,'#8aaa73');
+}
+function drawSouthDistrict(){
+ // Estensione sud del quartiere: isolati allineati alla griglia viaria.
+ const columns=SOUTH_COLUMNS;
+ const rows=SOUTH_ROWS;
+ for(let ri=0;ri<rows.length;ri++)for(let ci=0;ci<columns.length;ci++){
+  const [xl,xr]=columns[ci], [yt,yb]=rows[ri];
+  const x=xl+28,y=yt+24,w=xr-xl-56,h=yb-yt-50;
+  if(w<100)continue;
+  if((ri+ci)%5===0){drawGardenBase(x,y,w,h);
+   gardenTree(x+Math.min(65,w*.25),y+65);gardenTree(x+w-65,y+h-60);
+   gardenBench(x+Math.max(25,w*.22),y+h/2+35);
+  }else{
+   rect(x,y,w,h,'#262e35');
+   const bw=Math.min(200,w-25),bh=Math.min(225,h-30);
+   drawResidence({x:x+12,y:y+h-bh-8,w:bw,h:bh});
+   if(w>330)drawResidence({x:x+w-bw-12,y:y+h-bh-8,w:bw,h:bh});
+   else if(w>230)gardenTree(x+w-35,y+70);
+  }
+ }
+}
+function drawPocketSquares(){
+ // La base è condivisa con il giardino grande; cambia soltanto l'arredo.
+ const squares=[[612,1343,216,274],[1080,1343,428,274]];
+ squares.forEach(([x,y,w,h],index)=>{
+  drawGardenBase(x,y,w,h);
+  if(index===0){
+   gardenTree(x+74,y+76);gardenTree(x+w-78,y+h-69);
+   gardenTree(x+90,y+h-75);gardenBench(x+49,y+h/2-49);
+   gardenBench(x+w-131,y+h/2+43);
+   rect(x+w/2-12,y+h/2-12,24,24,'#9d9b8c');
+   rect(x+w/2-8,y+h/2-8,16,16,'#528f9b');
+  }else{
+   gardenTree(x+78,y+72);gardenTree(x+w-78,y+72);
+   gardenTree(x+90,y+h-68);gardenTree(x+w-88,y+h-75);
+   gardenBench(x+47,y+h/2+42);gardenBench(x+w-121,y+h/2-55);
+   for(const [dx,dy] of [[120,76],[w-128,h-80]]){
+    rect(x+dx-15,y+dy-12,30,24,'#526d44');
+    rect(x+dx-10,y+dy-16,20,24,'#77965e');
+   }
+  }
+ });
+}
+function streetLampPositions(){
+ const candidates=[[863,525],[1051,530],[414,560],[581,960],[1584,965],[1743,870],[1045,1020],[1856,612],[2444,612]];
+ return candidates.map(([x,y])=>{
+  for(let r=35;r<=145;r+=15)for(let a=0;a<16;a++){const nx=x+Math.cos(a*Math.PI/8)*r,ny=y+Math.sin(a*Math.PI/8)*r;
+   if(nx<38||ny<40||nx>world.w-38||ny>world.h-38||onRoad(nx,ny)||nearSidewalk(nx,ny,15)||collides(nx,ny))continue;
+   return [Math.round(nx),Math.round(ny)];
+  }return null;
+ }).filter(Boolean);
+}
+function drawStreetAtmosphere(){
+ // Small irregular paving details and drains: no extra collision bodies.
+ for(let i=0;i<450;i++){
+  const x=(i*163+41)%world.w,y=(i*277+89)%world.h;
+  rect(x,y,(i%3)+1,1,i%5?'rgba(169,164,156,.14)':'rgba(21,26,32,.2)');
+ }
+ // Tombini decorativi ripetuti rimossi: nessuna caditoia sospesa sui marciapiedi.
+ // Le luci delle vetrine si accendono solo al crepuscolo e di notte.
+ const lightHour=life.minute/60;
+ if(lightHour>=18.5||lightHour<6.5)for(const b of buildings){
+  const cx=b.x+b.w/2,cy=b.y+b.h+19;
+  const glow=ctx.createRadialGradient(cx,cy,1,cx,cy,48);
+  glow.addColorStop(0,'rgba(238,171,98,.13)');glow.addColorStop(1,'rgba(238,171,98,0)');
+  ctx.fillStyle=glow;ctx.fillRect(cx-48,cy-48,96,96);
+ }
+}
+function drawRoads(){
+ // Superficie stradale continua: i marciapiedi non attraversano mai le carreggiate.
+ const vertical=CITY_ROADS.vertical;
+ const horizontal=CITY_ROADS.horizontal;
+ for(const r of vertical)rect(r.x,0,r.w,world.h,'#343d48');
+ for(const r of horizontal)rect(0,r.y,world.w,r.h,'#343d48');
+ // Pavé torinese: moduli 25×50 cm, scala convenzionale 1 cm = 0,36 px.
+ // Pietre antiche sfalsate, con giunti, usura e variazioni discrete di tono.
+ const stoneW=18,stoneH=9,stoneColors=['#353c43','#3b4249','#323940','#40464b','#394048','#363e45'];
+ function pave(x,y,w,h){
+  ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
+  for(let row=0,yy=y-9;yy<y+h+9;row++,yy+=stoneH){
+   const shift=(row%2)*stoneW/2;
+   for(let xx=x-stoneW+shift;xx<x+w+stoneW;xx+=stoneW){
+    const hash=Math.abs(Math.floor(xx*13+yy*7));
+    rect(xx+1,yy+1,stoneW-2,stoneH-2,stoneColors[hash%stoneColors.length]);
+    if(hash%7===0)rect(xx+3,yy+2,stoneW-7,1,'rgba(158,150,133,.10)');
+    if(hash%11===0)rect(xx+7,yy+stoneH-3,5,1,'rgba(17,22,25,.24)');
+   }
+  }ctx.restore();
+ }
+ for(const r of vertical)pave(r.x,0,r.w,world.h);
+ for(const r of horizontal)pave(0,r.y,world.w,r.h);
+
+ // Marciapiedi suddivisi in isolati: nessuna fascia trasversale sulla strada.
+ const hEdges=[0,...horizontal.map(r=>r.y),...horizontal.map(r=>r.y+r.h),world.h].sort((a,b)=>a-b);
+ const vEdges=[0,...vertical.map(r=>r.x),...vertical.map(r=>r.x+r.w),world.w].sort((a,b)=>a-b);
+ const sidewalk=(x,y,w,h)=>{if(w<=0||h<=0)return;rect(x,y,w,h,'#858986');rect(x,y,w,3,'#aaa9a0');for(let k=22;k<w;k+=30)rect(x+k,y,2,h,'#999b95')};
+ for(const r of vertical)for(let i=0;i<hEdges.length-1;i+=2){const y=hEdges[i],e=hEdges[i+1];sidewalk(r.x-36,y,36,e-y);sidewalk(r.x+r.w,y,36,e-y)}
+ for(const r of horizontal)for(let i=0;i<vEdges.length-1;i+=2){const x=vEdges[i],e=vEdges[i+1];sidewalk(x,r.y-36,e-x,36);sidewalk(x,r.y+r.h,e-x,36)}
+ // Segnaletica orizzontale: interrotta agli incroci.
+ for(const r of vertical)for(let i=0;i<hEdges.length-1;i+=2){for(let y=hEdges[i]+18;y<hEdges[i+1]-20;y+=80)rect(r.x+r.w/2-1,y,2,30,'#b2a678')}
+ for(const r of horizontal)for(let i=0;i<vEdges.length-1;i+=2){for(let x=vEdges[i]+18;x<vEdges[i+1]-20;x+=82)rect(x,r.y+r.h/2-1,32,2,'#b2a678')}
+ // Binari incassati nell'asfalto: niente traversine da ferrovia.
+ for(const dx of [37,66]){rect(900+dx,0,2,world.h,'#777d7d');rect(900+dx+2,0,1,world.h,'#b3aca0')}
+ for(const y of [335,790,1200])for(const x of [450,900,1620]){
+  // Attraversamenti pedonali appena prima dell'incrocio, solo sulla carreggiata.
+  for(let i=0;i<5;i++){rect(x+9+i*16,y-13,10,15,'#d8d2c1');rect(x+9+i*16,y+horizontal.find(r=>r.y===y).h-1,10,15,'#d8d2c1')}
+ }
+ // Fermate tram a lato della carreggiata: piccola pensilina e palina.
+ for(const y of [245,685,1085]){const x=1082;if(onRoad(x,y)||nearSidewalk(x,y,24))continue;rect(x,y-15,33,27,'#293d47');rect(x+3,y-12,27,14,'#6b8a94');rect(x-3,y-20,39,5,'#c0b19a');rect(x+35,y-28,3,35,'#b7aa8d');rect(x+29,y-40,16,13,'#c7a868');text('T',x+37,y-30,'#192b37',9)}
+ // Accessi metro piccoli, tutti sul lato esterno della carreggiata.
+ // Segnaletica metro disegnata una sola volta, sopra il livello degli edifici.
+ // Parcheggio a pavé, ingresso e uscita separati verso la strada a sud.
+ const x=van.x,y=van.y,left=x-170,top=y-100;
+ rect(left-7,top-7,346,213,'#646b67');rect(left,top,332,198,'#30383d');
+ for(let yy=top+4,row=0;yy<top+195;yy+=10,row++)for(let xx=left+3+(row%2)*13;xx<left+329;xx+=26){rect(xx,yy,24,8,((row+Math.floor(xx/26))%4===0)?'#394148':'#343c42');}
+ // Due varchi liberi nel bordo sud: ingresso e uscita, collegati alla strada.
+ rect(left-4,top-4,340,5,'#9d9d91');rect(left-4,top-4,5,203,'#9d9d91');rect(left+331,top-4,5,203,'#9d9d91');
+ rect(left-4,top+193,80,5,'#9d9d91');rect(left+136,top+193,57,5,'#9d9d91');rect(left+253,top+193,83,5,'#9d9d91');
+ for(let i=1;i<4;i++)rect(left+i*83,top+12,2,154,'#bcb8a5');
+ rect(left+3,top+11,326,2,'#bcb8a5');
+ for(const i of [0,2,3])text('LIBERO',left+42+i*83,top+99,'#a9b3ad',10);
+ // Due corsie vere fino alla carreggiata sud: il marciapiede viene interrotto ai varchi.
+ const roadEdge=1200;
+ for(const [cx,sign] of [[left+106,'↓'],[left+223,'↑']]){
+  const laneX=cx-23,laneTop=top+193,laneH=Math.max(0,roadEdge-laneTop+5);
+  rect(laneX-3,laneTop,52,laneH,'#29343b');
+  for(let yy=laneTop;yy<roadEdge;yy+=11){
+   for(let xx=laneX+(Math.floor((yy-laneTop)/11)%2)*12;xx<laneX+46;xx+=25){
+    rect(xx,yy,23,9,'#39434a');
+   }
+  }
+  rect(laneX-3,laneTop,2,laneH,'#a49f8f');rect(laneX+48,laneTop,2,laneH,'#a49f8f');
+  text(sign,cx,roadEdge-15,'#e8d5aa',18);
+ }
+ rect(left+291,top+6,31,30,'#216386');text('P',left+306,top+29,'#fff',20);
+ text('ENTRATA',left+105,top+189,'#d9cba8',9);text('USCITA',left+223,top+189,'#d9cba8',9);
+
+}
+function wallShopLamps(){const h=life.minute/60;if(!(h>=18.5||h<6.5))return;
+ for(const b of buildings){const key=businessInfo[b.label]?.[0];if(!key||!businessOpen(key))continue;
+  const x=b.x+b.w/2,y=b.y+b.h-67;
+  rect(x-13,y-15,26,5,'#4b4541');rect(x-3,y-13,6,9,'#a59b83');rect(x-9,y-5,18,6,'#f5d29b');
+  const g=ctx.createRadialGradient(x,y+3,2,x,y+3,59);g.addColorStop(0,'rgba(255,204,122,.38)');g.addColorStop(1,'rgba(255,204,122,0)');ctx.fillStyle=g;ctx.fillRect(x-59,y-56,118,118);
+ }
+}
+function drawCityDetails(){
+ // Parco urbano: stesso bordo e stessi materiali dei giardini minori.
+ const px=1866,py=487,pw=568,ph=248;
+ drawGardenBase(px,py,pw,ph);
+ // Aiuole, cespugli e alberi con ombre coerenti.
+ for(const [tx,ty] of [[px+72,py+63],[px+pw-72,py+63],[px+72,py+ph-52],[px+pw-72,py+ph-52],[px+122,py+106],[px+pw-122,py+ph-106]]){
+  rect(tx-12,ty+7,30,9,'rgba(16,34,23,.32)');rect(tx-4,ty,8,20,'#5a4838');
+  rect(tx-18,ty-22,36,31,'#284d36');rect(tx-12,ty-29,28,24,'#6a9662');rect(tx-4,ty-32,11,7,'#8aaa73');
+ }
+ for(const [ax,ay] of [[px+140,py+54],[px+pw-140,py+54],[px+140,py+ph-55],[px+pw-140,py+ph-55]]){
+  rect(ax-17,ay-9,34,18,'#526d44');rect(ax-12,ay-12,24,20,'#77965e');
+ }
+ // Fontana al centro del parco, vasca a due livelli.
+ const fx=px+pw/2,fy=py+ph/2;
+ rect(fx-34,fy-34,68,68,'#c7c0a9');rect(fx-29,fy-29,58,58,'#376e80');
+ rect(fx-21,fy-21,42,42,'#5b9ba7');rect(fx-11,fy-11,22,22,'#b3c6ba');
+ rect(fx-3,fy-22,6,18,'#c6e5e7');rect(fx-18,fy+17,36,3,'#a4d3d9');
+ for(const [bx,by] of [[px+47,py+130],[px+pw-71,py+130]]){rect(bx,by,24,7,'#967957');rect(bx+3,by+7,3,7,'#5b4c40');rect(bx+19,by+7,3,7,'#5b4c40')}
+ text('GIARDINI DEL QUARTIERE',px+pw/2,py-18,'#cce2b8',14);
+ // Castello monumentale: cortile, bastioni, torri e portale. Ampliato il mondo per ospitarlo.
+ const cx=1895,cy=11,cw=525,ch=278;
+ rect(cx-14,cy+ch-10,cw+28,10,'#5a6159');rect(cx-10,cy+ch-13,cw+20,4,'#a79b88');
+ rect(cx+35,cy+53,cw-70,ch-57,'#373c42');
+ rect(cx+47,cy+64,cw-94,ch-77,'#8b8175');
+ for(let yy=cy+80;yy<cy+ch-22;yy+=19){rect(cx+49,yy,cw-98,2,'#706c65');for(let xx=cx+53+(yy%2)*14;xx<cx+cw-55;xx+=37)rect(xx,yy+2,2,15,'#6f6d65')}
+ // Torri angolari, merli e finestre strette.
+ for(const dx of [0,cw-91]){
+  rect(cx+dx,cy+35,91,ch-23,'#6e6b68');rect(cx+dx+8,cy+20,75,26,'#a09686');
+  for(let k=0;k<5;k++)rect(cx+dx+k*19,cy+6,15,25,'#b4a592');
+  for(const yy of [cy+102,cy+175,cy+240]){rect(cx+dx+37,yy,16,31,'#2b323c');rect(cx+dx+40,yy+4,10,20,'#c49a73')}
+ }
+ rect(cx+104,cy+48,cw-208,24,'#a99c88');for(let k=0;k<10;k++)rect(cx+106+k*25,cy+31,17,22,'#b8a994');
+ // Grande portale con arco e battenti.
+ const gx=cx+cw/2;rect(gx-49,cy+ch-112,98,112,'#b9a992');rect(gx-40,cy+ch-102,80,102,'#292f39');
+ rect(gx-35,cy+ch-91,70,91,'#57463e');rect(gx-2,cy+ch-91,4,91,'#292f39');
+ for(const yy of [cy+ch-65,cy+ch-30]){rect(gx-24,yy,8,5,'#a48c63');rect(gx+17,yy,8,5,'#a48c63')}
+ // Cornicioni, feritoie e conci di pietra sul fronte storico.
+ for(let i=0;i<12;i++){const bx=cx+96+i*28;rect(bx,cy+123,3,17,'#655f59');rect(bx+9,cy+180,5,24,'#2d3036');}
+ rect(cx+95,cy+ch-32,cw-190,6,'#a89b89');
+ for(let i=0;i<7;i++){rect(cx+106+i*42,cy+145,21,33,'#b1a38f');rect(cx+111+i*42,cy+150,11,23,'#333a40');}
+ rect(cx+cw/2-94,cy+92,188,22,'#514a4a');text('CASTELLO',cx+cw/2,cy+108,'#e4cba2',17);
+ // Lampioni spenti di giorno, accesi dopo il tramonto.
+ for(const [x,y] of streetLampPositions()){
+  rect(x-2,y-19,4,23,'#3b414b');rect(x-6,y-24,12,7,(life.minute/60>=18.5||life.minute/60<6.5)?'#e7c78a':'#66717a');if(life.minute/60>=18.5||life.minute/60<6.5){rect(x-4,y-22,8,3,'#fff0b9');
+  const g=ctx.createRadialGradient(x,y-21,2,x,y-21,37);g.addColorStop(0,'rgba(255,215,143,.23)');g.addColorStop(1,'rgba(255,215,143,0)');ctx.fillStyle=g;ctx.fillRect(x-37,y-58,74,74);}
+ }
+}
+function nearestBusinessInfo(){let found=null,dist=Infinity;for(const b of buildings){const dx=Math.max(b.x-p.x,0,p.x-(b.x+b.w)),dy=Math.max(b.y-p.y,0,p.y-(b.y+b.h));const d=Math.hypot(dx,dy);if(d<34&&d<dist){found=b;dist=d}}return found}
+function drawBusinessBubble(){
+ // UI informativa in DOM: non viene trasformata con la camera/zoom.
+ const card=document.getElementById('businessCard');
+ if(zoom<=0.60){card.hidden=true;return;}
+ const b=nearestBusinessInfo(),info=b&&businessInfo[b.label];
+ if(!info){card.hidden=true;return;}
+ const open=info[0]==='residenza'?life.rented:businessOpen(info[0]);
+ const name=String(info[1]||b.label),hours=(open?'APERTO':'CHIUSO')+' · '+hoursLabel(info[0]);
+ const owner='Gestore: '+String(info[2]||'—'),note=String(info[3]||'');
+ const key=[name,hours,owner,note].join('|');
+ if(card.dataset.key!==key){
+  card.dataset.key=key;
+  card.replaceChildren();
+  const title=document.createElement('strong');title.textContent=name;card.appendChild(title);
+  for(const [value,cls] of [[hours,open?'open':'closed'],[owner,'owner'],[note,'note']]){
+   if(!value)continue;const line=document.createElement('div');line.className=cls;line.textContent=value;card.appendChild(line);
+  }
+ }
+ card.hidden=false;
+}
+
+function nearSidewalk(x,y,pad=18){return CityGeometry.nearSidewalk(x,y,pad)}
+function draw(){ctx.setTransform(1,0,0,1,0,0);rect(0,0,W,H,'#080b14');ctx.setTransform(scale,0,0,scale,0,0);let vw=W/scale,vh=H/scale;if(!cameraFree){camX=p.x-vw/2;camY=p.y-vh/2;}clampCamera();updateRecenterButton();ctx.translate(-Math.floor(camX),-Math.floor(camY));rect(0,0,world.w,world.h,'#242b32');for(let x=0;x<world.w;x+=55){rect(x,0,2,world.h,'#293139')}for(let y=0;y<world.h;y+=55){rect(0,y,world.w,2,'#293139')}drawRoads();drawSouthDistrict();drawPocketSquares();drawStreetAtmosphere();const seasonIndex=CODEX_SEASONS.indexOf(codexSeason(life.day));drawCityDetails();for(const tr of trees){if(onRoad(tr.x,tr.y)||tr.x>1735&&tr.y<710||nearSidewalk(tr.x,tr.y,29)||(tr.x>1750&&tr.x<2115&&tr.y>890&&tr.y<1140))continue;rect(tr.x-3,tr.y,6,17,'#4a332e');const leaves=['#45684c','#396e48','#88633b','#526068'][seasonIndex];const crown=['#668653','#438b54','#b77b3f','#82949d'][seasonIndex];rect(tr.x-18,tr.y-19,35,27,leaves);rect(tr.x-12,tr.y-25,23,18,crown);rect(tr.x-4,tr.y-27,9,7,seasonIndex===3?'#d4dbe2':'#8d4b57')}for(const b of CityEntities.buildings())drawArchitecturalBuilding(b);for(const r of residences)drawResidence(r);wallShopLamps();drawStreetPlaques();drawCognack();for(const a of CityEntities.places()){if(a.kind==='metro')continue;if(a.kind==='water'){rect(a.x-5,a.y-11,10,17,'#296b63');rect(a.x-7,a.y-13,14,5,'#398b79');rect(a.x+3,a.y-8,8,3,'#c9d5bb');rect(a.x+9,a.y-4,2,7,'#80c9e0');text('TORET',a.x,a.y-21,'#b8e5c7',9)}else{rect(a.x-6,a.y-6,12,12,'#dca967');text('▼',a.x,a.y-10,'#ffe4a4',11)}}for(const m of metroStations){const x=m.x,y=m.y;rect(x-13,y-11,26,28,'#172e3b');rect(x-11,y-9,22,24,'#466c78');for(let k=0;k<4;k++)rect(x-9,y-6+k*5,18,2,'#1a3441');rect(x-20,y-51,40,21,'#0875a1');rect(x-18,y-49,36,17,'#12658a');text('M',x,y-35,'#ffffff',16);rect(x-1,y-30,2,19,'#a5b8bf');text('METRO',x,y-58,'#e4f7ff',10)}drawWalker(danger.x,danger.y,danger.walk,danger.moving,danger.dir,false,'Aggressore');text('Ruggine '+(danger.mood==='aggressivo'?'⚠':danger.mood==='irritato'?'!':'·'),danger.x,danger.y-42,danger.mood==='aggressivo'?'#ff7777':'#e6c3a4',11);for(const n of npcs){drawWalker(n.x,n.y,n.walk,n.moving,n.dir,false,n.role);if(n.name==='Lolly Piercer'){rect(n.x-3,n.y-37,6,6,'#f4f0e6');rect(n.x-1,n.y-40,4,4,'#ffffff');rect(n.x-6,n.y-23,3,9,'#b07b98');}else if(n.name==='JackPanthera'){rect(n.x-7,n.y-36,14,4,'#20252e');rect(n.x+(n.dir===3?-10:4),n.y-33,7,2,'#20252e');rect(n.x+4,n.y-22,3,8,'#8b4b43');}text(n.name,n.x,n.y-42,'#ffe2b6',11);if(tattooBooking&&tattooBooking.client===n.name&&tattooBooking.status!=='done'&&tattooBooking.approachStarted){drawTattooClientIcon(n.x,n.y-61);}}drawPlayer(p.x,p.y);drawBusinessBubble();drawInkEnergy(p.x,p.y-51);const hour=life.minute/60;const night=hour<5.5?1:hour<7.5?(7.5-hour)/2:hour>18.5?Math.min(1,(hour-18.5)/2):0;
+if(night>0){
+ // Illuminazione ambientale notturna: non oscurare uniformemente tutta la città.
+ ctx.fillStyle='rgba(8,13,28,'+(night*.27).toFixed(3)+')';ctx.fillRect(camX,camY,vw,vh);
+ // Ombra di contatto discreta alla base: niente veli rettangolari sulla strada.
+ for(const b of [...buildings,...residences]){
+  ctx.fillStyle='rgba(5,9,21,'+(night*.22).toFixed(3)+')';
+  ctx.fillRect(Math.round(b.x+5),Math.round(b.y+b.h),Math.round(b.w-10),5);
+ }
+ // Aloni caldi attorno ai lampioni e alle vetrine, accesi esclusivamente di notte.
+ const lights=[...streetLampPositions().map(([x,y])=>[x,y-21,115,.28]),...buildings.map(b=>[b.x+b.w/2,b.y+b.h+17,88,.17])];
+ for(const [x,y,r,strength] of lights){
+  const glow=ctx.createRadialGradient(x,y,3,x,y,r);
+  glow.addColorStop(0,'rgba(255,205,131,'+(night*strength).toFixed(3)+')');
+  glow.addColorStop(.45,'rgba(255,193,116,'+(night*strength*.40).toFixed(3)+')');
+  glow.addColorStop(1,'rgba(255,193,116,0)');
+  ctx.fillStyle=glow;ctx.fillRect(x-r,y-r,r*2,r*2);
+ }
+}ctx.setTransform(1,0,0,1,0,0);const near=npcs.find(n=>Math.hypot(n.x-p.x,n.y-p.y)<68);const nearRuggine=Math.hypot(danger.x-p.x,danger.y-p.y)<75;const place=nearbyPlace();if(performance.now()>messageUntil)$('#hint').textContent=place?'PARLA: '+place.name+' · interagisci':near?`PARLA con ${near.name} · E / T per tatuare`:nearRuggine?'PARLA con Ruggine · attenzione al suo umore':'Esplora Torino · joystick / WASD · SPAZIO salto · F colpo · T tatua';$('#money').textContent=p.money;$('#hudMoney').textContent=p.money;updateTargetBar();$('#task').textContent=['Trova lavoro','Attendi il cliente','Primo incarico completato'][p.quest]||'Esplora';}let joy={x:0,y:0},keys={};let messageUntil=0;function toast(msg){$('#hint').textContent=msg;messageUntil=performance.now()+1700;}function jump(){if(paused||p.jump>0)return;p.jump=.62;}function fight(){if(paused||p.attack>0)return;p.attack=.27;if(Math.hypot(p.x-danger.x,p.y-danger.y)<65){danger.cooldown=8;danger.warning=0;toast('Hai respinto Ruggine: qualche secondo di tregua.')}else toast('Colpo a vuoto');}function isAuthorizedTattooLocation(){const studio=buildings.find(b=>b.label==='STUDIO TATTOO');const doorX=studio.x+studio.w/2,doorY=studio.y+studio.h+17;return Math.hypot(p.x-doorX,p.y-doorY)<105;}
+function tattoo(){audio.effect('tattoo');if(paused||p.tattoo>0)return;if(Math.hypot(p.x-danger.x,p.y-danger.y)<75&&gameMinutes()<=danger.clientUntil&&isAuthorizedTattooLocation()){showChoices('Ruggine · Tatuaggio','Ruggine è pronto. Compenso: 28 €.',[{label:'Inizia tatuaggio',action:()=>{p.tattoo=1.1;danger.clientUntil=0;danger.clientDone++;p.money+=28;toast('Ruggine tatuato · +28 €')}},{label:'Non ora'}]);return;}const tt=target();const n=tt?.kind==='npc'&&tt.d<75?tt.obj:null;if(!n){if(Math.hypot(p.x-danger.x,p.y-danger.y)<75&&gameMinutes()<=danger.clientUntil&&isAuthorizedTattooLocation()){showChoices('Ruggine · Tatuaggio','Ruggine è pronto. Compenso: 28 €.',[{label:'Inizia tatuaggio',action:()=>{p.tattoo=1.1;danger.clientUntil=0;danger.clientDone++;p.money+=28;toast('Ruggine tatuato · +28 €')}},{label:'Non ora'}]);return;}toast('Avvicinati a un cliente per tatuare');return;}if(!tattooBooking||n.name!==tattooBooking.client||p.quest!==1){toast('Nessun incarico disponibile qui');return;}if(!bookingReady()){toast('Attendi il cliente e l’orario dell’appuntamento.');return;}if(!isAuthorizedTattooLocation()||!businessOpen('studio')){toast('Serve uno studio aperto e autorizzato (12:00–20:00).');return;}showChoices(n.name+' · Tatuaggio','Incarico nello studio autorizzato di Dario. Compenso: '+tattooBooking.price+' €. Vuoi iniziare?', [{label:'🖋️ Inizia tatuaggio · +'+tattooBooking.price+' €',action:()=>{tattooInProgressId=tattooBooking.id;p.tattoo=1.1;toast('Stai tatuando '+n.name+'…')}},{label:'Non adesso'}]);}function beg(){audio.effect('interact');if(paused)return;showChoices('Elemosina','Vuoi chiedere qualche spicciolo alla persona più vicina? Potresti essere rifiutato.',[{label:'Chiedi elemosina',action:performBeg},{label:'Lascia perdere'}])}
+function performBeg(){
+ if(paused)return;
+ if(p.money>=10){toast('Puoi chiedere elemosina solo con meno di 10 €.');return;}
+ const n=npcs.find(n=>Math.hypot(n.x-p.x,n.y-p.y)<75);
+ if(!n){toast('Avvicinati a un passante e chiedi aiuto');return;}
+ const now=(life.day-1)*1440+life.minute;
+ if(charity[n.name]!==undefined&&now-charity[n.name]<360){showInteraction(n.name,'Ti ho già risposto. Non ho altro da darti.');return;}
+ charity[n.name]=now;begAttempts++;reputation=Math.max(0,reputation-2);
+ // Solo circa una richiesta su quattro dà denaro; 1–3 euro, con esito deterministico variabile.
+ const seed=(begAttempts*17+n.name.length*13+life.day*7)%12;
+ if(seed<3){const coins=1+(seed%3);p.money+=coins;showInteraction(n.name,'Tieni '+coins+' €. Non posso fare di più.');}
+ else showInteraction(n.name,['Mi dispiace, non ho spiccioli.','Oggi non posso aiutarti.','Prova a cercare un lavoro.','Non ho niente da darti.'][seed%4]);
+}
+$('#beg').hidden=true;$('#beg').addEventListener('pointerdown',e=>{e.preventDefault();beg()});
+function respawn(){
+ p.health=100;p.invulnerable=12;p.x=590;p.y=365;p.moving=false;p.walk=0;
+ p.money=Math.max(0,p.money-5);life.energy=Math.max(10,life.energy);
+ danger.cooldown=20;
+ showInteraction('PRONTO SOCCORSO · TORINO',"Ti risvegli dopo un'aggressione. Qualcuno ti ha portato in ospedale. Hai perso fino a 5 €; fame e stanchezza non possono ucciderti.");
+}
+// Ruggine wanders between city districts. The south-west is a temporary rough-area anchor;
+// when a real rough district is added, change only the anchor points.
+const ruggineRoutes=[{x:565,y:790},{x:540,y:1060},{x:625,y:735},{x:1030,y:790},{x:1220,y:825},{x:1070,y:440},{x:610,y:445}];
+
+function talkRuggine(){
+ const now=gameMinutes();
+ if(danger.mood==='aggressivo'&&now>danger.clientUntil){showInteraction('Ruggine','Non è il momento di parlargli. Sembra pronto a menare le mani.');return}
+ const available=now>=danger.clientCooldown&&p.quest>=2&&danger.mood==='calmo';
+ if(!available){showInteraction('Ruggine',danger.mood==='irritato'?'Lasciami stare. Oggi non ho pazienza.':'Ci si vede in giro. Magari un giorno avrò un lavoro per te.');return}
+ showChoices('Ruggine · Possibile cliente','Ruggine osserva i tuoi tatuaggi. «Forse mi farei fare qualcosa. Ma niente promesse.»',[
+ {label:'Proponi un tatuaggio · 28 €',action:()=>{
+   if(hashEvent('rugginecliente',Math.floor(now/100)+danger.clientDone)<.7){danger.clientUntil=now+240;danger.clientCooldown=now+1440;showInteraction('Ruggine','Va bene. Ti aspetto allo studio. Non farmi perdere tempo.');}
+   else{danger.clientCooldown=now+720;showInteraction('Ruggine','Non oggi. Magari un’altra volta.');}
+ }},{label:'Lascia perdere'}]);
+}
+function offerForClient(n){
+ const st=clientState[n.name];if(!st||p.quest<2||life.day<st.nextDay)return false;
+ if(!st.offer){const r=hashEvent(n.name,st.visits+life.day);st.offer=r<.56?'tattoo':r<.82?'art':null;if(!st.offer){st.nextDay=life.day+1;return false}}
+ const tattoo=st.offer==='tattoo';const price=tattoo?34+st.visits*4:16+st.visits*3;
+ showChoices(n.name+' · Cliente abituale',tattoo?'«Vorrei un altro tatuaggio. Hai disponibilità?»':'«Hai qualche tua opera da vendere?»',[
+ {label:(tattoo?'Accetta tatuaggio':'Vendi opera')+' · '+price+' €',action:()=>{
+   if(tattoo&&!isAuthorizedTattooLocation()){showInteraction(n.name,'Per tatuare dobbiamo essere allo studio autorizzato. Ci vediamo lì.');return}
+   confirmAction(n.name,'Confermi '+(tattoo?'il tatuaggio':'la vendita dell’opera')+' per '+price+' €?',()=>{
+     p.money+=price;if(tattoo)p.tattoo=1.1;else artStock.sold++;
+     st.visits++;st.nextDay=life.day+2+Math.floor(hashEvent(n.name,st.visits)*5);st.offer=null;
+     toast((tattoo?'Tatuaggio':'Opera venduta')+' · +'+price+' €');
+   });
+ }},{label:'Non adesso'}]);return true;
+}
+
+let keyboardHeld=0;let activeGamepad=null;let gamepadActionWasDown=false;let padPrev={jump:false,fight:false,tattoo:false,beg:false};addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=true;if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(e.key.toLowerCase()))e.preventDefault();if(e.repeat)return;if(e.key==='Escape'&&paused){closeDialog();return;}if(e.key.toLowerCase()==='e')interact();if(e.key===' ')jump();if(e.key.toLowerCase()==='f')fight();if(e.key.toLowerCase()==='t')tattoo();if(e.key.toLowerCase()==='b')beg();if(e.key.toLowerCase()==='i')inventory();if(e.key.toLowerCase()==='u')useEquippedItem();if(e.key==='Tab'){e.preventDefault();rotateTarget(1)}});addEventListener('keyup',e=>keys[e.key.toLowerCase()]=false);addEventListener('blur',()=>{keys={};keyboardHeld=0;endJoy()});const j=$('#joy'),stick=$('#stick');let joyCenterTapTime=0,joyCenterPointer=null;function isJoyCenter(e){const r=j.getBoundingClientRect();return Math.hypot(e.clientX-r.left-r.width/2,e.clientY-r.top-r.height/2)<Math.min(37,r.width*.28)}function setJoy(e){const r=j.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),d=Math.max(1,Math.hypot(dx,dy)),radius=Math.max(1,(r.width-stick.offsetWidth)/2-4),a=Math.min(radius,d);joy.x=dx/d*Math.min(1,d/radius);joy.y=dy/d*Math.min(1,d/radius);stick.style.transform=`translate(${dx/d*a}px,${dy/d*a}px)`}j.addEventListener('pointerdown',e=>{e.preventDefault();if(cameraFree&&isJoyCenter(e)){const now=performance.now();if(now-joyCenterTapTime<360){recenterCamera();joyCenterTapTime=0;}else{joyCenterTapTime=now;}joyCenterPointer=e.pointerId;return;}j.setPointerCapture(e.pointerId);setJoy(e)});j.addEventListener('dblclick',e=>{e.preventDefault();e.stopPropagation()});j.addEventListener('touchend',e=>e.preventDefault(),{passive:false});j.addEventListener('pointermove',e=>{if(e.pointerId===joyCenterPointer){if(!isJoyCenter(e)){joyCenterPointer=null;j.setPointerCapture(e.pointerId);setJoy(e)}return;}if(j.hasPointerCapture(e.pointerId))setJoy(e)});function endJoy(){joy.x=joy.y=0;stick.style.transform=''}j.addEventListener('pointerup',e=>{e.preventDefault();if(e.pointerId===joyCenterPointer)joyCenterPointer=null;endJoy()});j.addEventListener('pointercancel',e=>{if(e.pointerId===joyCenterPointer)joyCenterPointer=null;endJoy()});let paused=false;let mapUnlocked=false;function candidates(){const out=[];for(const n of npcs){const d=Math.hypot(n.x-p.x,n.y-p.y);if(d<64)out.push({kind:'npc',name:n.name,d,obj:n})}const d=Math.hypot(danger.x-p.x,danger.y-p.y);if(d<64)out.push({kind:'danger',name:'Ruggine',d,obj:danger});for(const a of places){const d=Math.hypot(a.x-p.x,a.y-p.y);if(d<72)out.push({kind:'place',name:a.name,d,obj:a})}return out.sort((a,b)=>a.d-b.d)}
+let selectedTarget=null;function target(){const list=candidates();if(!list.length){selectedTarget=null;return null}const chosen=list.find(t=>t.kind===selectedTarget?.kind&&t.name===selectedTarget?.name);if(chosen)return chosen;selectedTarget=null;return list[0]}
+// Percorso su griglia: Ruggine aggira gli edifici senza attraversare i muri.
+const RUG_GRID=28;
+function rugginePath(sx,sy,tx,ty){return CityNavigation.route(sx,sy,tx,ty)||[]}
+function updateDanger(dt){
+ danger.cooldown=Math.max(0,danger.cooldown-dt);p.invulnerable=Math.max(0,p.invulnerable-dt);
+ danger.moodTime-=dt;
+ if(danger.moodTime<=0){
+   const r=hashEvent('Ruggine',Math.floor(gameMinutes()/80)+danger.clientDone);
+   danger.mood=r<.18?'aggressivo':r<.48?'irritato':'calmo';
+   danger.moodTime=12+hashEvent('umore',Math.floor(gameMinutes()/80))*17;
+ }
+ danger.wait-=dt;
+ if(danger.wait<=0&&Math.hypot(danger.targetX-danger.x,danger.targetY-danger.y)<12){
+   // 65% of the time he returns to the future rough district.
+   const r=hashEvent('percorso',Math.floor(gameMinutes()/9)+Math.floor(danger.x));
+   const ix=r<.65?Math.floor(r*100)%3:3+Math.floor(r*100)%4;
+   const goal=ruggineRoutes[ix];const safe=collides(goal.x,goal.y)?safePosition(goal.x,goal.y):goal;danger.targetX=safe.x;danger.targetY=safe.y;danger.wait=2+r*5;
+ }
+ if(gameMinutes()<=danger.clientUntil){danger.targetX=1260;danger.targetY=790;danger.wait=0;}
+ // Recalculate only when the destination changes or a waypoint is exhausted.
+ const routeKey=Math.round(danger.targetX/RUG_GRID)+':'+Math.round(danger.targetY/RUG_GRID);
+ if(danger.routeKey!==routeKey||!danger.route||danger.route.length===0){
+  danger.route=rugginePath(danger.x,danger.y,danger.targetX,danger.targetY);
+  danger.routeKey=routeKey;
+ }
+ while(danger.route?.length&&Math.hypot(danger.x-danger.route[0].x,danger.y-danger.route[0].y)<13)danger.route.shift();
+ const waypoint=danger.route?.[0]||{x:danger.targetX,y:danger.targetY};
+ const vx=waypoint.x-danger.x,vy=waypoint.y-danger.y,dist=Math.hypot(vx,vy);
+ danger.moving=false;
+ if(danger.wait<=0&&dist>12){
+   const ux=vx/dist,uy=vy/dist,step=Math.min(dist,(danger.mood==='aggressivo'?43:31)*dt);
+   const nx=danger.x+ux*step,ny=danger.y+uy*step;
+   if(!collides(nx,danger.y)){danger.x=nx;danger.moving=true}
+   if(!collides(danger.x,ny)){danger.y=ny;danger.moving=true}
+   // Se il percorso diretto è bloccato, prova a costeggiare l'ostacolo.
+   if(!danger.moving){
+     const dirs=[[1,0],[-1,0],[0,1],[0,-1],[.707,.707],[.707,-.707],[-.707,.707],[-.707,-.707]];
+     let best=null,bestScore=Infinity;
+     for(const [ax,ay] of dirs){const tx=danger.x+ax*Math.max(8,step),ty=danger.y+ay*Math.max(8,step);
+       if(collides(tx,ty))continue;
+       const score=Math.hypot(danger.targetX-tx,danger.targetY-ty)+Math.random()*6;
+       if(score<bestScore){bestScore=score;best=[tx,ty];}
+     }
+     if(best){danger.x=best[0];danger.y=best[1];danger.moving=true;}
+   }
+   if(!danger.moving){danger.stuck=(danger.stuck||0)+dt;
+     if(danger.stuck>1.4){danger.route=[];danger.routeKey=null;const valid=ruggineRoutes.filter(q=>!collides(q.x,q.y)&&Math.hypot(q.x-danger.x,q.y-danger.y)>70);const goal=valid[Math.floor(Math.random()*valid.length)];if(goal){danger.targetX=goal.x;danger.targetY=goal.y;}danger.wait=0;danger.stuck=0;}
+   }else danger.stuck=0;
+   if(danger.moving){danger.walk+=step*.24;danger.dir=Math.abs(ux)>Math.abs(uy)?(ux>0?1:3):(uy>0?0:2)}
+ }
+ const d=Math.hypot(p.x-danger.x,p.y-danger.y);
+ const hostile=danger.mood==='aggressivo'&&gameMinutes()>danger.clientUntil&&danger.cooldown===0&&p.invulnerable===0;
+ if(d<70&&hostile){danger.warning+=dt;
+   if(danger.warning>1.8){p.health=Math.max(0,p.health-34);danger.cooldown=3.2;danger.warning=0;toast('Ruggine ti ha aggredito! Salute: '+p.health+'%');if(p.health===0)respawn();}
+ }else danger.warning=0;
+ $('#health').textContent=Math.round(p.health);
+}
+function rotateTarget(dir){const list=candidates();if(!list.length){selectedTarget=null;return}const current=target(),index=list.findIndex(t=>t.kind===current.kind&&t.name===current.name);const next=list[(index+dir+list.length)%list.length];selectedTarget={kind:next.kind,name:next.name};updateTargetBar()}
+function updateTargetBar(){
+ const t=target();
+ const canInteract=!!t&&((t.kind==='place'&&t.d<95)||(t.kind!=='place'&&t.d<75));
+ const bar=$('#targetBar');bar.hidden=!t;
+ if(t)$('#targetName').textContent=t.name;
+ const talk=$('#act'),tattooButton=$('#tattoo'),begButton=$('#beg');
+ talk.hidden=!canInteract;
+ if(canInteract){
+  const label=t.kind==='place'?(t.obj.kind==='studio'?(studioPermissions(studioById('dario-torino')).owner?'Gestisci studio':'Informazioni studio'):'Esamina'):'Parla';
+  talk.textContent='💬';
+  talk.setAttribute('aria-label',label);
+  talk.title=label;
+ }
+ const nearStudio=isAuthorizedTattooLocation();
+ const tattooNpc=businessOpen('studio')&&canInteract&&((t.kind==='npc'&&tattooBooking&&t.obj.name===tattooBooking.client&&p.quest===1&&bookingReady())||(t.kind==='danger'&&gameMinutes()<=danger.clientUntil));
+ tattooButton.hidden=!(nearStudio&&tattooNpc);
+ begButton.hidden=!(p.money<10&&canInteract&&t.kind==='npc');
+}
+$('#targetPrev').addEventListener('click',()=>rotateTarget(-1));$('#targetNext').addEventListener('click',()=>rotateTarget(1));
+function addItem(id,name,qty=1){let row=bag.items.find(a=>a.id===id);if(row){row.qty+=qty;return true}if(bag.items.length>=bag.capacity)return false;bag.items.push({id,name,qty});return true}
+function removeItem(id,qty=1){const row=bag.items.find(a=>a.id===id);if(!row||row.qty<qty)return false;row.qty-=qty;if(row.qty===0)bag.items.splice(bag.items.indexOf(row),1);return true}
+function updateMapButton(){const b=$('#mapQuick');b.disabled=!mapUnlocked;b.textContent=mapUnlocked?'🗺 MAPPA':'🗺 MAPPA 🔒';b.title=mapUnlocked?'Apri mappa':'Esplora la città per sbloccare la mappa'}$('#mapQuick').addEventListener('click',()=>{if(!mapUnlocked)return;showChoices('MAPPA · TORINO (ALPHA)',cityMapDescription(),[{label:'Chiudi mappa'}])});updateMapButton();function inventory(){showChoices('🎒 Zaino · '+bag.items.length+'/'+bag.capacity,'Oggetti posseduti. Seleziona un oggetto per regalarlo o scambiarlo con il bersaglio vicino.',[...bag.items.map(item=>({label:item.name+' ×'+item.qty,action:()=>itemMenu(item.id)})),{label:'Chiudi'}])}
+function itemMenu(id){const item=bag.items.find(a=>a.id===id);if(!item)return;const t=target();const n=t?.kind==='npc'?t.obj:null;showChoices(item.name,'Oggetto nello zaino'+(n?' · interlocutore: '+n.name:''),[...(item.id.startsWith('cibo:')?[{label:'🍴 Consuma',action:()=>{const foodValues={'Espresso':8,'Cappuccino e brioche':25,'Colazione abbondante':43,'Panino':23,'Piatto del giorno':40,'Pranzo completo':60,'Zuppa':27,'Pasta e acqua':55,'Cena completa':80};if(removeItem(item.id)){life.hunger=Math.max(0,life.hunger-(foodValues[item.name]||10));toast('Consumati: '+item.name);}}}]:[]),{label:'Dona a NPC',disabled:!n,action:()=>confirmAction('Dono','Regalare '+item.name+' a '+n.name+'?',()=>{if(n.bag.length>=NPC_BAG_CAPACITY)return toast('Inventario di '+n.name+' pieno');if(removeItem(id)){n.bag.push({id:item.id,name:item.name,qty:1});toast(n.name+' ha ricevuto '+item.name)}})},{label:'Scambia con NPC',disabled:!n||!n.bag.length,action:()=>tradeWith(n,id)},{label:'Indietro',action:inventory}])}
+function tradeWith(n,id){const mine=bag.items.find(a=>a.id===id);if(!mine||!n.bag.length)return;showChoices('Scambio · '+n.name,'Offri '+mine.name+' in cambio di:',[...n.bag.map((it,i)=>({label:it.name+' ×'+it.qty,action:()=>confirmAction('Scambio','Confermi lo scambio senza denaro?',()=>{if(!bag.items.some(a=>a.id===it.id)&&bag.items.length>=bag.capacity)return toast('Zaino pieno');if(n.bag.length>NPC_BAG_CAPACITY)return toast('Inventario NPC pieno');if(!removeItem(id))return;const taken=n.bag.splice(i,1)[0];addItem(taken.id,taken.name,1);n.bag.push({id:mine.id,name:mine.name,qty:1});economy.trades++;toast('Scambio effettuato con '+n.name)})})),{label:'Annulla'}])}
+$('#inventoryQuick').addEventListener('click',()=>{toggleSettings(false);inventory()});
+$('#timeSpeed').addEventListener('input',e=>{timeMultiplier=[0,.5,1,2,4][Number(e.target.value)]??1;$('#timeSpeedValue').textContent=timeMultiplier+'×'});$('#timeSpeed').value='3';$('#timeSpeedValue').textContent='2×';
+function nearWorkplace(label,x,y){const b=CityEntities.buildingByLabel(label);if(!b)return false;const entrance=CityEntities.entrance(b);return Math.hypot(x-entrance.x,y-entrance.y)<105;}function interact(){if(paused)return;const t=target();if(!t)return toast('Nessuno abbastanza vicino');if(t.kind==='place'){if(t.d<72)usePlace(t.obj);else toast('Avvicinati');return}if(t.kind==='danger'){if(t.d<64)talkRuggine();else toast('Avvicinati');return}const n=t.obj;if(t.d>64)return toast('Avvicinati a '+n.name);if(n.name==='ilBrusco'){
+ const drunk=hashEvent('brusco',Math.floor(gameMinutes()/180))>.64;
+ showChoices('ilBrusco',drunk?'Ha bevuto. «Posso risolvere tutto. O peggiorarlo parecchio.»':'«Se hai un problema, posso provare a sistemarlo.»',[
+ {label:drunk?'Lascia perdere: è brillo':'Chiedi un favore',action:()=>{if(drunk){showInteraction('ilBrusco','«Non mi dire cosa devo fare!» Meglio ripassare quando è sobrio.');return}storyFlags.bruscoFavor++;showInteraction('ilBrusco','«Vedrò cosa posso fare.» Favori promessi: '+storyFlags.bruscoFavor+'.')}},
+ {label:'Scambia oggetti',action:()=>npcExchange(n)},{label:'Saluta'}]);return;
+ }
+ if(n.name==='Chicco d’Uva'){
+ showChoices('Chicco d’Uva','«Le occasioni arrivano quando meno te le aspetti. E spesso dopo una festa.»',[
+ {label:storyFlags.uvaMet?'Parla dei vostri progetti':'Presentati',action:()=>{storyFlags.uvaMet=true;showInteraction('Chicco d’Uva','«Chicco d’Inchiostro? Io Chicco d’Uva! Questa amicizia promette guai e fortuna.»')}},
+ {label:'Scambia oggetti',action:()=>npcExchange(n)},{label:'Saluta'}]);return;
+ }
+ if(n.name==='ilBarbaBarabba'){
+ showChoices('ilBarbaBarabba','«Vivo nel mio Volkswagen T2 arancione. Si chiama Cognack. Il mare non è vicino, ma la libertà sì.»',[
+ {label:'Parla di Cognack',action:()=>{storyFlags.barbaMet=true;showInteraction('ilBarbaBarabba','«Un giorno ti racconterò come sono arrivato qui. Intanto, non toccare il cambio!»')}},
+ {label:'Scambia oggetti',action:()=>npcExchange(n)},{label:'Saluta'}]);return;
+ }
+ if(n.name==='Bruno'){rentRoom();return}if(n.name==='Elia'){showChoices('Elia · Pasticcere','Lavoro al Caffè / Pasticceria. Per comprare qualcosa usa l’ingresso del locale.',[{label:'Scambia oggetti',action:()=>npcExchange(n)},{label:'Saluta'}]);return}if(offerForClient(n))return;
+ if(n.potentialCustomer&&p.quest>=2&&n.name!=='Nico'){
+  showChoices(n.name+' · Potenziale cliente','«Potrei essere interessato a un tatuaggio. Lavori in qualche studio?»',[
+   {label:'Parla di un futuro appuntamento',action:()=>showInteraction(n.name,'Interessante! Quando avrai un contratto con uno studio potremo concordare una data.')},
+   {label:'🎁 Dona / scambia oggetti',action:()=>npcExchange(n)},
+   {label:'Saluta'}]);return;
+ }if(n.name==='Sergio'&&!businessOpen('barbiere')){showInteraction('BARBIERE','Chiuso. Orario: '+hoursLabel('barbiere'));return}if(n.name==='Sergio'&&!nearWorkplace('BARBIERE',p.x,p.y)){showInteraction('Sergio','Per un taglio passa al mio negozio. In strada posso soltanto parlare o scambiare oggetti.');return}if(n.name==='Sergio'){showChoices('Sergio · Barbiere','Taglio di capelli: 8 €.',[{label:'Taglio · 8 €',disabled:p.money<8,action:()=>confirmAction('Barbiere','Spendere 8 €?',()=>{p.money-=8;toast('Nuovo taglio di capelli')})},{label:'Scambia oggetti',action:()=>npcExchange(n)},{label:'Esci'}]);return}if(n.name==='Lina'&&!businessOpen('abbigliamento')){showInteraction('ABBIGLIAMENTO','Chiuso. Orario: '+hoursLabel('abbigliamento'));return}if(n.name==='Lina'&&!nearWorkplace('ABBIGLIAMENTO',p.x,p.y)){showInteraction('Lina','Per comprare vestiti devi venire al negozio.');return}if(n.name==='Lina'){showChoices('Lina · Abbigliamento','Maglietta 12 € · Giacca 35 €.',[{label:'Compra maglietta · 12 €',disabled:p.money<12,action:()=>confirmAction('Negozio','Spendere 12 €?',()=>{if(addItem('maglietta','Maglietta'))p.money-=12;else toast('Zaino pieno')})},{label:'Compra giacca · 35 €',disabled:p.money<35,action:()=>confirmAction('Negozio','Spendere 35 €?',()=>{if(addItem('giacca','Giacca'))p.money-=35;else toast('Zaino pieno')})},{label:'Scambia oggetti',action:()=>npcExchange(n)}]);return}let msg=n.lines[0];if(n.name==='Dario'&&!businessOpen('studio')){showInteraction('Dario','Lo studio e chiuso. Orario: '+hoursLabel('studio'));return}if(n.name==='Dario'&&!studioEmployed){showChoices('Dario · Tatuatore',p.quest===2?'Bel lavoro con il cliente precedente. Vuoi un nuovo appuntamento?':'Cerchi lavoro? Ti invierò le richieste nel diario. Potrai accettarle o rifiutarle.', [{label:'✓ Accetta incarico',action:()=>{bookDarioClient();toast('Assunto! Controlla le richieste nel diario.');}},{label:studioPermissions(studioById('dario-torino')).owner?'Gestisci studio':'Informazioni / acquisto studio',action:studioPanel},{label:'Rifiuta per ora'}]);return}else if(tattooBooking&&n.name===tattooBooking.client&&p.quest===1){msg=bookingReady()?'Sono arrivato per il mio appuntamento. Avvicinati allo studio e premi TATUA.':'Ho un appuntamento con te allo studio. Ci vediamo all’orario stabilito.'}else if(n.name==='Dario'&&p.quest===2){msg='Il cliente dice che il tatuaggio è perfetto. Ma quella pietra nella tua macchinetta ha brillato.'}showChoices(n.name+' · '+n.role,msg,[...(n.name==='Dario'?[{label:studioPermissions(studioById('dario-torino')).owner?'Gestisci studio':'Informazioni / acquisto studio',action:studioPanel}]:[]),{label:'🎁 Dona / scambia oggetti',action:()=>npcExchange(n)},{label:'Saluta'}])}
+function npcExchange(n){showChoices('Scambi · '+n.name,'Possiede: '+(n.bag.map(i=>i.name).join(', ')||'niente')+'. Puoi offrire un oggetto dal tuo zaino.',[...bag.items.map(it=>({label:'Offri '+it.name,action:()=>itemMenu(it.id)})),{label:'Chiudi'}])}
+function showInteraction(who,msg){showChoices(who,msg,[])}
+function showChoices(who,msg,options){$('#who').textContent=who;$('#say').textContent=msg;const box=$('#choices');box.replaceChildren();for(const o of options){const btn=document.createElement('button');btn.type='button';btn.textContent=o.label;btn.disabled=!!o.disabled;btn.addEventListener('click',()=>{closeDialog();if(o.action)o.action()});box.appendChild(btn)}$('#close').textContent=options.length?'ANNULLA / ESC':'CHIUDI';$('#dialog').style.display='block';paused=true}
+
+function nearbyPlace(){return CityEntities.nearbyPlaces(p.x,p.y,72)[0]}
+function usePlace(a){if(a.kind==='metro'){showChoices(a.name,'Metropolitana di Torino · collegamento rapido tra le stazioni del quartiere.',metroStations.filter(m=>m.name!==a.name).map(m=>({label:'🚇 '+m.name,action:()=>{const dest=safePosition(m.x+36,m.y+36);p.x=dest.x;p.y=dest.y;toast('Metro: '+m.name)}})).concat([{label:'Resta qui'}]));return;}if(a.kind==='studio'){if(!businessOpen('studio')){showInteraction('STUDIO TATTOO','Chiuso. Orario: '+hoursLabel('studio')+'.');return;}studioPanel();return;}
+ const hour=life.minute/60;
+ if(a.kind==='water'){showChoices('TORET · ACQUA POTABILE','Fontanella pubblica torinese. Acqua gratuita.',[{label:'Bevi acqua · GRATIS',action:()=>{life.hunger=Math.max(0,life.hunger-1);toast('Acqua fresca dal Toret.')}},{label:'Lascia stare'}]);return;}
+ if(a.kind==='home'){
+  if(!life.rented){showInteraction('RESIDENZA','Non hai un contratto valido. Parla con Bruno.');return}
+  showChoices('RESIDENZA · CASA','Accesso 24/7 · '+calendarDate(life.rentDue)+' scadenza. Riposa o usa l’armadio.',[
+   ...[2,4,6,8,12].map(hours=>({label:'💤 Dormi '+hours+' ore · fame +'+(hours===12?25:hours/2*5)+'% · salute +'+hours+'%',action:()=>sleepHours(hours)})),
+   {label:'🗄 ARMADIO / DEPOSITO',action:openHomeStorage},{label:'Esci'}]);return;
+ }
+
+ const menus={breakfast:{min:6,max:11,items:[['Espresso',2,8],['Cappuccino e brioche',4,25],['Colazione abbondante',7,43]]},lunch:{min:11,max:16,items:[['Panino',5,23],['Piatto del giorno',8,40],['Pranzo completo',12,60]]},dinner:{min:18,max:24,items:[['Zuppa',7,27],['Pasta e acqua',13,55],['Cena completa',19,80]]}};
+ const menu=menus[a.kind];const kind={breakfast:'caffe',lunch:'mercato',dinner:'ristorante'}[a.kind];if(!businessOpen(kind)){showInteraction(a.name,'Chiuso. Orario: '+hoursLabel(kind)+'.');return}
+ showChoices(a.name+' · MENÙ','Saldo: '+p.money+' €. Scegli cosa ordinare. Nessun addebito senza conferma.',menu.items.map(([name,price,food])=>({label:name+' · '+price+' € · da mettere nello zaino',disabled:p.money<price,action:()=>confirmAction(a.name,'Acquistare '+name+' per '+price+' € e conservarlo nello zaino?',()=>{if(p.money<price)return;const id='cibo:'+name;if(!addItem(id,name)){toast('Zaino pieno: nessun addebito');return;}p.money-=price;toast(name+' nello zaino · −'+price+' €')})})).concat([{label:'Esci senza ordinare'}]));
+}
+function confirmAction(who,msg,fn){showChoices(who+' · CONFERMA',msg,[{label:'✓ CONFERMA',action:fn},{label:'✕ ANNULLA'}])}
+function sleepHours(hours){
+ if(!life.rented)return toast('Contratto scaduto');
+ const total=gameMinutes()+hours*60;life.day=Math.floor(total/1440)+1;life.minute=total%1440;
+ life.hunger=Math.min(100,life.hunger+(hours===12?25:hours/2*5));life.energy=100;p.health=Math.min(100,p.health+hours);
+ checkRent();manageStudioOffers();syncActiveBooking();toast('Riposo '+hours+'h · '+calendarDate(life.day));
+}
+function openHomeStorage(){
+ if(!life.rented)return toast('Serve un affitto valido');
+ showChoices('🗄 ARMADIO · '+homeStorage.length+'/120','Deposita o ritira oggetti. Lo zaino ha '+bag.items.length+'/'+bag.capacity+' slot.',[
+  ...bag.items.map(it=>({label:'↓ Deposita '+it.name+' ×'+it.qty,disabled:homeStorage.length>=120,action:()=>{const idx=bag.items.indexOf(it);if(idx>=0&&homeStorage.length<120){homeStorage.push({...it});bag.items.splice(idx,1);}openHomeStorage();}})),
+  ...homeStorage.map(it=>({label:'↑ Ritira '+it.name+' ×'+it.qty,disabled:bag.items.length>=bag.capacity,action:()=>{const idx=homeStorage.indexOf(it);if(idx>=0&&bag.items.length<bag.capacity){bag.items.push({...it});homeStorage.splice(idx,1);}openHomeStorage();}})),
+  {label:'Chiudi'}]);
+}
+function rentRoom(){
+ const offers=[[7,40,'7 giorni'],[30,100,'1 mese'],[365,1000,'1 anno']];
+ showChoices('Bruno · Proprietario','Affitto residenza · saldo '+p.money+' €. '+(life.rented?'Contratto valido fino al '+calendarDate(life.rentDue):'Nessun contratto attivo')+'.',[
+  ...offers.map(([days,price,label])=>({label:'🏠 '+label+' · '+price+' €',disabled:p.money<price,action:()=>confirmAction('Bruno','Confermi '+label+' per '+price+' €?',()=>{if(p.money<price)return;p.money-=price;life.rented=true;life.rentDue=Math.max(life.day,life.rentDue)+days;toast('Affitto valido fino al '+calendarDate(life.rentDue));})})),{label:'Non affittare'}]);
+}
+function checkRent(){if(life.rented&&life.day>=life.rentDue){life.rented=false;toast('Affitto scaduto. Parla con Bruno per rinnovare.')}}
+
+function closeDialog(){$('#dialog').style.display='none';paused=false}$('#act').addEventListener('pointerdown',e=>{e.preventDefault();interact()});
+// USA is always available: choose an owned item; do not invent an effect for objects
+// without an implemented use action.
+function useEquippedItem(){
+ if(paused)return;
+ if(!bag.items.length){toast('Nessun oggetto nello zaino');return;}
+ showChoices('USA · OGGETTO','Scegli un oggetto da utilizzare.',[
+  ...bag.items.map(it=>({label:it.name+' ×'+it.qty,action:()=>{
+    if(it.id==='bozzetto')showInteraction('Bozzetto','Osservi il tuo disegno. Potrai usarlo per i lavori nello studio.');
+    else if(it.id==='matita')showInteraction('Matita','Prepari la matita. Per disegnare servirà una postazione adatta.');
+    else showInteraction(it.name,'Questo oggetto non ha ancora un utilizzo attivo.');
+  }})),{label:'Annulla'}]);
+}
+$('#useItem').addEventListener('pointerdown',e=>{e.preventDefault();useEquippedItem()});for(const [id,fn] of [['jump',jump],['fight',fight],['tattoo',tattoo]])$('#'+id).addEventListener('pointerdown',e=>{e.preventDefault();audio.effect(id==='jump'?'jump':id==='fight'?'fight':'tattoo');fn()});$('#close').onclick=closeDialog;function updateZoomLabel(){$('#zoomValue').textContent=Math.round(zoom*100)+'%';$('#zoomSlider').value=Math.round(zoom*100)}// Esplorazione touch: trascina la mappa sul canvas, senza interferire con joystick e pulsanti.
+const recenterBtn=document.querySelector('#recenterCamera');
+recenterBtn.addEventListener('pointerdown',e=>e.stopPropagation());
+recenterBtn.addEventListener('click',()=>recenterCamera());
+c.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;if(document.querySelector('#intro').style.display!=='none'||paused)return;if(panPointer!==null)return;panPointer=e.pointerId;panLastX=e.clientX;panLastY=e.clientY;c.setPointerCapture(e.pointerId);});
+c.addEventListener('pointermove',e=>{if(e.pointerId!==panPointer)return;const dx=e.clientX-panLastX,dy=e.clientY-panLastY;panLastX=e.clientX;panLastY=e.clientY;if(Math.abs(dx)+Math.abs(dy)<.5)return;cameraFree=true;camX-=dx*devicePixelRatio/scale;camY-=dy*devicePixelRatio/scale;clampCamera();updateRecenterButton();});
+function endPan(e){if(e.pointerId===panPointer){panPointer=null;if(c.hasPointerCapture(e.pointerId))c.releasePointerCapture(e.pointerId)}}
+c.addEventListener('pointerup',endPan);c.addEventListener('pointercancel',endPan);
+$('#zoomSlider').addEventListener('input',e=>{zoom=Math.max(.3,Math.min(innerWidth>innerHeight?1.3:1.75,Number(e.target.value)/100));resize();updateZoomLabel()});updateZoomLabel();const settingsMenu=$('#settingsMenu'),settingsToggle=$('#settingsToggle');function toggleSettings(open){settingsMenu.hidden=!open;settingsToggle.setAttribute('aria-expanded',String(open))}settingsToggle.addEventListener('click',()=>toggleSettings(settingsMenu.hidden));$('#settingsClose').addEventListener('click',()=>toggleSettings(false));$('#fullscreen').onclick=async()=>{if(document.fullscreenEnabled&&document.documentElement.requestFullscreen){try{await document.documentElement.requestFullscreen();return}catch(e){}}$('#installTip').style.display='block'};$('#tipClose').onclick=()=>$('#installTip').style.display='none';$('#exitGame').onclick=()=>{toggleSettings(false);confirmAction('ESCI DAL GIOCO','Vuoi uscire? I progressi non esportati andranno persi.',()=>{closeDialog();$('#intro').style.display='flex';document.body.classList.remove('game-started');$('#intro h1').textContent='CODEX EX ANIMA';$('#start').setAttribute('aria-label','Ricomincia');$('#start').onclick=()=>location.reload();paused=true;});};$('#start').onclick=()=>{audio.unlock();audio.effect('open');$('#intro').style.display='none';document.body.classList.add('game-started');if(!last){last=performance.now();requestAnimationFrame(loop)}};let last=0;function analogSpeed(magnitude){
+  // Dead zone: 15%. Continuous analog speed from 20% to 100% of previous maximum.
+  if(magnitude<=0.15)return 0;
+  const t=Math.min(1,(magnitude-0.15)/0.85);
+  return 225*(0.2+0.8*t);
+}
+// World time and needs advance independently of DOM rendering.
+function advanceLife(dt){const elapsed=dt*3.5*timeMultiplier;life.minute+=elapsed;life.hunger=Math.min(100,life.hunger+dt*.042*timeMultiplier);life.energy=Math.max(0,life.energy-dt*.027*timeMultiplier);while(life.minute>=1440){life.minute-=1440;life.day++;checkRent()} }
+const CODEX_SEASONS=Object.freeze([{name:'PRIMAVERA',icon:'🍃'},{name:'ESTATE',icon:'☀️'},{name:'AUTUNNO',icon:'🍁'},{name:'INVERNO',icon:'❄️'}]);
+function codexSeason(day){const d=Math.max(1,Math.floor(Number(day)||1));return CODEX_SEASONS[Math.floor(((d-1)%120)/30)];}
+function renderLifeHud(){const hr=Math.floor(life.minute/60);$('#day').textContent=calendarDate(life.day);const currentSeason=codexSeason(life.day);$('#season').textContent=currentSeason.name;$('#seasonIcon').textContent=currentSeason.icon;$('#clock').textContent=String(hr).padStart(2,'0')+':'+String(Math.floor(life.minute%60)).padStart(2,'0');$('#hunger').textContent=Math.round(life.hunger);$('#energy').textContent=Math.round(life.energy);$('#housing').textContent=life.rented?'Affitto fino al giorno '+life.rentDue:'Senza casa'; }
+function updateLife(dt){advanceLife(dt);renderLifeHud();}
+function getGamepad(){
+  if(!navigator.getGamepads)return null;
+  const pads=navigator.getGamepads();
+  for(const pad of pads){if(pad&&pad.connected)return pad;}
+  return null;
+}
+function loop(now){
+  let dt=Math.min(.04,(now-last)/1000||0);last=now;
+  const pad=getGamepad();
+  let gx=0,gy=0,gamepadMagnitude=0;
+  if(pad){
+    gx=pad.axes[0]||0;gy=pad.axes[1]||0;
+    // D-pad as digital full deflection when no analog input.
+    if(Math.hypot(gx,gy)<0.15){
+      gx=(pad.buttons[15]?.pressed?1:0)-(pad.buttons[14]?.pressed?1:0);
+      gy=(pad.buttons[13]?.pressed?1:0)-(pad.buttons[12]?.pressed?1:0);
+    }
+    gamepadMagnitude=Math.min(1,Math.hypot(gx,gy));
+    const actionDown=!!(pad.buttons[0]?.pressed||pad.buttons[2]?.pressed);
+    if(actionDown&&!gamepadActionWasDown)interact();const btn={jump:!!pad.buttons[1]?.pressed,fight:!!pad.buttons[5]?.pressed,tattoo:!!pad.buttons[4]?.pressed,beg:!!pad.buttons[3]?.pressed};for(const [key,fn] of [['jump',jump],['fight',fight],['tattoo',tattoo],['beg',beg]]){if(btn[key]&&!padPrev[key])fn();}padPrev=btn;
+    gamepadActionWasDown=actionDown;
+  }else{gamepadActionWasDown=false;padPrev={jump:false,fight:false,tattoo:false,beg:false};}
+  simulationTick(dt,gx,gy,gamepadMagnitude);
+  audio.setScene(life.minute<360||life.minute>1110?'night':isAuthorizedTattooLocation()?'studio':'city');
+  audio.footsteps(p.moving&&!paused);
+  draw();
+  requestAnimationFrame(loop)
+}
+// Simulation tick: state transitions, physics, NPCs and needs. No canvas drawing.
+function simulationTick(dt, gx, gy, gamepadMagnitude){
+  if(!paused){
+    const previousTattoo=p.tattoo;p.jump=Math.max(0,p.jump-dt);p.attack=Math.max(0,p.attack-dt);p.tattoo=Math.max(0,p.tattoo-dt);if(previousTattoo>0&&p.tattoo===0&&tattooInProgressId!==null){const b=tattooAgenda.find(v=>v.id===tattooInProgressId);tattooInProgressId=null;if(b&&b.status==='arrived'){b.status='done';completedTattooCount++;p.money+=b.price;reputation=Math.min(100,reputation+5);toast('Tatuaggio completato! +'+b.price+' € · reputazione +5');syncActiveBooking();save();}}
+    const kx=Number(!!(keys.d||keys.arrowright))-Number(!!(keys.a||keys.arrowleft));
+    const ky=Number(!!(keys.s||keys.arrowdown))-Number(!!(keys.w||keys.arrowup));
+    const keyboardMoving=kx!==0||ky!==0;
+    keyboardHeld=keyboardMoving?Math.min(0.7,keyboardHeld+dt):0;
+    const keyboardSpeed=keyboardMoving?225*(0.2+0.8*(keyboardHeld/0.7)):0;
+    const touchMagnitude=Math.min(1,Math.hypot(joy.x,joy.y));
+    const touchSpeed=analogSpeed(touchMagnitude);
+    const padSpeed=analogSpeed(gamepadMagnitude);
+    // Strongest active input wins; don't add keyboard and analog vectors together.
+    let dx=0,dy=0,speed=0;
+    if(keyboardSpeed>=touchSpeed&&keyboardSpeed>=padSpeed&&keyboardMoving){
+      const n=Math.hypot(kx,ky);dx=kx/n;dy=ky/n;speed=keyboardSpeed;
+    }else if(touchSpeed>=padSpeed&&touchSpeed>0){
+      dx=joy.x/touchMagnitude;dy=joy.y/touchMagnitude;speed=touchSpeed;
+    }else if(padSpeed>0){
+      dx=gx/gamepadMagnitude;dy=gy/gamepadMagnitude;speed=padSpeed;
+    }
+    if(collides(p.x,p.y)){const safe=safePosition(p.x,p.y);p.x=safe.x;p.y=safe.y;}
+    if(p.tattoo>0)speed=0;
+    if(speed>0){
+      p.dir=Math.abs(dx)>Math.abs(dy)?(dx>0?1:3):(dy>0?0:2);
+      if(life.hunger>85||life.energy<15)speed*=.55;const step=speed*dt;
+      const segments=Math.max(1,Math.ceil(step/7));for(let i=0;i<segments;i++){const sx=dx*step/segments,sy=dy*step/segments;if(!collides(p.x+sx,p.y))p.x+=sx;if(!collides(p.x,p.y+sy))p.y+=sy;}
+      p.moving=true;p.walk+=step*.23;
+    }else{p.moving=false;p.walk=0;}
+    // Limite superiore: il giocatore non può sparire dietro la barra HUD.
+    if(!cameraFree){const hud=document.querySelector('#top');const hudBottom=hud?hud.getBoundingClientRect().bottom:110;
+      const minVisibleY=camY+(hudBottom+40)*devicePixelRatio/scale;
+      if(camY<2&&p.y<minVisibleY)p.y=Math.min(world.h-24,Math.max(24,minVisibleY));
+    }
+    if(!mapUnlocked&&Math.hypot(p.x-945,p.y-680)>420){mapUnlocked=true;updateMapButton();toast('Mappa del quartiere sbloccata!')}updateNpcs(dt);updateLife(dt);manageStudioOffers();updateTattooBooking(dt);updateDanger(dt);
+  }
+}
+
+// QA 1.2.15.24: Diario dinamico del Quartiere Zero, senza nuovi sistemi persistenti.
+// Le informazioni vengono lette dallo stato esistente, senza duplicare le missioni.
+const journalOverlay=document.createElement('section');
+journalOverlay.id='codexJournal';
+journalOverlay.setAttribute('role','dialog');
+journalOverlay.setAttribute('aria-modal','true');
+journalOverlay.setAttribute('aria-label','Diario e obiettivi');
+journalOverlay.hidden=true;
+journalOverlay.style.cssText='position:fixed;inset:0;z-index:9999;background:#080a12e8;display:none;align-items:center;justify-content:center;padding:calc(18px + env(safe-area-inset-top)) 18px calc(18px + env(safe-area-inset-bottom));pointer-events:auto';
+const journalCard=document.createElement('div');
+journalCard.style.cssText='width:min(440px,100%);max-height:85dvh;overflow-y:auto;border:1px solid #b75e78;border-radius:14px;background:#151b2b;color:#f6e7d7;padding:18px;box-shadow:0 16px 50px #000a;font:14px/1.5 system-ui,sans-serif';
+const journalHeading=document.createElement('div');
+journalHeading.style.cssText='display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px';
+const journalTitle=document.createElement('strong');journalTitle.textContent='📓 DIARIO · QUARTIERE ZERO';journalTitle.style.cssText='color:#f1bdcc;letter-spacing:.5px;font-size:15px';
+const journalClose=document.createElement('button');journalClose.type='button';journalClose.textContent='✕';journalClose.setAttribute('aria-label','Chiudi diario');journalClose.style.cssText='border:1px solid #ae627e;border-radius:8px;background:#352337;color:#fff;padding:7px 12px;font-size:16px';
+const journalContent=document.createElement('div');journalContent.id='journalContent';
+journalHeading.append(journalTitle,journalClose);journalCard.append(journalHeading,journalContent);journalOverlay.appendChild(journalCard);document.body.appendChild(journalOverlay);
+function journalRow(title,body){const section=document.createElement('section');section.style.cssText='padding:11px 0;border-top:1px solid #5c4256';const h=document.createElement('strong');h.textContent=title;h.style.cssText='display:block;color:#e7b5c4;margin-bottom:3px';const p=document.createElement('div');p.textContent=body;p.style.whiteSpace='pre-line';section.append(h,p);return section;}
+function journalButton(label,action,disabled=false){const b=document.createElement('button');b.type='button';b.textContent=label;b.disabled=disabled;b.addEventListener('click',action);return b;}
+function refreshJournal(){
+ journalContent.replaceChildren();
+ journalContent.append(journalRow('📊 STATISTICHE DI GIOCO',calendarDate(life.day)+' · '+appointmentClock(gameMinutes()).time+'\nDenaro: '+p.money+' € · Salute: '+Math.round(p.health)+'%\nFame: '+Math.round(life.hunger)+'% · Energia: '+Math.round(life.energy)+'%\nReputazione tatuatore: '+reputation+'/100 · Tatuaggi: '+completedTattooCount+'\nAppuntamenti mancati: '+tattooAgenda.filter(b=>b.status==='missed').length+' · Clienti assenti: '+tattooAgenda.filter(b=>b.status==='no_show').length+' · Trasferimenti falliti: '+tattooAgenda.filter(b=>b.status==='travel_failed').length+' · Richieste scadute: '+tattooHistory.filter(b=>b.status==='expired').length+'\nClienti propri: '+selfClientCount+' · Clienti forniti da Dario: '+(tattooRequests.length+tattooAgenda.length+tattooHistory.filter(b=>b.status==='expired'||b.status==='declined').length)+' · Elemosine: '+begAttempts));
+ const health=journalRow('♥ SALUTE','Cure mediche: recupera 35 punti salute pagando 12 €.');health.append(journalButton('🏥 CURATI · 12 €',()=>{if(p.money<12||p.health>=100)return;p.money-=12;p.health=Math.min(100,p.health+35);toast('Salute recuperata');refreshJournal();},p.money<12||p.health>=100));journalContent.append(health);
+ const requests=journalRow('📨 RICHIESTE DA CONFERMARE',tattooRequests.length?'Scadono dopo 2 giorni di gioco.':'Nessuna richiesta in attesa.');
+ for(const b of tattooRequests){const r=document.createElement('div');r.style.cssText='padding:8px 0;border-top:1px dashed #68435d';r.append(document.createTextNode(bookingLabel(b)+' · conferma entro '+calendarDate(appointmentClock(b.expiresAt).day)),document.createElement('br'),journalButton('✓ ACCETTA',()=>acceptStudioOffer(b.id)),journalButton('✕ RIFIUTA',()=>rejectStudioOffer(b.id)));requests.append(r)}journalContent.append(requests);
+ const agenda=journalRow('📅 APPUNTAMENTI CLIENTI',tattooAgenda.filter(b=>['booked','arrived'].includes(b.status)).length?'Agenda ordinata per giorno e orario.':'Nessun appuntamento confermato.');
+ for(const b of tattooAgenda.filter(b=>['booked','arrived'].includes(b.status)).sort((a,b)=>a.at-b.at)){const r=document.createElement('div');r.style.padding='6px 0';r.textContent='• '+bookingLabel(b)+(b.status==='arrived'?' · CLIENTE ARRIVATO':'');agenda.append(r)}journalContent.append(agenda);
+ journalContent.append(journalRow('🎯 OBIETTIVO / MISSIONE',!studioEmployed?'Parla con Dario e fatti assumere nello studio.':tattooAgenda.some(b=>['booked','arrived'].includes(b.status))?'Completa gli appuntamenti confermati. Progressi: '+completedTattooCount+' tatuaggi completati.':'Controlla le richieste di Dario. Progressi: '+tattooHistory.filter(b=>b.status==='done').length+' tatuaggi completati.'));
+ const map=journalRow('🗺 MAPPA MONDO',mapUnlocked?'Quartiere Zero esplorato.':'Mappa ancora bloccata: esplora il quartiere.');map.append(journalButton('APRI MAPPA',()=>{closeJournal();document.querySelector('#mapQuick').click();},!mapUnlocked));journalContent.append(map);
+ journalContent.append(journalRow('💬 MESSAGGI MULTIPLAYER','Disponibili quando sarà implementato il multiplayer. Nessuna chat online attiva.'));
+}
+function openJournal(){refreshJournal();journalOverlay.hidden=false;journalOverlay.style.display='flex';journalClose.focus();}
+function closeJournal(){journalOverlay.hidden=true;journalOverlay.style.display='none';}
+journalClose.addEventListener('click',closeJournal);
+journalOverlay.addEventListener('click',e=>{if(e.target===journalOverlay)closeJournal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!journalOverlay.hidden){e.preventDefault();closeJournal();}});
+document.querySelector('#journalQuick').addEventListener('click',e=>{e.stopPropagation();toggleSettings(false);openJournal();});
+
+})();
+</script><script id="qa25-touch-guard-js">
+/* Safari iOS: blocca pinch e double-tap zoom del documento; lascia intatto lo zoom del gioco. */
+(()=>{
+  const stop=e=>{if(e.cancelable)e.preventDefault();};
+  for(const name of ['gesturestart','gesturechange','gestureend'])document.addEventListener(name,stop,{capture:true,passive:false});
+  document.addEventListener('touchmove',e=>{if(e.touches.length>1)stop(e);},{capture:true,passive:false});
+  // Il double-tap su una finestra non deve ingrandire la pagina Safari.
+  let lastTouch=0,lastX=0,lastY=0;
+  document.addEventListener('touchend',e=>{
+    if(e.changedTouches.length!==1)return;
+    const t=e.changedTouches[0],now=performance.now();
+    const isDouble=now-lastTouch<330&&Math.hypot(t.clientX-lastX,t.clientY-lastY)<42;
+    if(isDouble){stop(e);lastTouch=0;}
+    else{lastTouch=now;lastX=t.clientX;lastY=t.clientY;}
+  },{capture:true,passive:false});
+})();
+</script><script id="qa31-4-hud-js">
+(()=>{
+ 'use strict';
+ const top=document.getElementById('top');
+ const needs=document.getElementById('needs');
+ const money=document.getElementById('hudMoney').closest('.status-row');
+ const inventory=document.getElementById('inventoryQuick');
+ const diary=document.getElementById('journalQuick');
+ const map=document.getElementById('mapQuick');
+ const settings=document.getElementById('settingsToggle');
+ const house=needs.querySelector('.status-house');
+ money.classList.add('hud-money');
+ money.firstChild.textContent='€ ';
+ const rent=document.createElement('span');rent.className='rent-mini';rent.textContent='⌂';rent.setAttribute('aria-label','Stato affitto');
+ money.append(rent);
+ const vitals=document.createElement('div');vitals.className='hud-vitals';
+ const rows=[...needs.querySelectorAll('.status-row')].filter(el=>el!==money);
+ const icons=['♥','🍽','☾'],names=['Salute','Fame','Energia'];
+ rows.forEach((row,i)=>{
+   const label=row.querySelector('span');
+   if(label){label.classList.add('vital-label');label.textContent='';}
+   const icon=document.createElement('span');icon.className='vital-icon';icon.textContent=icons[i];icon.setAttribute('aria-hidden','true');row.prepend(icon);
+   row.title=names[i];row.setAttribute('aria-label',names[i]);vitals.append(row);
+ });
+ // Data e orario fuori dalla barra, senza meteo o nome della stagione.
+ const clock=document.createElement('div');clock.id='hudClockOutside';
+ clock.append('◷ ',document.getElementById('day'),' ',document.getElementById('clock'));
+ document.getElementById('ui').append(clock);
+ const updateRent=()=>{rent.title=house.textContent.trim();rent.style.color=house.textContent.includes('Senza casa')?'#f5a7ad':'#a8e5c3';};
+ new MutationObserver(updateRent).observe(house,{subtree:true,childList:true,characterData:true});updateRent();
+ [money,inventory,diary,map,vitals,settings].forEach(el=>top.append(el));
+ needs.hidden=true;
+ map.textContent='🗺';map.setAttribute('aria-label','Apri mappa');
+ new MutationObserver(()=>{if(map.textContent!=='🗺')map.textContent='🗺';}).observe(map,{childList:true,characterData:true,subtree:true});
+ settings.setAttribute('aria-label','Opzioni');
+})();
+</script></body></html>
